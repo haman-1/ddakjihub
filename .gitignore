@@ -7,6 +7,9 @@ resources/
 legacy-papermod/
 
 # Claude 작업 파일 (로컬 전용)
+.claude/
 CLAUDE.md
 PROJECT-STATE.md
+PROJECT-HISTORY.md
+CONTENT-INDEX.md
 claude-glm.bat
