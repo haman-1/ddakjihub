@@ -9,7 +9,7 @@ categories: ["품종"]
 tags: ["보더콜리", "털색", "모색"]
 series: "border-collie"
 toc: true
-draft: true
+draft: false
 ---
 
 **2026년 9월 10일 기준** — 모색별 분양 시세처럼 시간이 지나면 바뀌는 정보를 다루고 있으니, 읽는 시점과 차이가 있을 수 있습니다.
