@@ -31,9 +31,17 @@
 - **남은 클리어**: 구 저장소 `haman-1/-ddakjihub` 삭제 — Pages는 이미 해제(도메인 충돌 없음). 삭제는 `delete_repo` 스코프가 필요해 사용자 직접 실행: 터미널에 `! gh auth refresh -h github.com -s delete_repo` 로 스코프 부여 뒤 `gh repo delete haman-1/-ddakjihub --yes` (또는 GitHub 웹에서 삭제)
 - 구 히스토리 백업: `legacy-papermod/repo-history-old.bundle` (로컬 전용, gitignore 처리됨)
 
+## 2026-09-09 디자인 적용 — 시안 CSS 구현 (검수 대기)
+
+- `DESIGN-aspca.org.md` 채택 시안을 `assets/css/main.css`에 통째로 반영 — 에그셸 `#fff9e5` 페이지 배경, 네이비 `#002e4d` 프라이머리(링크·버튼·제목·포커스), 오렌지 `#f75f00`은 카테고리·장식(히어로 눈금자·404 숫자) 한정, radius 4px 통일, 라이트 고정, 즉시 노출(등장 애니메이션 없음)
+- 섹션 온오프 리듬: `baseof`의 `main.container`를 해제하고 템플릿별 자체 컨테이너 + 흰색 `.band` 섹션 구조로 조정(index·list·single·archives·404). 스티키 헤더, 본문 건너뛰기 링크, 포커스 링 추가
+- 한국 가독 조정(시안의 컨테이너 축소 판단과 같은 맥락, CSS 상단 주석에 기록): 본문 18px에 줄간격 1.7, 본문 링크 밑줄 유지, 그리드 카드 제목 20px, 글 안 제목은 본문 폭에 맞는 별도 스케일
+- 빌드 검증 완료: 드래프트 포함/제외 모두 에러·경고 없음. 산출 HTML 구조 확인(밴드·시리즈 박스 정상)
+- **미리보기**: `hugo server -b http://localhost:1313/ -D` — 검수 후 승인되면 커밋·push(push 즉시 GitHub Actions 배포)
+
 ## 다음 단계
 
-- [ ] **디자인 단계** — 사용자가 디자인 자료 공유 후 진행. `DESIGN-aspca.org.md`가 현재 기준 초안 (에그셸 #fff9e5 / 네이비 #002e4d / 오렌지 #f75f00 / radius 4px / 라이트 전용 / Pretendard)
+- [ ] **디자인 검수·배포** — 위 2026-09-09 디자인 적용 항목 확인 후 커밋·push (사용자 검수 대기 중)
 - [ ] 구 저장소(`-ddakjihub`) 삭제 — 위 안내대로 사용자 액션 필요
 - [ ] contact·privacy의 `[이메일 주소]` 등 플레이스홀더 교체
 - [ ] 초기 콘텐츠: 품종 허브 1호(개인 사진·경험 중심) + 스포크 2~3편 — 초반은 질 우선

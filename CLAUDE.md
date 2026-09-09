@@ -102,7 +102,7 @@
 
 - Hugo 0.165 Extended, 테마 없음. partials는 `layouts/_partials/`(신규 디렉터리 구조)
 - Hugo 신엔진 자동 이스케이프: `{{ .Title }}`처럼 베어로 두면 알아서 처리 — `| html` 파이프를 덧붙이면 이중 이스케이프 버그(`&#34;` 노출)
-- 스타일은 `assets/css/main.css` 한 파일 — `resources.Get`으로 번들·지문화됨. **현재는 임시 최소 스타일이며 디자인 확정 시 통째로 교체한다**
+- 스타일은 `assets/css/main.css` 한 파일 — `resources.Get`으로 번들·지문화됨. `DESIGN-aspca.org.md` 시안 적용본(2026-09-09)
 - 설정 키는 `locale`(Hugo 0.158부터 `languageCode` 폐기)
 - 미리보기: `hugo server -b http://localhost:1313/` — `-b` 없이 띄우면 baseURL 플레이스홀더 때문에 CSS·링크가 전부 404. 드래프트 포함 미리보기는 `-D` 추가
 - 발행 전 `hugo` 빌드로 검증 (에러·경고 없어야 함)
@@ -110,8 +110,8 @@
 
 ## 디자인
 
-- **디자인은 별도 단계** — 사용자가 디자인 자료를 공유하면 그때 진행한다. 지금은 뼈대 확인용 임시 스타일 상태
 - 기준 문서: `DESIGN-aspca.org.md` (2026-09-09 채택 시안 — 사용자가 새 자료를 주면 그것이 우선)
+- **시안 적용 완료(2026-09-09)** — `assets/css/main.css`가 이 시안으로 작성됨. 색·radius·타입 값은 문서 기준값을 따른다(한국 가독 조정분은 CSS 상단 주석에 기록)
 
 ## 검색엔진·수익화 로드맵 (상세는 PROJECT-STATE.md)
 
