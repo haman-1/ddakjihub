@@ -235,12 +235,16 @@ textarea {
 }
 .card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
 
-/* 표지 이미지가 있는 카드 — 16:9 잘림 썸네일 */
+/* 표지 이미지가 있는 카드 — 16:9 잘림 썸네일.
+   표지 프레임은 카드·상세 공통 규약: 어떤 비율의 원본이든 16:9로 크롭해 보여준다
+   (object-fit: cover라 프레임 밖으로 넘치지 않음). object-position은 세로 사진의
+   얼굴(보통 상단)이 잘리지 않도록 위쪽으로 치우친 값. */
 .card-cover img {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
   object-fit: cover;
+  object-position: 50% 35%;
 }
 
 .card-body {
@@ -374,6 +378,9 @@ textarea {
 .post-cover img {
   display: block;
   width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: 50% 35%;
   border-radius: 4px;
 }
 
