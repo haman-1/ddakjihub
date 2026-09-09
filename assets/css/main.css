@@ -236,9 +236,10 @@ textarea {
 .card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
 
 /* 표지 이미지가 있는 카드 — 16:9 잘림 썸네일.
-   표지 프레임은 카드·상세 공통 규약: 어떤 비율의 원본이든 16:9로 크롭해 보여준다
+   카드 썸네일은 어떤 비율의 원본이든 16:9로 크롭해 그리드를 일정하게 유지한다
    (object-fit: cover라 프레임 밖으로 넘치지 않음). object-position은 세로 사진의
-   얼굴(보통 상단)이 잘리지 않도록 위쪽으로 치우친 값. */
+   얼굴(보통 상단)이 잘리지 않도록 위쪽으로 치우친 값. 잘림이 없는 전체 사진은
+   상세 페이지 표지가 원본 비율로 출력한다. */
 .card-cover img {
   display: block;
   width: 100%;
@@ -373,14 +374,15 @@ textarea {
   color: var(--text-sub);
 }
 
-/* 글 표지 이미지 — 글 디렉터리의 cover.* */
+/* 글 표지 이미지 — 글 디렉터리의 cover.*
+   상세에서는 원본 비율 그대로 출력한다(2026-09-10 2차 조치). 세로·정사각 사진도
+   잘리지 않고 전체가 보이며, 16:9 크롭은 카드 썸네일에서만 적용된다.
+   표지를 손으로 미리 자를 필요 없이 원본을 그대로 넣으면 된다. */
 .post-cover { margin: 28px 0 0; }
 .post-cover img {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  object-position: 50% 35%;
+  height: auto;
   border-radius: 4px;
 }
 
