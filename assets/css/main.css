@@ -227,14 +227,28 @@ textarea {
 .card {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 22px 24px;
   border: 1px solid var(--line);
   border-radius: 4px;
   background: var(--surface-card);
+  overflow: hidden;
   transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 .card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+
+/* 표지 이미지가 있는 카드 — 16:9 잘림 썸네일 */
+.card-cover img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 22px 22px;
+}
 
 .card-meta {
   display: flex;
@@ -353,6 +367,14 @@ textarea {
   font-size: 18px;
   line-height: 1.7;
   color: var(--text-sub);
+}
+
+/* 글 표지 이미지 — 글 디렉터리의 cover.* */
+.post-cover { margin: 28px 0 0; }
+.post-cover img {
+  display: block;
+  width: 100%;
+  border-radius: 4px;
 }
 
 /* 목차 */

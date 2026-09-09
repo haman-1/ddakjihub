@@ -18,6 +18,12 @@
     {{- end }}
   </header>
 
+  {{- with .Resources.GetMatch "cover.*" }}
+  <figure class="post-cover">
+    <img src="{{ .RelPermalink }}" alt="{{ $.Title }} 표지 이미지" decoding="async">
+  </figure>
+  {{- end }}
+
   {{- if .Params.toc }}
   <nav class="toc" aria-label="목차">
     <h2>목차</h2>

@@ -1,14 +1,21 @@
 <article class="card">
-  <div class="card-meta">
-    {{- with .GetTerms "categories" }}
-    <span class="card-category">{{ (index . 0).LinkTitle }}</span>
-    {{- end }}
-    {{- if not .Date.IsZero }}
-    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format (site.Params.dateFormat | default "2006. 1. 2.") }}</time>
+  {{- with .Resources.GetMatch "cover.*" }}
+  <a class="card-cover" href="{{ $.RelPermalink }}" tabindex="-1" aria-hidden="true">
+    <img src="{{ .RelPermalink }}" alt="" loading="lazy" decoding="async">
+  </a>
+  {{- end }}
+  <div class="card-body">
+    <div class="card-meta">
+      {{- with .GetTerms "categories" }}
+      <span class="card-category">{{ (index . 0).LinkTitle }}</span>
+      {{- end }}
+      {{- if not .Date.IsZero }}
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format (site.Params.dateFormat | default "2006. 1. 2.") }}</time>
+      {{- end }}
+    </div>
+    <h3 class="card-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+    {{- with .Description }}
+    <p class="card-desc">{{ . }}</p>
     {{- end }}
   </div>
-  <h3 class="card-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-  {{- with .Description }}
-  <p class="card-desc">{{ . }}</p>
-  {{- end }}
 </article>
