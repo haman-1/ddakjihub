@@ -5,3 +5,8 @@ resources/
 
 # 로컬 전용 보관 폴더 (재구축 전 작업물·구 히스토리 번들)
 legacy-papermod/
+
+# Claude 작업 파일 (로컬 전용)
+CLAUDE.md
+PROJECT-STATE.md
+claude-glm.bat
