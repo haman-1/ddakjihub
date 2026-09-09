@@ -25,7 +25,7 @@ buildExpired = false
   tagline = '강아지·반려동물 정보'
   dateFormat = '2006. 1. 2.'
   # 네이버 서치어드바이저 소유 확인 코드 (등록 후 주석을 풀고 입력)
-  # naverSiteVerification = ''
+  naverSiteVerification = '51bdd90e9a7adf0fc218e9592e85655c1f4614ff'
 
 # ── 메뉴 ────────────────────────────────────────────────────────
 [[menus.main]]
