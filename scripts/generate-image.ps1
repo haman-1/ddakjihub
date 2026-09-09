@@ -33,6 +33,18 @@ $resp = Invoke-RestMethod `
 $part = $resp.candidates[0].content.parts | Where-Object { $_.inlineData } | Select-Object -First 1
 if (-not $part) { throw "이미지가 반환되지 않았습니다: $($resp | ConvertTo-Json -Depth 6)" }
 
+# 반환된 실제 형식과 확장자가 다르면 이름을 맞춘다 (예: jpeg인데 .png로 저장하는 것 방지)
+$ext = switch ($part.inlineData.mimeType) {
+  "image/jpeg" { ".jpg" }
+  "image/png"  { ".png" }
+  "image/webp" { ".webp" }
+  default      { [IO.Path]::GetExtension($Out) }
+}
+if ([IO.Path]::GetExtension($Out) -ne $ext) {
+  $Out = [IO.Path]::ChangeExtension($Out, $ext)
+  "주의: 반환 형식이 $($part.inlineData.mimeType)라 저장 이름을 $Out 로 맞췄습니다"
+}
+
 $dir = Split-Path -Parent $Out
 if ($dir -and -not (Test-Path $dir)) { New-Item -ItemType Directory -Force $dir | Out-Null }
 [IO.File]::WriteAllBytes($Out, [Convert]::FromBase64String($part.inlineData.data))
