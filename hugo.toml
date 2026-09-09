@@ -1,0 +1,58 @@
+# ── 딱지허브 사이트 설정 ──────────────────────────────────────────
+# 테마 없이 이 저장소의 layouts/로만 구성한다 (themes/ 디렉터리 없음).
+# 도메인: ddakjihub.com — 배포 워크플로가 Pages 설정에 맞춰 baseURL을 자동 교정한다.
+baseURL = 'https://ddakjihub.com/'
+locale = 'ko-KR'
+defaultContentLanguage = 'ko'
+title = '딱지허브'
+
+enableRobotsTXT = true
+buildDrafts = false
+buildFuture = false
+buildExpired = false
+
+[pagination]
+  pagerSize = 12
+
+# series — 같은 견종의 허브·스포크 글을 자동으로 묶는다 (본문 하단 '관련 글')
+[taxonomies]
+  category = 'categories'
+  tag = 'tags'
+  series = 'series'
+
+[params]
+  description = '반려견 품종 정보부터 일상·관리·건강·용품까지, 한국 반려동물 가족을 위한 에버그린 정보 허브'
+  tagline = '강아지·반려동물 정보'
+  dateFormat = '2006. 1. 2.'
+  # 네이버 서치어드바이저 소유 확인 코드 (등록 후 주석을 풀고 입력)
+  # naverSiteVerification = ''
+
+# ── 메뉴 ────────────────────────────────────────────────────────
+[[menus.main]]
+  name = '품종'
+  url = '/breeds/'
+  weight = 10
+
+[[menus.main]]
+  name = '가이드'
+  url = '/guides/'
+  weight = 20
+
+[[menus.main]]
+  name = '일상'
+  url = '/daily/'
+  weight = 30
+
+[[menus.main]]
+  name = '전체 글'
+  url = '/archives/'
+  weight = 40
+
+[[menus.main]]
+  name = '소개'
+  url = '/about/'
+  weight = 50
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true

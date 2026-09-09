@@ -1,0 +1,24 @@
+{{ define "main" }}
+<header class="page-head">
+  <h1>{{ .Title }}</h1>
+</header>
+{{- $sections := slice "breeds" "guides" "daily" }}
+{{- $pages := (where site.RegularPages "Type" "in" $sections).ByDate.Reverse }}
+{{- with $pages }}
+{{- range .GroupByDate "2006" }}
+<section class="archive-group">
+  <h2 class="archive-year">{{ .Key }}년</h2>
+  <ul class="archive-list">
+    {{- range .Pages }}
+    <li>
+      <time>{{ .Date | time.Format "1. 2." }}</time>
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    </li>
+    {{- end }}
+  </ul>
+</section>
+{{- end }}
+{{- else }}
+<p class="empty-note">아직 올라온 글이 없습니다.</p>
+{{- end }}
+{{ end }}

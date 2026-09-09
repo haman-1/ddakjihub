@@ -1,0 +1,45 @@
+{{ define "main" }}
+<header class="page-head">
+  <h1>{{ .Title }}</h1>
+  {{- with .Description }}
+  <p>{{ . }}</p>
+  {{- end }}
+</header>
+
+{{- if eq .Kind "taxonomy" }}
+{{- /* 택소노미 뿌리 페이지(예: /categories/) — 하위 항목을 링크로 나열 */}}
+<ul class="term-list">
+  {{- range .Data.Terms.Alphabetical }}
+  <li>
+    <a href="{{ .Page.RelPermalink }}">{{ .Page.LinkTitle }} <span class="term-count">({{ .Count }})</span></a>
+  </li>
+  {{- end }}
+</ul>
+{{- else }}
+  {{- /* 섹션·택소노미 항목 페이지 — 글 카드 목록 (최신 순) */}}
+  {{- $pages := .Pages }}
+  {{- if eq .Kind "section" }}
+    {{- $pages = where site.RegularPages "Type" .Type }}
+  {{- end }}
+  {{- $paginator := .Paginate ($pages.ByDate.Reverse) }}
+  {{- if $paginator.Pages }}
+  <div class="card-grid">
+    {{- range $paginator.Pages }}
+    {{ partial "card.html" . }}
+    {{- end }}
+  </div>
+    {{- if gt $paginator.TotalPages 1 }}
+  <nav class="pagination" aria-label="페이지 이동">
+    {{- if $paginator.HasPrev }}
+    <a href="{{ $paginator.Prev.URL }}">이전</a>
+    {{- end }}
+    {{- if $paginator.HasNext }}
+    <a href="{{ $paginator.Next.URL }}">다음</a>
+    {{- end }}
+  </nav>
+    {{- end }}
+  {{- else }}
+  <p class="empty-note">아직 올라온 글이 없습니다.</p>
+  {{- end }}
+{{- end }}
+{{ end }}

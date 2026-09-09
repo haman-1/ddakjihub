@@ -1,0 +1,55 @@
+{{ define "main" }}
+<article class="post">
+  <header class="post-head">
+    <div class="post-meta">
+      {{- with .GetTerms "categories" }}
+        {{- range first 1 . }}
+      <a class="post-category" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+        {{- end }}
+      {{- end }}
+      {{- if not .Date.IsZero }}
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format (site.Params.dateFormat | default "2006. 1. 2.") }}</time>
+      {{- end }}
+    </div>
+    <h1 class="post-title">{{ .Title }}</h1>
+    {{- with .Description }}
+    <p class="post-desc">{{ . }}</p>
+    {{- end }}
+  </header>
+
+  {{- if .Params.toc }}
+  <nav class="toc" aria-label="목차">
+    <h2>목차</h2>
+    {{ .TableOfContents }}
+  </nav>
+  {{- end }}
+
+  <div class="post-content">
+    {{ .Content }}
+  </div>
+
+  {{- with .GetTerms "tags" }}
+  <div class="post-tags">
+    {{- range . }}
+    <a class="tag" href="{{ .RelPermalink }}">#{{ .LinkTitle }}</a>
+    {{- end }}
+  </div>
+  {{- end }}
+
+  {{- /* series가 같은 글(허브·스포크)을 자동으로 나열한다 */ -}}
+  {{- with .GetTerms "series" }}
+    {{- $series := index . 0 }}
+    {{- $others := where $series.Pages "RelPermalink" "ne" $.RelPermalink }}
+    {{- if $others }}
+  <aside class="series-box">
+    <h2>{{ $.Params.breed | default $series.LinkTitle }} 관련 글</h2>
+    <ul>
+      {{- range $others.ByDate.Reverse }}
+      <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+      {{- end }}
+    </ul>
+  </aside>
+    {{- end }}
+  {{- end }}
+</article>
+{{ end }}
