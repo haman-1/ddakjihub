@@ -117,3 +117,4 @@ draft: true
 - [University of Minnesota College of Veterinary Medicine — Border Collie Collapse](https://vetmed.umn.edu/research/research-labs/canine-genetics-lab/canine-genetics-research/border-collie-collapse) (BCC 증상)
 - 스탠리 코렌, 『개의 지능(The Intelligence of Dogs)』(1994) — 복종 지능 순위에서 보더콜리 1위
 - 딱지의 하루 루틴: 운영자 실제 사례
+- 표지 사진: AI 생성 이미지(gemini-3.1-flash-image), 발행 전 사람이 검수
