@@ -23,16 +23,18 @@
 - 빌드 검증 완료: 드래프트 포함/제외 모두 에러 없음, 시리즈 자동 링크·택소노미 페이지 정상
 - 교체된 구 테마 시절 미커밋 작업물은 `legacy-papermod/`에 보관 — 참고할 일 없으면 삭제해도 됨
 
-## 저장소·도메인 (2026-09-09 클리어 결정 — 재연결 대기)
+## 저장소·도메인 (2026-09-09 클리어 → 재구축 배포 완료)
 
-- 저장소 https://github.com/haman-1/-ddakjihub 클리어 예정 → 재생성 후 push
-- 재연결 설정: Pages Source = GitHub Actions · DNS A `@` → 185.199.108/109/110/111.153 · CNAME `www` → haman-1.github.io
-- 도메인 ddakjihub.com 보유 중. 워크플로 `.github/workflows/hugo.yml`는 서브모듈 없음에 맞게 정비 완료
+- **새 저장소**: https://github.com/haman-1/ddakjihub (공개, 새 히스토리 — 재구축 커밋 1개로 시작)
+- **배포 검증 완료**: Pages Source = GitHub Actions · 커스텀 도메인 ddakjihub.com 재연결 · 인증서 승인(apex+www, ~2026-12-08) · HTTPS 강제 적용 · `https://ddakjihub.com/` 200 OK · www 301 확인
+- DNS(등록부에 유지 중): A `@` → 185.199.108/109/110/111.153 · CNAME `www` → haman-1.github.io
+- **남은 클리어**: 구 저장소 `haman-1/-ddakjihub` 삭제 — Pages는 이미 해제(도메인 충돌 없음). 삭제는 `delete_repo` 스코프가 필요해 사용자 직접 실행: 터미널에 `! gh auth refresh -h github.com -s delete_repo` 로 스코프 부여 뒤 `gh repo delete haman-1/-ddakjihub --yes` (또는 GitHub 웹에서 삭제)
+- 구 히스토리 백업: `legacy-papermod/repo-history-old.bundle` (로컬 전용, gitignore 처리됨)
 
 ## 다음 단계
 
 - [ ] **디자인 단계** — 사용자가 디자인 자료 공유 후 진행. `DESIGN-aspca.org.md`가 현재 기준 초안 (에그셸 #fff9e5 / 네이비 #002e4d / 오렌지 #f75f00 / radius 4px / 라이트 전용 / Pretendard)
-- [ ] 저장소 재생성 + Pages 설정 + 도메인 재연결 → 배포 확인
+- [ ] 구 저장소(`-ddakjihub`) 삭제 — 위 안내대로 사용자 액션 필요
 - [ ] contact·privacy의 `[이메일 주소]` 등 플레이스홀더 교체
 - [ ] 초기 콘텐츠: 품종 허브 1호(개인 사진·경험 중심) + 스포크 2~3편 — 초반은 질 우선
 - [ ] GSC·네이버 서치어드바이저 등록 (`hugo.toml`의 naverSiteVerification 입력)
