@@ -1,4 +1,4 @@
-# 딱지허브 AI 일러스트 생성 스크립트
+﻿# 딱지허브 AI 일러스트 생성 스크립트
 # 사용: .\scripts\generate-image.ps1 -Prompt "..." -Out content\breeds\xxx\cover.png
 # API 키는 루트 .env(GEMINI_API_KEY=...)에서만 읽는다 — 공개 저장소에 커밋 금지.
 # 모델: gemini-3.1-flash-image (2026-09-09 확정, 프로젝트 규칙)
