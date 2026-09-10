@@ -53,10 +53,8 @@
 
 <section class="band">
   <div class="container about-strip">
-    {{- with site.GetPage "/daily/ddakji-first-birthday" }}
-      {{- with .Resources.GetMatch "cover.*" }}
-    <img class="about-strip-img" src="{{ .RelPermalink }}" alt="보더콜리 딱지" decoding="async">
-      {{- end }}
+    {{- with resources.Get "images/ddakji-about.jpg" }}
+    <img class="about-strip-img" src="{{ (.Resize "600x").RelPermalink }}" alt="보더콜리 딱지" decoding="async">
     {{- end }}
     <div class="about-strip-body">
       <h2 class="section-title">딱지와 함께 쓰는 글</h2>
