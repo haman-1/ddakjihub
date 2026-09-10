@@ -16,6 +16,15 @@
 <meta property="og:url" content="{{ .Permalink }}">
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
 <meta property="og:site_name" content="{{ site.Title }}">
+{{- /* 공유 미리보기 이미지 — 표지가 있으면 표지, 없으면 본문 유튜브 영상의 썸네일 */ -}}
+{{- with .Resources.GetMatch "cover.*" }}
+<meta property="og:image" content="{{ .Permalink }}">
+{{- else }}
+{{- with findRE `\{\{<\s*youtube\s+"[^"]+"` .RawContent 1 }}
+{{- $yt := partial "youtube-id.html" (dict "src" (replaceRE `.*"([^"]+)"` `$1` (index . 0))) }}
+<meta property="og:image" content="https://i.ytimg.com/vi/{{ $yt }}/oar2.jpg">
+{{- end }}
+{{- end }}
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 {{- with site.Params.naverSiteVerification }}
 <meta name="naver-site-verification" content="{{ . }}">
