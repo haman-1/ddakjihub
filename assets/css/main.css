@@ -46,6 +46,20 @@ body {
 
 img { max-width: 100%; height: auto; }
 
+/* 유튜브 임베드 — 쇼츠(세로)는 폭을 제한해 본문 한가운데, 일반 영상(wide)은 16:9 전폭 */
+.video-embed {
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+  margin: 2rem auto;
+  aspect-ratio: 9 / 16;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.video-embed.wide { max-width: 100%; }
+.video-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
 /* 링크: 네이비, 밑줄 없음(본문 영역은 예외) */
 a { color: var(--navy); text-decoration: none; }
 

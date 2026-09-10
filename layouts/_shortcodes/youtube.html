@@ -1,0 +1,11 @@
+{{- /* 유튜브 영상 임베드 — {{< youtube "URL 또는 영상 ID" >}}
+       기본은 쇼츠(세로 9:16), 일반 영상은 wide="true"를 넣으면 16:9로 나온다. */ -}}
+{{- $src := .Get 0 -}}
+{{- $id := $src -}}
+{{- if findRE `youtu\.be/` $src -}}{{- $id = replaceRE `.*youtu\.be/([^?&/]+).*` `$1` $src -}}{{- end -}}
+{{- if findRE `youtube\.com/shorts/` $src -}}{{- $id = replaceRE `.*/shorts/([^?&/]+).*` `$1` $src -}}{{- end -}}
+{{- if findRE `[?&]v=` $src -}}{{- $id = replaceRE `.*[?&]v=([^&]+).*` `$1` $src -}}{{- end -}}
+{{- $wide := eq (.Get "wide") "true" -}}
+<div class="video-embed{{ if $wide }} wide{{ end }}">
+  <iframe src="https://www.youtube-nocookie.com/embed/{{ $id }}" title="YouTube 동영상" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
