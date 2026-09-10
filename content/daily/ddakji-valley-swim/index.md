@@ -15,8 +15,8 @@ draft: false
 
 수영을 이렇게 잘하는 줄은 몰랐다. 물을 가르는 네 발이 달리는 것처럼 보인다. 빠르다. 정말 빠르다.
 
-{{< youtube "https://www.youtube.com/shorts/xLqzELaiNqo" >}}
+{{< youtube "https://www.youtube.com/shorts/993UfLjBC7g" >}}
 
-[유튜브에서 보기](https://www.youtube.com/shorts/xLqzELaiNqo)
+[유튜브에서 보기](https://www.youtube.com/shorts/993UfLjBC7g)
 
 무서웠던 건 물이 아니라 수영장이었나 보다. 딱지의 풀은 계곡이다.
