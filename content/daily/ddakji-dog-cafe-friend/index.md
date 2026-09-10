@@ -14,9 +14,9 @@ draft: false
 
 보더콜리 둘이 노는 모습은 알아본다. 몸을 던지고, 급회전하고, 서로를 눈으로 쫓으면서 달린다. 체급도 비슷했다. 한 살 무렵엔 베스랑 만나면 시간 가는 줄 몰랐다.
 
-{{< youtube "https://www.youtube.com/shorts/PNg_GfCI7F4" >}}
+{{< youtube "https://www.youtube.com/shorts/tV6AUvIl5rY" >}}
 
-[유튜브에서 보기](https://www.youtube.com/shorts/PNg_GfCI7F4)
+[유튜브에서 보기](https://www.youtube.com/shorts/tV6AUvIl5rY)
 
 요즘은 안 논다. 베스가 다가와도 딱지가 자리를 피한다. 어릴 땐 체급만 맞으면 같이 굴렀는데, 성견이 되어 가니 취향이 갈리는 모양이다. 딱지는 여전히 흥분하면 몸부터 던지는 애라, 언니 입장에선 이제 그 놀이가 부담일 수도 있다.
 
