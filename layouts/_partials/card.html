@@ -1,7 +1,21 @@
 <article class="card">
-  {{- with .Resources.GetMatch "cover.*" }}
+  {{- $cover := .Resources.GetMatch "cover.*" -}}
+  {{- /* 표지가 없어도 본문에 유튜브 영상이 있으면 그 썸네일을 카드에 띄운다.
+         oar2는 원본 비율(세로) 썸네일 — 16:9 카드 크롭에 맞게 잘리며, 없는 영상은
+         hqdefault로 되돌린다. */ -}}
+  {{- $yt := "" -}}
+  {{- if not $cover -}}
+    {{- with findRE `\{\{<\s*youtube\s+"[^"]+"` .RawContent 1 -}}
+      {{- $yt = partial "youtube-id.html" (dict "src" (replaceRE `.*"([^"]+)"` `$1` (index . 0))) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if $cover }}
   <a class="card-cover" href="{{ $.RelPermalink }}" tabindex="-1" aria-hidden="true">
-    <img src="{{ .RelPermalink }}" alt="" loading="lazy" decoding="async">
+    <img src="{{ $cover.RelPermalink }}" alt="" loading="lazy" decoding="async">
+  </a>
+  {{- else if $yt }}
+  <a class="card-cover" href="{{ $.RelPermalink }}" tabindex="-1" aria-hidden="true">
+    <img src="https://i.ytimg.com/vi/{{ $yt }}/oar2.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/{{ $yt }}/hqdefault.jpg'" alt="" loading="lazy" decoding="async">
   </a>
   {{- end }}
   <div class="card-body">

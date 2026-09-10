@@ -1,0 +1,7 @@
+{{- /* 유튜브 URL 또는 영상 ID에서 영상 ID만 뽑아 반환한다.
+       사용: {{ partial "youtube-id.html" (dict "src" "https://...") }} */ -}}
+{{- $id := .src -}}
+{{- if in .src "youtu.be/" -}}{{- $id = replaceRE `.*youtu\.be/([^?&/]+).*` `$1` .src -}}{{- end -}}
+{{- if in .src "/shorts/" -}}{{- $id = replaceRE `.*/shorts/([^?&/]+).*` `$1` .src -}}{{- end -}}
+{{- if in .src "v=" -}}{{- $id = replaceRE `.*[?&]v=([^&]+).*` `$1` .src -}}{{- end -}}
+{{- return $id -}}
