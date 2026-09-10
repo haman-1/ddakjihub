@@ -27,4 +27,42 @@
     {{- end }}
   </div>
 </section>
+
+<section class="home-sections">
+  <div class="container">
+    <h2 class="section-title">둘러보기</h2>
+    <div class="section-nav-grid">
+      <a class="section-nav-card" href="/breeds/">
+        <span class="section-nav-name">품종 허브</span>
+        <p class="section-nav-desc">성격부터 색상 종류·운동량·건강까지, 키우기 전에 알아야 할 견종 정보를 깊이 다룹니다.</p>
+        <span class="section-nav-go">보러 가기 →</span>
+      </a>
+      <a class="section-nav-card" href="/guides/">
+        <span class="section-nav-name">실용 가이드·리뷰</span>
+        <p class="section-nav-desc">사료 고르는 법, 목욕 주기, 발톱 깎기처럼 반려견을 돌보는 데 바로 쓰는 실용 정보입니다.</p>
+        <span class="section-nav-go">보러 가기 →</span>
+      </a>
+      <a class="section-nav-card" href="/daily/">
+        <span class="section-nav-name">일상·경험</span>
+        <p class="section-nav-desc">보더콜리 딱지와 함께한 기록입니다. 수영, 눈, 생일 같은 평범하고 특별한 하루들.</p>
+        <span class="section-nav-go">보러 가기 →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="container about-strip">
+    {{- with site.GetPage "/daily/ddakji-first-birthday" }}
+      {{- with .Resources.GetMatch "cover.*" }}
+    <img class="about-strip-img" src="{{ .RelPermalink }}" alt="보더콜리 딱지" decoding="async">
+      {{- end }}
+    {{- end }}
+    <div class="about-strip-body">
+      <h2 class="section-title">딱지와 함께 쓰는 글</h2>
+      <p>이 사이트의 글은 보더콜리 딱지를 직접 키우는 운영자가 경험하고, 필요한 사실은 신뢰할 수 있는 자료로 확인하며 씁니다.</p>
+      <a class="button" href="/daily/">딱지 이야기 보기</a>
+    </div>
+  </div>
+</section>
 {{ end }}
