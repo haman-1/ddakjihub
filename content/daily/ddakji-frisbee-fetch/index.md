@@ -27,3 +27,7 @@ draft: false
 정말 빠르게 자랐다.
 
 같은 딱지가 맞나 싶을 정도다. 🐶
+
+원반놀이에서 중요한 건  
+던지는 사람이라는 이야기는  
+[이 글](/daily/ddakji-frisbee-throwing/)에서.
