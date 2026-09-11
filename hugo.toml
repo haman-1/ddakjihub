@@ -26,6 +26,8 @@ buildExpired = false
   dateFormat = '2006. 1. 2.'
   # 네이버 서치어드바이저 소유 확인 코드 (등록 후 주석을 풀고 입력)
   naverSiteVerification = '51bdd90e9a7adf0fc218e9592e85655c1f4614ff'
+  # 구글 애널리틱스 4(GA4) 측정 ID — layouts/_partials/head.html에서 gtag 스니펫 출력
+  googleAnalytics = 'G-HKY09V88M3'
 
 # ── 메뉴 ────────────────────────────────────────────────────────
 [[menus.main]]
