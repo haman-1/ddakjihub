@@ -6,7 +6,8 @@
 # 드래프트 포함 미리보기는 `.\scripts\dev.ps1 -D`로 실행한다.
 $log = Join-Path $env:TEMP 'ddakjihub-hugo.log'
 Remove-Item $log -ErrorAction SilentlyContinue
-$proc = Start-Process -FilePath 'hugo' -ArgumentList @('server','-b','http://localhost:13131/') @args -NoNewWindow -PassThru -RedirectStandardOutput $log -RedirectStandardError (Join-Path $env:TEMP 'ddakjihub-hugo.err.log')
+$argList = @('server','-b','http://localhost:13131/') + $args
+$proc = Start-Process -FilePath 'hugo' -ArgumentList $argList -NoNewWindow -PassThru -RedirectStandardOutput $log -RedirectStandardError (Join-Path $env:TEMP 'ddakjihub-hugo.err.log')
 try {
   $url = $null
   for ($i = 0; $i -lt 40 -and -not $url; $i++) {
