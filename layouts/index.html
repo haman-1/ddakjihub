@@ -15,13 +15,28 @@
   <div class="container">
     <h2 class="section-title">최신 글</h2>
     {{- $sections := slice "breeds" "guides" "daily" }}
-    {{- $recent := first 9 (where site.RegularPages "Type" "in" $sections).ByDate.Reverse }}
-    {{- if $recent }}
+    {{- $recent := (where site.RegularPages "Type" "in" $sections).ByDate.Reverse }}
+    {{- $paginator := .Paginate $recent 12 }}
+    {{- if $paginator.Pages }}
     <div class="card-grid">
-      {{- range $recent }}
+      {{- range $paginator.Pages }}
       {{ partial "card.html" . }}
       {{- end }}
     </div>
+      {{- if gt $paginator.TotalPages 1 }}
+    <nav class="pagination" aria-label="페이지 이동">
+      {{- if $paginator.HasPrev }}
+      <a href="{{ $paginator.Prev.URL }}">이전</a>
+      {{- else }}
+      <span></span>
+      {{- end }}
+      {{- if $paginator.HasNext }}
+      <a href="{{ $paginator.Next.URL }}">다음</a>
+      {{- else }}
+      <span></span>
+      {{- end }}
+    </nav>
+      {{- end }}
     {{- else }}
     <p class="empty-note">곧 첫 글이 올라옵니다.</p>
     {{- end }}

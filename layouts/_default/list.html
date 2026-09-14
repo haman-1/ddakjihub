@@ -36,9 +36,13 @@
     <nav class="pagination" aria-label="페이지 이동">
       {{- if $paginator.HasPrev }}
       <a href="{{ $paginator.Prev.URL }}">이전</a>
+      {{- else }}
+      <span></span>
       {{- end }}
       {{- if $paginator.HasNext }}
       <a href="{{ $paginator.Next.URL }}">다음</a>
+      {{- else }}
+      <span></span>
       {{- end }}
     </nav>
       {{- end }}

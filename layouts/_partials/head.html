@@ -1,8 +1,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+{{- /* 홈 페이지네이션 페이지(/page/N/)의 .Permalink는 루트를 가리키므로 페이지 URL을 직접 만든다 */ -}}
+{{- $pageURL := .Permalink }}
+{{- $pageNo := 0 }}
+{{- if .IsHome }}
+{{- $pageNo = .Paginator.PageNumber }}
+{{- if gt $pageNo 1 }}
+{{- $pageURL = printf "%spage/%d/" $pageURL $pageNo }}
+{{- end }}
+{{- end }}
 {{- $title := .Title }}
 {{- if .IsHome }}
-<title>{{ site.Title }} · {{ site.Params.tagline }}</title>
+<title>{{ site.Title }} · {{ site.Params.tagline }}{{ if gt $pageNo 1 }} · {{ $pageNo }}페이지{{ end }}</title>
 {{- else if $title }}
 <title>{{ $title }} | {{ site.Title }}</title>
 {{- else }}
@@ -10,10 +19,10 @@
 {{- end }}
 {{- $desc := .Description | default site.Params.description }}
 <meta name="description" content="{{ $desc }}">
-<link rel="canonical" href="{{ .Permalink }}">
-<meta property="og:title" content="{{ if .IsHome }}{{ site.Title }}{{ else }}{{ $title }}{{ end }}">
+<link rel="canonical" href="{{ $pageURL }}">
+<meta property="og:title" content="{{ if .IsHome }}{{ site.Title }}{{ if gt $pageNo 1 }} · {{ $pageNo }}페이지{{ end }}{{ else }}{{ $title }}{{ end }}">
 <meta property="og:description" content="{{ $desc }}">
-<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:url" content="{{ $pageURL }}">
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
 <meta property="og:site_name" content="{{ site.Title }}">
 {{- /* 공유 미리보기 이미지 — 표지가 있으면 표지, 없으면 본문 유튜브 영상의 썸네일 */ -}}
