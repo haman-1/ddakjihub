@@ -1,0 +1,6 @@
+{{- /* 홈 '최신 글' 페이지네이터 — head(제목·canonical)와 본문(카드 목록)이 같은 필터·크기로 공유한다.
+       Hugo는 페이지네이터를 처음 호출한 결과로 고정하므로, head가 본문보다 먼저 렌더되는 점을 이용해
+       여기서 필터된 컬렉션으로 먼저 만들면 이후 호출은 모두 같은 결과를 받는다. */ -}}
+{{- $sections := slice "breeds" "guides" "daily" }}
+{{- $recent := (where site.RegularPages "Type" "in" $sections).ByDate.Reverse }}
+{{- return .Paginate $recent 12 }}

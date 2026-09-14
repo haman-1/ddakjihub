@@ -4,7 +4,7 @@
 {{- $pageURL := .Permalink }}
 {{- $pageNo := 0 }}
 {{- if .IsHome }}
-{{- $pageNo = .Paginator.PageNumber }}
+{{- $pageNo = (partial "home-pager.html" .).PageNumber }}
 {{- if gt $pageNo 1 }}
 {{- $pageURL = printf "%spage/%d/" $pageURL $pageNo }}
 {{- end }}

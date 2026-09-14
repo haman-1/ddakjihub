@@ -14,9 +14,7 @@
 <section class="band">
   <div class="container">
     <h2 class="section-title">최신 글</h2>
-    {{- $sections := slice "breeds" "guides" "daily" }}
-    {{- $recent := (where site.RegularPages "Type" "in" $sections).ByDate.Reverse }}
-    {{- $paginator := .Paginate $recent 12 }}
+    {{- $paginator := partial "home-pager.html" . }}
     {{- if $paginator.Pages }}
     <div class="card-grid">
       {{- range $paginator.Pages }}
