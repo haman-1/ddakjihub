@@ -31,3 +31,7 @@ draft: false
 원반놀이에서 중요한 건  
 던지는 사람이라는 이야기는  
 [이 글](/daily/ddakji-frisbee-throwing/)에서.
+
+공놀이를 시작하는 시기와  
+공 고르는 이야기는  
+[이 글](/guides/dog-ball-play/)에서.
