@@ -132,4 +132,4 @@ draft: false
 - [Exercise for dogs — PDSA](https://www.pdsa.org.uk/pet-help-and-advice/looking-after-your-pet/puppies-dogs/how-much-exercise-does-your-dog-need) (하루 1~2회, 견종별 1~2시간, 노견 관절, 서늘한 시간대, 신축 리드줄 경고)
 - [How to Protect Dog Paws From Hot Pavement — AKC](https://www.akc.org/expert-advice/health/dog-paws-hot-pavement/) (손바닥 10초 테스트, 기온 30°C일 때 아스팔트 57°C, 열사병 증상)
 
-표지와 본문 영상은 운영자의 반려견 딱지 산책 영상에서 가져왔다.
+표지는 AI로 생성한 이미지다. 본문 영상은 운영자의 반려견 딱지 산책 영상이다.
