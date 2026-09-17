@@ -1,0 +1,37 @@
+{{ define "main" }}
+<header class="page-head">
+  <div class="container">
+    <h1>{{ .Title }}</h1>
+    <p>견종 이름이든 궁금한 주제든, 입력한 단어가 들어간 글을 찾아 드립니다.</p>
+  </div>
+</header>
+
+<section class="band">
+  <div class="container">
+    <form class="search-box" role="search" onsubmit="return false;">
+      <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg>
+      <label class="skip-label" for="search-input">검색어</label>
+      <input id="search-input" type="search" placeholder="예: 시바견 색상, 산책, 리트리버" autocomplete="off" autofocus>
+    </form>
+
+    <div class="search-suggest" id="search-suggest">
+      <span class="filter-label">자주 찾는 단어</span>
+      <a href="/search/?q=시바견">시바견</a>
+      <a href="/search/?q=보더콜리">보더콜리</a>
+      <a href="/search/?q=색상">색상</a>
+      <a href="/search/?q=산책">산책</a>
+      <a href="/search/?q=운동량">운동량</a>
+    </div>
+
+    <p class="search-status" id="search-status" hidden></p>
+    <ul class="search-results" id="search-results"></ul>
+    <noscript><p class="empty-note">검색은 브라우저에서 자바스크립트로 동작합니다. 자바스크립트를 켜면 사용할 수 있어요.</p></noscript>
+  </div>
+</section>
+
+{{- /* Fuse.js(직접 번들 — CDN 의존 없음) + 검색 로직을 한 파일로 합쳐 지문화해 붙인다 */ -}}
+{{- $fuse := resources.Get "js/fuse.min.js" -}}
+{{- $logic := resources.Get "js/search.js" -}}
+{{- $js := slice $fuse $logic | resources.Concat "js/search-bundle.js" | minify | fingerprint }}
+<script src="{{ $js.RelPermalink }}" defer data-search-index="/search-index.json"></script>
+{{ end }}

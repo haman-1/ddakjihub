@@ -5,6 +5,8 @@ description: 시바견의 성격(시바 스크림·독립성), 공인 모색 4�
 summary: ""
 kind: hub
 breed: 시바견
+size: "소형"                  # 견종 도감 필터 — 소형/중형/대형 (본문 표기 '소형~중소형' 기준)
+group: "논스포팅"             # AKC 견종 그룹 한국어 표기
 categories: ["품종"]
 tags: [시바견, 견종, 아파트]
 series: "shiba-inu"

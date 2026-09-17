@@ -19,6 +19,9 @@
 {{- end }}
 {{- $desc := .Description | default site.Params.description }}
 <meta name="description" content="{{ $desc }}">
+{{- with .Params.noindex }}
+<meta name="robots" content="noindex">
+{{- end }}
 <link rel="canonical" href="{{ $pageURL }}">
 <meta property="og:title" content="{{ if .IsHome }}{{ site.Title }}{{ if gt $pageNo 1 }} · {{ $pageNo }}페이지{{ end }}{{ else }}{{ $title }}{{ end }}">
 <meta property="og:description" content="{{ $desc }}">

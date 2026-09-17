@@ -1,0 +1,117 @@
+{{ define "main" }}
+{{- /* 견종 도감 — 날짜순 글 카드 나열 대신 견종(허브) 카드를 크기·그룹 필터와 함께 보여준다.
+       심층 글(스포크)은 각 견종 카드의 '심층 글 n편'과 하단 목록에서 이어진다. */ -}}
+{{- $hubs := where (where site.RegularPages "Type" "breeds") ".Params.kind" "hub" -}}
+{{- $spokes := where (where site.RegularPages "Type" "breeds") ".Params.kind" "spoke" -}}
+{{- /* 그룹 칩은 실제 허브에 들어간 값만 나열한다(빈 그룹 방지) */ -}}
+{{- $groups := slice -}}
+{{- range $hubs -}}
+  {{- with .Params.group }}{{ $groups = $groups | append . }}{{ end -}}
+{{- end -}}
+{{- $groups = uniq $groups }}
+
+<header class="page-head">
+  <div class="container">
+    <h1>{{ .Title }}</h1>
+    {{- with .Description }}
+    <p>{{ . }}</p>
+    {{- end }}
+  </div>
+</header>
+
+<section class="band">
+  <div class="container">
+    <div class="breed-filters">
+      <div class="breed-filter" role="group" aria-label="크기로 걸러 보기">
+        <span class="filter-label">크기</span>
+        <button class="filter-chip" type="button" data-key="size" data-value="" aria-pressed="true">전체</button>
+        <button class="filter-chip" type="button" data-key="size" data-value="소형" aria-pressed="false">소형</button>
+        <button class="filter-chip" type="button" data-key="size" data-value="중형" aria-pressed="false">중형</button>
+        <button class="filter-chip" type="button" data-key="size" data-value="대형" aria-pressed="false">대형</button>
+      </div>
+      {{- if gt (len $groups) 1 }}
+      <div class="breed-filter" role="group" aria-label="견종 그룹으로 걸러 보기">
+        <span class="filter-label">그룹</span>
+        <button class="filter-chip" type="button" data-key="group" data-value="" aria-pressed="true">전체</button>
+        {{- range $groups }}
+        <button class="filter-chip" type="button" data-key="group" data-value="{{ . }}" aria-pressed="false">{{ . }}</button>
+        {{- end }}
+      </div>
+      {{- end }}
+    </div>
+
+    {{- if $hubs }}
+    <div class="card-grid breed-grid">
+      {{- range $hubs.ByTitle }}
+      {{- $n := 0 -}}
+      {{- with .Params.series }}{{ $n = len (where $spokes ".Params.series" .) }}{{ end }}
+      <article class="card breed-card" data-size="{{ .Params.size | default "" }}" data-group="{{ .Params.group | default "" }}">
+        {{- $cover := .Resources.GetMatch "cover.*" }}
+        {{- with $cover }}
+        <a class="card-cover" href="{{ $.RelPermalink }}" tabindex="-1" aria-hidden="true">
+          <img src="{{ (.Resize "560x jpg q75").RelPermalink }}" alt="" loading="lazy" decoding="async">
+        </a>
+        {{- end }}
+        <div class="card-body">
+          <div class="breed-badges">
+            {{- with .Params.size }}<span class="badge badge-size">{{ . }}</span>{{ end }}
+            {{- with .Params.group }}<span class="badge">{{ . }}</span>{{ end }}
+            {{- if gt $n 0 }}<span class="badge badge-count">심층 글 {{ $n }}편</span>{{ end }}
+          </div>
+          <h3 class="breed-name"><a href="{{ .RelPermalink }}">{{ .Params.breed | default .Title }}</a></h3>
+          {{- with .Description }}
+          <p class="card-desc">{{ . }}</p>
+          {{- end }}
+        </div>
+      </article>
+      {{- end }}
+    </div>
+    <p class="empty-note" id="breed-empty" hidden>선택한 조건에 맞는 견종이 아직 없습니다. 다른 조건으로 찾아보세요.</p>
+    {{- else }}
+    <p class="empty-note">아직 올라온 견종이 없습니다.</p>
+    {{- end }}
+
+    {{- with ($spokes.ByDate.Reverse | first 8) }}
+    <section class="breed-spokes">
+      <h2 class="spokes-title">품종별 심층 글</h2>
+      <ul class="spoke-list">
+        {{- range . }}
+        <li>
+          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+          <span class="spoke-meta">{{ with .Params.breed }}{{ . }} · {{ end }}<time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format (site.Params.dateFormat | default "2006. 1. 2.") }}</time></span>
+        </li>
+        {{- end }}
+      </ul>
+      <a class="spokes-more" href="/archives/">전체 글 보기</a>
+    </section>
+    {{- end }}
+  </div>
+</section>
+
+<script>
+(function () {
+  var chips = document.querySelectorAll('.filter-chip');
+  var cards = document.querySelectorAll('.breed-card');
+  var empty = document.getElementById('breed-empty');
+  if (!chips.length || !cards.length) return;
+  var state = { size: '', group: '' };
+  chips.forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      var key = chip.dataset.key;
+      state[key] = chip.dataset.value;
+      chips.forEach(function (c) {
+        if (c.dataset.key === key) c.setAttribute('aria-pressed', String(c === chip));
+      });
+      var shown = 0;
+      cards.forEach(function (card) {
+        var ok = (!state.size || card.dataset.size === state.size)
+          && (!state.group || card.dataset.group === state.group);
+        card.hidden = !ok;
+        if (ok) shown++;
+      });
+      if (empty) empty.hidden = shown > 0;
+    });
+  });
+})();
+</script>
+{{ end }}

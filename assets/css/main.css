@@ -666,6 +666,158 @@ textarea {
 }
 .footer-copy { margin: 0; font-size: 13.5px; color: var(--text-sub); }
 
+/* ── 견종 도감(품종 섹션) ───────────────── */
+.breed-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.breed-filter { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.filter-label { margin-right: 4px; font-size: 13.5px; font-weight: 700; color: var(--text-sub); }
+.filter-chip {
+  padding: 7px 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--surface-card);
+  color: var(--navy);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.filter-chip:hover { border-color: var(--navy); }
+.filter-chip[aria-pressed="true"] {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
+}
+
+/* 도감 카드 — 설명은 3줄로 묶어 견종명·배지가 그리드에서 일정한 높이를 유지 */
+.breed-card .card-desc {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.breed-badges { display: flex; flex-wrap: wrap; gap: 6px; }
+.badge {
+  padding: 3px 10px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text-sub);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.badge-size {
+  border-color: rgba(247, 95, 0, 0.35);
+  background: rgba(247, 95, 0, 0.08);
+  color: #bd4700;
+}
+.badge-count { border: 0; padding: 3px 4px; background: transparent; }
+.breed-name {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  font-weight: 800;
+  color: var(--navy);
+}
+.breed-name a { color: inherit; }
+
+.breed-spokes { margin-top: 56px; }
+.spokes-title {
+  margin: 0 0 8px;
+  font-size: 24px;
+  letter-spacing: -0.01em;
+  color: var(--navy);
+}
+.spoke-list { list-style: none; margin: 0; padding: 0; }
+.spoke-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 14px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+}
+.spoke-list a { font-weight: 600; }
+.spoke-list a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.spoke-meta { margin-left: auto; font-size: 13.5px; color: var(--text-sub); white-space: nowrap; }
+.spokes-more { display: inline-block; margin-top: 16px; font-weight: 600; color: var(--orange); }
+
+/* ── 사이트 검색 ──────────────────────── */
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 620px;
+  padding: 14px 18px;
+  border: 2px solid var(--navy);
+  border-radius: 4px;
+  background: var(--surface);
+}
+.search-box:focus-within { box-shadow: var(--shadow-hover); }
+.search-icon { flex: 0 0 auto; color: var(--navy); }
+.skip-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+#search-input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 17px;
+  color: var(--text);
+}
+#search-input:focus { outline: none; }
+
+.search-suggest { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 20px 0 0; }
+.search-suggest a {
+  padding: 6px 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--surface-card);
+  color: var(--navy);
+  font-size: 14px;
+  font-weight: 600;
+}
+.search-suggest a:hover { border-color: var(--navy); }
+
+.search-status { margin: 24px 0 0; font-size: 14.5px; color: var(--text-sub); }
+.search-results { list-style: none; margin: 8px 0 0; padding: 0; }
+.search-result { padding: 20px 0; border-bottom: 1px solid var(--line); }
+.search-result-meta { margin-bottom: 6px; font-size: 13.5px; color: var(--text-sub); }
+.search-result-title { margin: 0; font-size: 19px; line-height: 1.45; font-weight: 700; }
+.search-result-title a { color: var(--navy); }
+.search-result-title a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.search-result-snippet { margin: 8px 0 0; font-size: 15px; line-height: 1.65; color: var(--text-sub); }
+.search-result mark {
+  background: rgba(247, 95, 0, 0.16);
+  color: inherit;
+  padding: 0 1px;
+  border-radius: 2px;
+}
+
+/* ── 헤더 검색 아이콘 ─────────────────── */
+.header-search {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px;
+  border-radius: 4px;
+  color: var(--navy);
+}
+.header-search:hover { color: var(--orange); }
+.header-search:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; }
+
 /* ── 모션 최소화 설정 존중 ─────────────── */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

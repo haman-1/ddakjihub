@@ -5,6 +5,8 @@ description: "골든 리트리버의 성격과 수명, 털·색상부터 한국 
 summary: "성격·수명·분양가·유전병 위험까지 골든 리트리버의 모든 것"
 kind: hub
 breed: "골든 리트리버"
+size: "대형"                  # 견종 도감 필터 — 소형/중형/대형
+group: "스포팅"               # AKC 견종 그룹 한국어 표기
 categories: ["품종"]
 tags: ["골든 리트리버", "견종", "대형견"]
 series: "golden-retriever"

@@ -5,6 +5,8 @@ description: "가장 똑똑하다는 양몰이견 보더콜리. 성격과 하루
 summary: "보더콜리 품종 가이드 — 성격·운동량·털색·유전병, 한국 실정 기준"
 kind: hub
 breed: "보더콜리"
+size: "중형"                  # 견종 도감 필터 — 소형/중형/대형
+group: "허딩"                 # AKC 견종 그룹 한국어 표기
 categories: ["품종"]
 tags: ["보더콜리", "견종", "양몰이견"]
 series: "border-collie"
