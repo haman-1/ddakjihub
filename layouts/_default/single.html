@@ -3,10 +3,10 @@
 <article class="post">
   <header class="post-head">
     <div class="post-meta">
-      {{- with .GetTerms "categories" }}
-        {{- range first 1 . }}
-      <a class="post-category" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
-        {{- end }}
+      {{- /* 카드 라벨과 같은 기준 — 섹션(품종/가이드/일상)으로 통일, 섹션 목록으로 링크 */ -}}
+      {{- $sectionLabels := dict "breeds" "품종" "guides" "가이드" "daily" "일상" -}}
+      {{- with index $sectionLabels .Section }}
+      <a class="post-category" href="/{{ $.Section }}/">{{ . }}</a>
       {{- end }}
       {{- if not .Date.IsZero }}
       <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format (site.Params.dateFormat | default "2006. 1. 2.") }}</time>

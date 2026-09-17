@@ -21,8 +21,10 @@
   {{- end }}
   <div class="card-body">
     <div class="card-meta">
-      {{- with .GetTerms "categories" }}
-      <span class="card-category">{{ (index . 0).LinkTitle }}</span>
+      {{- /* 라벨은 주제 카테고리가 아니라 섹션 기준으로 통일 — 메뉴(품종/가이드/일상)와 같은 축 */ -}}
+      {{- $sectionLabels := dict "breeds" "품종" "guides" "가이드" "daily" "일상" -}}
+      {{- with index $sectionLabels .Section }}
+      <span class="card-category">{{ . }}</span>
       {{- end }}
       {{- if not .Date.IsZero }}
       <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format (site.Params.dateFormat | default "2006. 1. 2.") }}</time>
