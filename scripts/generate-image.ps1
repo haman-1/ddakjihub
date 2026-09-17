@@ -7,10 +7,21 @@ param(
   [Parameter(Mandatory = $true)][string]$Prompt,
   [Parameter(Mandatory = $true)][string]$Out,
   [string]$Model = "gemini-3.1-flash-image",
-  [string]$AspectRatio = "16:9"
+  [string]$AspectRatio = "16:9",
+  [switch]$NoStyle
 )
 
 $ErrorActionPreference = "Stop"
+
+# 실사(photorealistic) 가드 — 프롬프트에 실사 지시가 없으면 기본 접두사를 붙인다.
+# 이 사이트의 AI 이미지 규칙은 '실사 스타일'이므로 일러스트가 나오는 것을 방지한다.
+# 실사가 아닌 이미지가 필요하면 -NoStyle 스위치로 가드를 끈다.
+$realisticMarkers = @("실사", "사진", "photorealistic", "realistic", "photo")
+$isRealistic = ($realisticMarkers | Where-Object { $Prompt -match [regex]::Escape($_) }).Count -gt 0
+if (-not $NoStyle -and -not $isRealistic) {
+  $Prompt = "실사 사진 스타일(photorealistic photography, 자연스러운 조명과 질감, 일러스트 아님). " + $Prompt
+  "주의: 실사 지시가 없어 기본 실사 접두사를 붙였습니다 (-NoStyle 로 끌 수 있음)"
+}
 $root = Split-Path -Parent $PSScriptRoot
 $envLine = Get-Content (Join-Path $root ".env") | Where-Object { $_ -match "^GEMINI_API_KEY=" }
 if (-not $envLine) { throw ".env 에 GEMINI_API_KEY 가 없습니다." }

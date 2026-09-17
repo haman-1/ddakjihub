@@ -1,0 +1,8 @@
+{{- /* 본문 이미지 렌더 훅 — 페이지 번들 안의 이미지는 리사이즈·압축해 출력한다.
+       원본은 그대로 보존되고 빌드 결과물만 가벼워진다. 외부 URL은 그대로 둔다. */ -}}
+{{- with .Page.Resources.GetMatch .Destination }}
+  {{- $img := .Resize "1000x jpg q78" }}
+<img src="{{ $img.RelPermalink }}" alt="{{ $.PlainText }}" loading="lazy" decoding="async"{{ with $.Title }} title="{{ . }}"{{ end }}>
+{{- else }}
+<img src="{{ .Destination }}" alt="{{ .PlainText }}" loading="lazy" decoding="async"{{ with .Title }} title="{{ . }}"{{ end }}>
+{{- end }}

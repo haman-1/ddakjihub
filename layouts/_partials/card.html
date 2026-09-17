@@ -11,7 +11,8 @@
   {{- end -}}
   {{- if $cover }}
   <a class="card-cover" href="{{ $.RelPermalink }}" tabindex="-1" aria-hidden="true">
-    <img src="{{ $cover.RelPermalink }}" alt="" loading="lazy" decoding="async">
+    {{- /* 카드는 작게 보이므로 리사이즈·압축본을 쓴다(원본은 보존) */ -}}
+    <img src="{{ ($cover.Resize "560x jpg q75").RelPermalink }}" alt="" loading="lazy" decoding="async">
   </a>
   {{- else if $yt }}
   <a class="card-cover" href="{{ $.RelPermalink }}" tabindex="-1" aria-hidden="true">
