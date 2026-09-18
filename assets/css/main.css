@@ -46,6 +46,9 @@ body {
 
 img { max-width: 100%; height: auto; }
 
+/* hidden 속성이 작성자 display 규칙(.card의 flex 등)에 밀려 무시되지 않게 한다 */
+[hidden] { display: none !important; }
+
 /* 유튜브 임베드 — 쇼츠(세로)는 폭을 제한해 본문 한가운데, 일반 영상(wide)은 16:9 전폭 */
 .video-embed {
   position: relative;
