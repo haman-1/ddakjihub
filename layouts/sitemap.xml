@@ -1,0 +1,27 @@
+{{- /*
+  사이트맵 — 택소노미 뿌리 페이지(/tags/·/categories/·/series/)와
+  태그 항목 페이지를 제외한다. 얇은 자동생성 페이지가 크롤 예산을 낭비하지 않도록.
+  카테고리·시리즈 항목 페이지는 색인에 남긴다(주제 허브·허브-스포크 연결).
+*/ -}}
+{{ printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  {{ range .Data.Pages }}
+    {{- /* 제외: 택소노미 뿌리 페이지 + 태그 항목 페이지 + 프런트매터에서 sitemap 비활성화한 페이지(/search/ 등) */ -}}
+    {{- $exclude := or (eq .Kind "taxonomy") (and (eq .Kind "term") (eq .Data.Singular "tag")) .Sitemap.Disable }}
+    {{- if and (not $exclude) .Permalink -}}
+  <url>
+    <loc>{{ .Permalink }}</loc>{{ if not .Lastmod.IsZero }}
+    <lastmod>{{ .Lastmod.Format "2006-01-02T15:04:05-07:00" }}</lastmod>{{ end }}{{ if .IsTranslated }}
+    {{ range .Translations }}
+    <xhtml:link
+      rel="alternate"
+      hreflang="{{ .Language.LanguageCode }}"
+      href="{{ .Permalink }}"
+      />
+    {{ end }}
+    {{ end }}
+  </url>
+    {{- end -}}
+  {{ end }}
+</urlset>

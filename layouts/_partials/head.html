@@ -19,8 +19,11 @@
 {{- end }}
 {{- $desc := .Description | default site.Params.description }}
 <meta name="description" content="{{ $desc }}">
-{{- with .Params.noindex }}
-<meta name="robots" content="noindex">
+{{- /* noindex — 글 프런트매터 지정 + 택소노미 뿌리(/tags/ 등)·태그 항목 페이지 자동 지정.
+      카테고리·시리즈 항목 페이지는 색인에 남긴다. follow로 글 링크는 계속 따라가게 */ -}}
+{{- $autoNoindex := or (eq .Kind "taxonomy") (and (eq .Kind "term") (eq .Data.Singular "tag")) }}
+{{- if or .Params.noindex $autoNoindex }}
+<meta name="robots" content="noindex, follow">
 {{- end }}
 <link rel="canonical" href="{{ $pageURL }}">
 <meta property="og:title" content="{{ if .IsHome }}{{ site.Title }}{{ if gt $pageNo 1 }} · {{ $pageNo }}페이지{{ end }}{{ else }}{{ $title }}{{ end }}">
