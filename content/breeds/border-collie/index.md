@@ -146,6 +146,8 @@ draft: false
 
 가장 곤란한 건 쉽게 흥분하는 것이다. 기분 좋은 일이 생기면 금세 들떠서 진정시키는 데 공이 든다. 위에 쓴 '민감한 품종'이라는 말이 실감나는 대목이다.
 
+성격과 좋아하는 것, 지금까지 기록한 이야기는 [딱지 프로필](/daily/ddakji-profile/) 한곳에 모아 두었다.
+
 ## 출처
 
 - [AKC — Border Collie 품종 정보](https://www.akc.org/dog-breeds/border-collie/) (체고·체중·수명, 성격, 그루밍)
