@@ -67,3 +67,7 @@ buildExpired = false
 [markup]
   [markup.goldmark.renderer]
     unsafe = true
+  # 물결표 범위 표기(62~70cm)가 취소선 문법으로 해석돼 줄 그어져 붙는 버그 방지
+  # (2026-10-02 — 이 확장이 홑물결표 짝도 <del>로 렌더링함)
+  [markup.goldmark.extensions]
+    strikethrough = false
