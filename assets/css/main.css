@@ -199,7 +199,9 @@ textarea {
   padding-block-end: 10px; /* 아래 밴드와의 간격 — 위 여백은 .band-compact-top이 보충 */
 }
 
-/* 문구 왼쪽 · 대표 카드 오른쪽 2단 — 모바일은 카드가 문구 아래로 접힌다 */
+/* 문구 왼쪽 · 대표 카드 오른쪽 2단 — 1024px 미만에서는 대표 카드를 숨긴다.
+   대표 글이 '최신 글' 그리드 첫 카드와 같은 글일 때 바로 붙어 중복되므로,
+   모바일·태블릿에서는 히어로 카드만 가린다(그리드 카드는 그대로). */
 .hero-inner {
   display: grid;
   grid-template-columns: 1fr;
@@ -207,10 +209,18 @@ textarea {
   align-items: center;
 }
 
+.hero-card {
+  display: none;
+}
+
 @media (min-width: 1024px) {
   .hero-inner {
     grid-template-columns: minmax(0, 1fr) 430px;
     gap: clamp(40px, 5vw, 64px);
+  }
+
+  .hero-card {
+    display: block;
   }
 }
 
