@@ -32,10 +32,7 @@
     {{- if $paginator.Pages }}
     <div class="card-grid">
       {{- range $paginator.Pages }}
-      {{- /* 대표 카드는 히어로에 있으므로 그리드에서는 뺀다 */ -}}
-      {{- if ne .RelPermalink $featured.RelPermalink }}
       {{ partial "card.html" . }}
-      {{- end }}
       {{- end }}
     </div>
       {{- if gt $paginator.TotalPages 1 }}
