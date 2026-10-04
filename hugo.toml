@@ -37,6 +37,8 @@ buildExpired = false
   naverSiteVerification = '51bdd90e9a7adf0fc218e9592e85655c1f4614ff'
   # 구글 애널리틱스 4(GA4) 측정 ID — layouts/_partials/head.html에서 gtag 스니펫 출력
   googleAnalytics = 'G-HKY09V88M3'
+  # 홈 대표카드 — 이 경로만 바꾸면 최신 글 맨 위 큰 카드가 그 글로 교체된다
+  featuredPost = '/guides/dog-walk-mistakes/'
 
 # ── 메뉴 ────────────────────────────────────────────────────────
 [[menus.main]]

@@ -187,19 +187,10 @@ textarea {
 }
 .site-nav a:hover { text-decoration: underline; text-underline-offset: 6px; }
 
-/* ── 홈 히어로 — 좌 텍스트 · 우 딱지 사진 ── */
+/* ── 홈 히어로 ─────────────────────────── */
 .hero {
-  padding-block: clamp(56px, 8vw, 104px) clamp(48px, 7vw, 88px);
+  padding-block: clamp(64px, 10vw, 120px) clamp(56px, 8vw, 96px);
 }
-
-.hero-grid {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: clamp(32px, 5vw, 72px);
-}
-
-.hero-copy { flex: 1 1 460px; }
 
 .hero-eyebrow {
   margin: 0 0 14px;
@@ -211,9 +202,9 @@ textarea {
 
 .hero-title {
   margin: 0;
-  max-width: 620px;
-  font-size: clamp(34px, 4.8vw, 48px);
-  line-height: 1.2;
+  max-width: 760px;
+  font-size: clamp(36px, 6vw, 60px);
+  line-height: 1.16;
   letter-spacing: -0.02em;
   font-weight: 800;
   color: var(--navy);
@@ -221,7 +212,7 @@ textarea {
 
 .hero-desc {
   margin: 20px 0 0;
-  max-width: 520px;
+  max-width: 560px;
   font-size: 18px;
   line-height: 1.7;
   color: var(--text-sub);
@@ -232,38 +223,6 @@ textarea {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-}
-
-/* 사진 — 4:5 크롭. 오프셋 프레임 장식은 두 번 시도 모두 사진과 어긋나
-   따로 노는 것처럼 보여 폐기(2026-10-05) — 테두리 없이 깔끔하게 둔다 */
-.hero-photo {
-  flex: 0 1 400px;
-  margin: 0;
-}
-
-.hero-photo img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  object-position: 50% 28%;
-  border-radius: 4px;
-}
-
-.hero-photo figcaption {
-  margin-top: 14px;
-  font-size: 13.5px;
-  text-align: center;
-  color: var(--text-sub);
-}
-
-/* 좁은 화면 — 텍스트 아래로 사진이 내려가 중앙 프레임 사진이 된다 */
-@media (max-width: 900px) {
-  .hero-photo {
-    flex-basis: 100%;
-    max-width: 440px;
-    margin-inline: auto;
-  }
 }
 
 /* ── 섹션 제목·카드 그리드 ─────────────── */
@@ -339,6 +298,72 @@ textarea {
   color: var(--text-sub);
 }
 
+/* ── 홈 대표 진열 — 첫 줄을 큰 카드 하나 + 컴팩트 카드 세 장으로.
+       900px 이하에서는 일반 카드 그리드와 같은 배치·크기로 흘러 모바일 모습이
+       달라지지 않고, 넓은 화면에서만 2단 진열이 열린다. 대표카드를 바꾸는 곳은
+       hugo.toml의 featuredPost. */
+.featured-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.card-more { display: none; }
+
+@media (min-width: 901px) {
+  .featured-row {
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+    align-items: stretch;
+  }
+
+  /* 대표카드 — 같은 카드 뼈대를 크게 */
+  .featured-main { display: flex; }
+  .featured-main .card { flex: 1; }
+  .featured-main .card-body { gap: 12px; padding: 24px 26px 26px; }
+  .featured-main .card-title { font-size: 26px; }
+  .featured-main .card-desc { font-size: 16px; }
+  .featured-main .card-more {
+    display: inline-block;
+    margin-top: 4px;
+    color: var(--orange);
+    font-weight: 700;
+    font-size: 15px;
+  }
+  .featured-main .card-more:hover {
+    text-decoration: underline;
+    text-underline-offset: 5px;
+  }
+
+  /* 컴팩트 카드 — 왼쪽 썸네일 · 오른쪽 제목·요약 가로 배열 */
+  .featured-side {
+    display: grid;
+    grid-auto-rows: 1fr;
+    gap: 16px;
+  }
+
+  .featured-side .card { flex-direction: row; }
+  .featured-side .card-cover { flex: 0 0 clamp(100px, 34%, 150px); }
+  .featured-side .card-cover img {
+    height: 100%;
+    aspect-ratio: auto;
+  }
+  .featured-side .card-body {
+    justify-content: center;
+    gap: 7px;
+    padding: 14px 16px;
+  }
+  .featured-side .card-meta { flex-wrap: wrap; }
+  .featured-side .card-title { font-size: 16px; line-height: 1.45; }
+  .featured-side .card-desc {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    font-size: 14px;
+  }
+}
+
 /* ── 홈 섹션 바로가기 ──────────────────── */
 .home-sections { padding-block: clamp(56px, 8vw, 96px); }
 
@@ -382,17 +407,27 @@ textarea {
   color: var(--orange);
 }
 
-/* ── 홈 딱지 소개 밴드 — 사진은 히어로로 옮기고 좁은 마무리 문단 ── */
-.about-strip-body {
-  max-width: 640px;
-  margin-inline: auto;
-  text-align: center;
+/* ── 홈 딱지 소개 스트립 ──────────────── */
+.about-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(24px, 5vw, 56px);
 }
+
+.about-strip-img {
+  flex: 0 0 auto;
+  width: min(300px, 100%);
+  border-radius: 4px;
+}
+
+.about-strip-body { flex: 1 1 340px; }
 
 .about-strip-body .section-title { margin-bottom: 16px; font-size: clamp(26px, 3vw, 36px); }
 
 .about-strip-body p {
   margin: 0 0 28px;
+  max-width: 560px;
   font-size: 17px;
   line-height: 1.7;
   color: var(--text-sub);

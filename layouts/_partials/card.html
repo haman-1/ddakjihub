@@ -1,38 +1,49 @@
-<article class="card">
-  {{- $cover := .Resources.GetMatch "cover.*" -}}
-  {{- /* 표지가 없어도 본문에 유튜브 영상이 있으면 그 썸네일을 카드에 띄운다.
-         oar2는 원본 비율(세로) 썸네일 — 16:9 카드 크롭에 맞게 잘리며, 없는 영상은
-         hqdefault로 되돌린다. */ -}}
-  {{- $yt := "" -}}
-  {{- if not $cover -}}
-    {{- with findRE `\{\{<\s*youtube\s+"[^"]+"` .RawContent 1 -}}
-      {{- $yt = partial "youtube-id.html" (dict "src" (replaceRE `.*"([^"]+)"` `$1` (index . 0))) -}}
-    {{- end -}}
+{{- /* 목록 카드 — 페이지를 바로 넘기는 게 기본형. 홈 대표카드는 dict로 옵션을 준다:
+       coverWidth(큰 카드용 넓은 리사이즈), more('자세히 보기' 링크) */ -}}
+{{- $p := . -}}
+{{- $coverWidth := 560 -}}
+{{- $more := false -}}
+{{- if reflect.IsMap . -}}
+  {{- $p = .page -}}
+  {{- with .coverWidth }}{{ $coverWidth = . }}{{ end -}}
+  {{- with .more }}{{ $more = . }}{{ end -}}
+{{- end -}}
+{{- $cover := $p.Resources.GetMatch "cover.*" -}}
+{{- /* 표지가 없어도 본문에 유튜브 영상이 있으면 그 썸네일을 카드에 띄운다.
+       oar2는 원본 비율(세로) 썸네일 — 16:9 카드 크롭에 맞게 잘리며, 없는 영상은
+       hqdefault로 되돌린다. */ -}}
+{{- $yt := "" -}}
+{{- if not $cover -}}
+  {{- with findRE `\{\{<\s*youtube\s+"[^"]+"` $p.RawContent 1 -}}
+    {{- $yt = partial "youtube-id.html" (dict "src" (replaceRE `.*"([^"]+)"` `$1` (index . 0))) -}}
   {{- end -}}
-  {{- if $cover }}
-  <a class="card-cover" href="{{ $.RelPermalink }}" tabindex="-1" aria-hidden="true">
-    {{- /* 카드는 작게 보이므로 리사이즈·압축본을 쓴다(원본은 보존) */ -}}
-    <img src="{{ ($cover.Resize "560x jpg q75").RelPermalink }}" alt="" loading="lazy" decoding="async">
-  </a>
-  {{- else if $yt }}
-  <a class="card-cover" href="{{ $.RelPermalink }}" tabindex="-1" aria-hidden="true">
-    <img src="https://i.ytimg.com/vi/{{ $yt }}/oar2.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/{{ $yt }}/hqdefault.jpg'" alt="" loading="lazy" decoding="async">
-  </a>
-  {{- end }}
-  <div class="card-body">
-    <div class="card-meta">
-      {{- /* 라벨은 주제 카테고리가 아니라 섹션 기준으로 통일 — 메뉴(품종/가이드/일상)와 같은 축 */ -}}
-      {{- $sectionLabels := dict "breeds" "품종" "guides" "가이드" "daily" "일상" -}}
-      {{- with index $sectionLabels .Section }}
-      <span class="card-category">{{ . }}</span>
-      {{- end }}
-      {{- if not .Date.IsZero }}
-      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format (site.Params.dateFormat | default "2006. 1. 2.") }}</time>
-      {{- end }}
-    </div>
-    <h3 class="card-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-    {{- with .Description }}
-    <p class="card-desc">{{ . }}</p>
+{{- end -}}
+{{- if $cover }}
+<a class="card-cover" href="{{ $p.RelPermalink }}" tabindex="-1" aria-hidden="true">
+  {{- /* 카드는 작게 보이므로 리사이즈·압축본을 쓴다(원본은 보존) */ -}}
+  <img src="{{ ($cover.Resize (printf "%dx jpg q75" $coverWidth)).RelPermalink }}" alt="" loading="lazy" decoding="async">
+</a>
+{{- else if $yt }}
+<a class="card-cover" href="{{ $p.RelPermalink }}" tabindex="-1" aria-hidden="true">
+  <img src="https://i.ytimg.com/vi/{{ $yt }}/oar2.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/{{ $yt }}/hqdefault.jpg'" alt="" loading="lazy" decoding="async">
+</a>
+{{- end }}
+<div class="card-body">
+  <div class="card-meta">
+    {{- /* 라벨은 주제 카테고리가 아니라 섹션 기준으로 통일 — 메뉴(품종/가이드/일상)와 같은 축 */ -}}
+    {{- $sectionLabels := dict "breeds" "품종" "guides" "가이드" "daily" "일상" -}}
+    {{- with index $sectionLabels $p.Section }}
+    <span class="card-category">{{ . }}</span>
+    {{- end }}
+    {{- if not $p.Date.IsZero }}
+    <time datetime="{{ $p.Date.Format "2006-01-02" }}">{{ $p.Date | time.Format (site.Params.dateFormat | default "2006. 1. 2.") }}</time>
     {{- end }}
   </div>
-</article>
+  <h3 class="card-title"><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></h3>
+  {{- with $p.Description }}
+  <p class="card-desc">{{ . }}</p>
+  {{- end }}
+  {{- if $more }}
+  <a class="card-more" href="{{ $p.RelPermalink }}">자세히 보기 →</a>
+  {{- end }}
+</div>

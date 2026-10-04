@@ -3,4 +3,10 @@
        여기서 필터된 컬렉션으로 먼저 만들면 이후 호출은 모두 같은 결과를 받는다. */ -}}
 {{- $sections := slice "breeds" "guides" "daily" }}
 {{- $recent := (where site.RegularPages "Type" "in" $sections).ByDate.Reverse }}
+{{- /* 대표카드로 고른 글은 목록에서 뺀다 — 홈 진열과 같은 글이 중복해 보이지 않게 */ -}}
+{{- with site.Params.featuredPost }}
+  {{- with site.GetPage . }}
+    {{- $recent = where $recent "RelPermalink" "!=" .RelPermalink }}
+  {{- end }}
+{{- end }}
 {{- return .Paginate $recent 12 }}
