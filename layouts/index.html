@@ -19,7 +19,7 @@
     </div>
     {{- with $featured }}
     <div class="hero-card">
-      {{ partial "card.html" . }}
+      {{ partial "card.html" (dict "Page" . "Eager" true) }}
     </div>
     {{- end }}
   </div>

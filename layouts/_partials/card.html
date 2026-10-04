@@ -1,37 +1,47 @@
+{{- /* 카드 파셜 — 컨텍스트는 페이지. 첫 화면에 보이는 카드는
+       {{ partial "card.html" (dict "Page" . "Eager" true) }}로 호출해
+       표지를 즉시 로드한다(그 외는 기본 lazy). */ -}}
+{{- $ctx := . -}}
+{{- $eager := false -}}
+{{- if and (reflect.IsMap .) (isset . "Page") -}}
+  {{- $ctx = .Page -}}
+  {{- $eager = (.Eager | default false) -}}
+{{- end -}}
+{{- $load := cond $eager "eager" "lazy" -}}
 <article class="card">
-  {{- $cover := .Resources.GetMatch "cover.*" -}}
+  {{- $cover := $ctx.Resources.GetMatch "cover.*" -}}
   {{- /* 표지가 없어도 본문에 유튜브 영상이 있으면 그 썸네일을 카드에 띄운다.
          oar2는 원본 비율(세로) 썸네일 — 16:9 카드 크롭에 맞게 잘리며, 없는 영상은
          hqdefault로 되돌린다. */ -}}
   {{- $yt := "" -}}
   {{- if not $cover -}}
-    {{- with findRE `\{\{<\s*youtube\s+"[^"]+"` .RawContent 1 -}}
+    {{- with findRE `\{\{<\s*youtube\s+"[^"]+"` $ctx.RawContent 1 -}}
       {{- $yt = partial "youtube-id.html" (dict "src" (replaceRE `.*"([^"]+)"` `$1` (index . 0))) -}}
     {{- end -}}
   {{- end -}}
   {{- if $cover }}
-  <a class="card-cover" href="{{ $.RelPermalink }}" tabindex="-1" aria-hidden="true">
+  <a class="card-cover" href="{{ $ctx.RelPermalink }}" tabindex="-1" aria-hidden="true">
     {{- /* 카드는 작게 보이므로 리사이즈·압축본을 쓴다(원본은 보존) */ -}}
-    <img src="{{ ($cover.Resize "560x jpg q75").RelPermalink }}" alt="" loading="lazy" decoding="async">
+    <img src="{{ ($cover.Resize "560x jpg q75").RelPermalink }}" alt="" loading="{{ $load }}" decoding="async">
   </a>
   {{- else if $yt }}
-  <a class="card-cover" href="{{ $.RelPermalink }}" tabindex="-1" aria-hidden="true">
-    <img src="https://i.ytimg.com/vi/{{ $yt }}/oar2.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/{{ $yt }}/hqdefault.jpg'" alt="" loading="lazy" decoding="async">
+  <a class="card-cover" href="{{ $ctx.RelPermalink }}" tabindex="-1" aria-hidden="true">
+    <img src="https://i.ytimg.com/vi/{{ $yt }}/oar2.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/{{ $yt }}/hqdefault.jpg'" alt="" loading="{{ $load }}" decoding="async">
   </a>
   {{- end }}
   <div class="card-body">
     <div class="card-meta">
       {{- /* 라벨은 주제 카테고리가 아니라 섹션 기준으로 통일 — 메뉴(품종/가이드/일상)와 같은 축 */ -}}
       {{- $sectionLabels := dict "breeds" "품종" "guides" "가이드" "daily" "일상" -}}
-      {{- with index $sectionLabels .Section }}
+      {{- with index $sectionLabels $ctx.Section }}
       <span class="card-category">{{ . }}</span>
       {{- end }}
-      {{- if not .Date.IsZero }}
-      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format (site.Params.dateFormat | default "2006. 1. 2.") }}</time>
+      {{- if not $ctx.Date.IsZero }}
+      <time datetime="{{ $ctx.Date.Format "2006-01-02" }}">{{ $ctx.Date | time.Format (site.Params.dateFormat | default "2006. 1. 2.") }}</time>
       {{- end }}
     </div>
-    <h3 class="card-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-    {{- with .Description }}
+    <h3 class="card-title"><a href="{{ $ctx.RelPermalink }}">{{ $ctx.Title }}</a></h3>
+    {{- with $ctx.Description }}
     <p class="card-desc">{{ . }}</p>
     {{- end }}
   </div>
