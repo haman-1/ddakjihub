@@ -12,9 +12,7 @@
     </div>
     {{- with resources.Get "images/ddakji-about.jpg" }}
     <figure class="hero-photo">
-      <div class="hero-photo-frame">
-        <img src="{{ (.Resize "880x").RelPermalink }}" alt="보더콜리 딱지" decoding="async" width="880" height="1152">
-      </div>
+      <img src="{{ (.Resize "880x").RelPermalink }}" alt="보더콜리 딱지" decoding="async" width="880" height="1152">
       <figcaption>이 사이트의 주인공, 보더콜리 딱지</figcaption>
     </figure>
     {{- end }}
