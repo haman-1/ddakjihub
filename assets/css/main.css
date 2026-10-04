@@ -201,9 +201,9 @@ textarea {
   align-items: center;
 }
 
-@media (min-width: 960px) {
+@media (min-width: 1024px) {
   .hero-inner {
-    grid-template-columns: minmax(0, 1fr) 380px;
+    grid-template-columns: minmax(0, 1fr) 430px;
     gap: clamp(40px, 5vw, 64px);
   }
 }
@@ -219,7 +219,7 @@ textarea {
 .hero-title {
   margin: 0;
   max-width: 760px;
-  font-size: clamp(36px, 6vw, 60px);
+  font-size: clamp(30px, 4vw, 44px);
   line-height: 1.16;
   letter-spacing: -0.02em;
   font-weight: 800;
