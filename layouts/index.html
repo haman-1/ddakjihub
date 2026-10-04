@@ -1,13 +1,27 @@
 {{ define "main" }}
+{{- /* 대표 카드 — featured: true를 단 최신 글이 우선, 없으면 최신 글 폴백.
+       변경은 원하는 글 프런트매터에 한 줄을 옮기면 된다. */ -}}
+{{- $sections := slice "breeds" "guides" "daily" -}}
+{{- $recent := (where site.RegularPages "Type" "in" $sections).ByDate.Reverse -}}
+{{- $feat := where $recent "Params.featured" true -}}
+{{- $featured := index $feat 0 -}}
+{{- if not $featured -}}{{- $featured = index $recent 0 -}}{{- end -}}
 <section class="hero">
-  <div class="container">
-    <p class="hero-eyebrow">{{ site.Params.tagline }}</p>
-    <h1 class="hero-title">반려견과 함께 사는 사람들의 정보 허브</h1>
-    <p class="hero-desc">품종 정보부터 일상·관리·건강·용품까지, 오래 찾아 쓰는 반려동물 정보를 한곳에 모았습니다.</p>
-    <div class="hero-actions">
-      <a class="button" href="/breeds/">품종 정보 보기</a>
-      <a class="button button-outline" href="/archives/">전체 글 보기</a>
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <p class="hero-eyebrow">{{ site.Params.tagline }}</p>
+      <h1 class="hero-title">반려견과 함께 사는 사람들의 정보 허브</h1>
+      <p class="hero-desc">품종 정보부터 일상·관리·건강·용품까지, 오래 찾아 쓰는 반려동물 정보를 한곳에 모았습니다.</p>
+      <div class="hero-actions">
+        <a class="button" href="/breeds/">품종 정보 보기</a>
+        <a class="button button-outline" href="/archives/">전체 글 보기</a>
+      </div>
     </div>
+    {{- with $featured }}
+    <div class="hero-card">
+      {{ partial "card.html" . }}
+    </div>
+    {{- end }}
   </div>
 </section>
 
@@ -18,7 +32,10 @@
     {{- if $paginator.Pages }}
     <div class="card-grid">
       {{- range $paginator.Pages }}
+      {{- /* 대표 카드는 히어로에 있으므로 그리드에서는 뺀다 */ -}}
+      {{- if ne .RelPermalink $featured.RelPermalink }}
       {{ partial "card.html" . }}
+      {{- end }}
       {{- end }}
     </div>
       {{- if gt $paginator.TotalPages 1 }}

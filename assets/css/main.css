@@ -189,7 +189,23 @@ textarea {
 
 /* ── 홈 히어로 ─────────────────────────── */
 .hero {
-  padding-block: clamp(64px, 10vw, 120px) clamp(56px, 8vw, 96px);
+  background: var(--surface);
+  padding-block: clamp(48px, 7vw, 80px);
+}
+
+/* 문구 왼쪽 · 대표 카드 오른쪽 2단 — 모바일은 카드가 문구 아래로 접힌다 */
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(28px, 4vw, 48px);
+  align-items: center;
+}
+
+@media (min-width: 960px) {
+  .hero-inner {
+    grid-template-columns: minmax(0, 1fr) 380px;
+    gap: clamp(40px, 5vw, 64px);
+  }
 }
 
 .hero-eyebrow {
