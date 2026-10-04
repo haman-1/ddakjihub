@@ -16,51 +16,22 @@
     <h2 class="section-title">최신 글</h2>
     {{- $paginator := partial "home-pager.html" . }}
     {{- if $paginator.Pages }}
-      {{- $pages := $paginator.Pages }}
-      {{- $rest := $pages }}
-      {{- $feat := "" }}
-      {{- $skip := 0 }}
-      {{- if eq $paginator.PageNumber 1 }}
-        {{- /* 대표 진열 — hugo.toml의 featuredPost에 고른 글을 큰 카드에 올리고,
-               못 찾으면 최신 글 첫 편이 대표가 된다. 나머지 세 장은 컴팩트 카드 */ -}}
-        {{- $feat = index $pages 0 }}
-        {{- $skip = 1 }}
-        {{- with site.Params.featuredPost }}
-          {{- with site.GetPage . }}
-            {{- $feat = . }}
-            {{- $skip = 0 }}
-          {{- end }}
-        {{- end }}
-        <div class="featured-row">
-          <div class="featured-main">
-            {{- partial "card.html" (dict "page" $feat "coverWidth" 1120 "more" true) }}
-          </div>
-          <div class="featured-side">
-            {{- range first 3 (after $skip $pages) }}
-              {{- partial "card.html" . }}
-            {{- end }}
-          </div>
-        </div>
-        {{- $rest = after (add 3 $skip) $pages }}
+    <div class="card-grid">
+      {{- range $paginator.Pages }}
+      {{ partial "card.html" . }}
       {{- end }}
-      {{- with $rest }}
-      <div class="card-grid">
-        {{- range . }}
-        {{ partial "card.html" . }}
-        {{- end }}
-      </div>
-      {{- end }}
+    </div>
       {{- if gt $paginator.TotalPages 1 }}
     <nav class="pagination" aria-label="페이지 이동">
       {{- if $paginator.HasPrev }}
-        <a href="{{ $paginator.Prev.URL }}">이전</a>
+      <a href="{{ $paginator.Prev.URL }}">이전</a>
       {{- else }}
-        <span></span>
+      <span></span>
       {{- end }}
       {{- if $paginator.HasNext }}
-        <a href="{{ $paginator.Next.URL }}">다음</a>
+      <a href="{{ $paginator.Next.URL }}">다음</a>
       {{- else }}
-        <span></span>
+      <span></span>
       {{- end }}
     </nav>
       {{- end }}
