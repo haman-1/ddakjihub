@@ -1,13 +1,21 @@
 {{ define "main" }}
 <section class="hero">
-  <div class="container">
-    <p class="hero-eyebrow">{{ site.Params.tagline }}</p>
-    <h1 class="hero-title">반려견과 함께 사는 사람들의 정보 허브</h1>
-    <p class="hero-desc">품종 정보부터 일상·관리·건강·용품까지, 오래 찾아 쓰는 반려동물 정보를 한곳에 모았습니다.</p>
-    <div class="hero-actions">
-      <a class="button" href="/breeds/">품종 정보 보기</a>
-      <a class="button button-outline" href="/archives/">전체 글 보기</a>
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="hero-eyebrow">{{ site.Params.tagline }}</p>
+      <h1 class="hero-title">반려견과 함께 사는 사람들의 정보 허브</h1>
+      <p class="hero-desc">품종 정보부터 일상·관리·건강·용품까지, 오래 찾아 쓰는 반려동물 정보를 한곳에 모았습니다.</p>
+      <div class="hero-actions">
+        <a class="button" href="/breeds/">품종 정보 보기</a>
+        <a class="button button-outline" href="/archives/">전체 글 보기</a>
+      </div>
     </div>
+    {{- with resources.Get "images/ddakji-about.jpg" }}
+    <figure class="hero-photo">
+      <img src="{{ (.Resize "880x").RelPermalink }}" alt="보더콜리 딱지" decoding="async" width="880" height="1152">
+      <figcaption>사이트 얼굴, 보더콜리 딱지</figcaption>
+    </figure>
+    {{- end }}
   </div>
 </section>
 
@@ -65,10 +73,7 @@
 </section>
 
 <section class="band">
-  <div class="container about-strip">
-    {{- with resources.Get "images/ddakji-about.jpg" }}
-    <img class="about-strip-img" src="{{ (.Resize "600x").RelPermalink }}" alt="보더콜리 딱지" decoding="async">
-    {{- end }}
+  <div class="container">
     <div class="about-strip-body">
       <h2 class="section-title">딱지와 함께 쓰는 글</h2>
       <p>이 사이트의 글은 보더콜리 딱지를 직접 키우는 운영자가 경험하고, 필요한 사실은 신뢰할 수 있는 자료로 확인하며 씁니다.</p>

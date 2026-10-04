@@ -187,10 +187,19 @@ textarea {
 }
 .site-nav a:hover { text-decoration: underline; text-underline-offset: 6px; }
 
-/* ── 홈 히어로 ─────────────────────────── */
+/* ── 홈 히어로 — 좌 텍스트 · 우 딱지 사진 ── */
 .hero {
-  padding-block: clamp(64px, 10vw, 120px) clamp(56px, 8vw, 96px);
+  padding-block: clamp(56px, 8vw, 104px) clamp(48px, 7vw, 88px);
 }
+
+.hero-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(32px, 5vw, 72px);
+}
+
+.hero-copy { flex: 1 1 460px; }
 
 .hero-eyebrow {
   margin: 0 0 14px;
@@ -202,9 +211,9 @@ textarea {
 
 .hero-title {
   margin: 0;
-  max-width: 760px;
-  font-size: clamp(36px, 6vw, 60px);
-  line-height: 1.16;
+  max-width: 620px;
+  font-size: clamp(34px, 4.8vw, 48px);
+  line-height: 1.2;
   letter-spacing: -0.02em;
   font-weight: 800;
   color: var(--navy);
@@ -212,7 +221,7 @@ textarea {
 
 .hero-desc {
   margin: 20px 0 0;
-  max-width: 560px;
+  max-width: 520px;
   font-size: 18px;
   line-height: 1.7;
   color: var(--text-sub);
@@ -223,6 +232,47 @@ textarea {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+}
+
+/* 사진 — 오렌지 오프셋 프레임(시안 장식 문법)을 뒤로 빼고 4:5 크롭 */
+.hero-photo {
+  position: relative;
+  flex: 0 1 400px;
+  margin: 0;
+}
+
+.hero-photo::before {
+  content: "";
+  position: absolute;
+  inset: 16px -16px -16px 16px;
+  border: 2px solid var(--orange);
+  border-radius: 4px;
+}
+
+.hero-photo img {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 50% 28%;
+  border-radius: 4px;
+}
+
+.hero-photo figcaption {
+  position: relative;
+  margin-top: 30px; /* 오프셋 프레임(16px) 아래 여유 포함 */
+  font-size: 13.5px;
+  color: var(--text-sub);
+}
+
+/* 좁은 화면 — 텍스트 아래로 사진이 내려가 중앙 프레임 사진이 된다 */
+@media (max-width: 900px) {
+  .hero-photo {
+    flex-basis: 100%;
+    max-width: 440px;
+    margin-inline: auto;
+  }
 }
 
 /* ── 섹션 제목·카드 그리드 ─────────────── */
@@ -341,27 +391,17 @@ textarea {
   color: var(--orange);
 }
 
-/* ── 홈 딱지 소개 스트립 ──────────────── */
-.about-strip {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: clamp(24px, 5vw, 56px);
+/* ── 홈 딱지 소개 밴드 — 사진은 히어로로 옮기고 좁은 마무리 문단 ── */
+.about-strip-body {
+  max-width: 640px;
+  margin-inline: auto;
+  text-align: center;
 }
-
-.about-strip-img {
-  flex: 0 0 auto;
-  width: min(300px, 100%);
-  border-radius: 4px;
-}
-
-.about-strip-body { flex: 1 1 340px; }
 
 .about-strip-body .section-title { margin-bottom: 16px; font-size: clamp(26px, 3vw, 36px); }
 
 .about-strip-body p {
   margin: 0 0 28px;
-  max-width: 560px;
   font-size: 17px;
   line-height: 1.7;
   color: var(--text-sub);
