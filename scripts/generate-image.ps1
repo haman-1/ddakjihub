@@ -65,21 +65,27 @@ if ($dir -and -not (Test-Path $dir)) { New-Item -ItemType Directory -Force $dir 
 $tmp = "$Out.download"
 Invoke-WebRequest -Uri $result.result.sample -OutFile $tmp -TimeoutSec 240
 
-# 반환된 실제 형식(파일 시그니처)과 확장자가 다르면 이름을 맞춘다 (예: png인데 .jpg로 저장하는 것 방지)
+# 반환 형식을 파일 시그니처로 판별 — png로 오면 jpg(품질 82)로 재인코딩해 저장소 원본을 가볍게 둔다
+# (optimize-image.ps1이 jpg만 압축하므로, png를 그대로 두면 2MB 원본이 저장소에 쌓인다)
 $bytes = [IO.File]::ReadAllBytes($tmp)
-$mime = if ($bytes.Length -gt 8 -and $bytes[0] -eq 0x89 -and $bytes[1] -eq 0x50 -and $bytes[2] -eq 0x4E -and $bytes[3] -eq 0x47) { "image/png" }
-        elseif ($bytes.Length -gt 3 -and $bytes[0] -eq 0xFF -and $bytes[1] -eq 0xD8) { "image/jpeg" }
-        elseif ($bytes.Length -gt 12 -and [Text.Encoding]::ASCII.GetString($bytes, 0, 4) -eq "RIFF") { "image/webp" }
-        else { "unknown" }
-$ext = switch ($mime) {
-  "image/jpeg" { ".jpg" }
-  "image/png"  { ".png" }
-  "image/webp" { ".webp" }
-  default      { [IO.Path]::GetExtension($Out) }
+$isPng  = ($bytes.Length -gt 8 -and $bytes[0] -eq 0x89 -and $bytes[1] -eq 0x50 -and $bytes[2] -eq 0x4E -and $bytes[3] -eq 0x47)
+$isJpeg = ($bytes.Length -gt 3 -and $bytes[0] -eq 0xFF -and $bytes[1] -eq 0xD8)
+if (-not $isPng -and -not $isJpeg) { throw "알 수 없는 이미지 형식이 반환됐습니다 (처음 4바이트: $($bytes[0..3] -join ' '))" }
+if ([IO.Path]::GetExtension($Out) -ne ".jpg") {
+  $Out = [IO.Path]::ChangeExtension($Out, ".jpg")
+  "주의: jpg 고정 저장이라 이름을 $Out 로 맞췄습니다"
 }
-if ([IO.Path]::GetExtension($Out) -ne $ext) {
-  $Out = [IO.Path]::ChangeExtension($Out, $ext)
-  "주의: 반환 형식이 $mime 라 저장 이름을 $Out 로 맞췄습니다"
+if ($isPng) {
+  Add-Type -AssemblyName System.Drawing
+  $img = [System.Drawing.Image]::FromFile($tmp)
+  $codec = [System.Drawing.Imaging.ImageCodecInfo]::GetImageEncoders() | Where-Object { $_.MimeType -eq "image/jpeg" }
+  $ep = New-Object System.Drawing.Imaging.EncoderParameters(1)
+  $ep.Param[0] = New-Object System.Drawing.Imaging.EncoderParameter([System.Drawing.Imaging.Encoder]::Quality, [long]82)
+  $img.Save($Out, $codec, $ep)
+  $img.Dispose()
+  Remove-Item $tmp
+  "원본 png를 jpg 품질 82로 재인코딩했습니다"
+} else {
+  Move-Item $tmp $Out -Force
 }
-Move-Item $tmp $Out -Force
-"{0} ({1}, {2:N0} KB)" -f $Out, $mime, ((Get-Item $Out).Length / 1KB)
+"{0} (image/jpeg, {1:N0} KB)" -f $Out, ((Get-Item $Out).Length / 1KB)
