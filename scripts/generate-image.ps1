@@ -1,6 +1,6 @@
 ﻿# 딱지허브 AI 일러스트 생성 스크립트
 # 사용: .\scripts\generate-image.ps1 -Prompt "..." -Out content\breeds\xxx\cover.png
-# API 키는 루트 .env(GEMINI_API_KEY=...)에서만 읽는다 — 공개 저장소에 커밋 금지.
+# API 키는 F:\GlmSecrets\ddakjihub-gemini-api-key.txt(저장소 밖)에서만 읽는다 — 절대 커밋 금지.
 # 모델: gemini-3.1-flash-image (2026-09-09 확정, 프로젝트 규칙)
 
 param(
@@ -22,10 +22,8 @@ if (-not $NoStyle -and -not $isRealistic) {
   $Prompt = "실사 사진 스타일(photorealistic photography, 자연스러운 조명과 질감, 일러스트 아님). " + $Prompt
   "주의: 실사 지시가 없어 기본 실사 접두사를 붙였습니다 (-NoStyle 로 끌 수 있음)"
 }
-$root = Split-Path -Parent $PSScriptRoot
-$envLine = Get-Content (Join-Path $root ".env") | Where-Object { $_ -match "^GEMINI_API_KEY=" }
-if (-not $envLine) { throw ".env 에 GEMINI_API_KEY 가 없습니다." }
-$key = $envLine.Split("=", 2)[1].Trim()
+$key = (Get-Content "F:\GlmSecrets\ddakjihub-gemini-api-key.txt" -Raw).Trim()
+if (-not $key) { throw "키 파일 F:\GlmSecrets\ddakjihub-gemini-api-key.txt 가 비어 있습니다." }
 
 $body = @{
   contents        = @(@{ parts = @(@{ text = $Prompt }) })
