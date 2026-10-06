@@ -855,24 +855,22 @@ textarea {
 
 /* ── 쇼츠 영상 카드·상세 (2026-10-06) ─────────────────────────── */
 
-/* 목록 카드 — 일반 카드와 같은 크기의 영상 전면 카드. 카드는 기본 1:1로
-   그리되, 같은 행의 일반 카드가 더 길면(본문·설명 포함) 그리드가 카드를
-   늘이고 영상이 항상 카드 전체를 채운다 — 하단 빈 공간이 생기지 않는다.
+/* 목록 카드 — 일반 카드와 같은 크기의 영상 전면 카드. 표지가 기본 1:1로
+   카드를 채우고(쇼츠끼리만 모인 행), 같은 행의 일반 카드가 더 길면 카드가
+   늘어나는 만큼 표지도 함께 자라 영상이 항상 카드 전체를 채운다 — 하단
+   빈 공간이 생기지 않는다. 카드(article) 자체에 aspect-ratio를 주면
+   그리드가 행 높이로 늘여주지 않으므로(비율 박스는 stretch 제외) 표지
+   쪽에 둔다.
    썸네일 규칙은 기존 카드와 같다(oar2 세로 원본 → hqdefault 폴백). */
-.card-shorts {
-  position: relative;
-  aspect-ratio: 1 / 1;
-}
 .card-shorts-cover {
-  position: absolute;
-  inset: 0;
+  position: relative; /* 배지·제목 오버레이 기준 */
   display: block;
+  flex: 1 1 auto;     /* 카드가 행 높이만큼 늘어나면 함께 늘어남 */
+  aspect-ratio: 1 / 1;
   background: var(--navy);
   overflow: hidden;
 }
 .card-shorts-cover img {
-  /* 그리드가 카드를 늘여도(행 높이 보정) 영상이 항상 카드 전체를
-     채우도록 absolute로 덮는다 */
   position: absolute;
   inset: 0;
   width: 100%;
