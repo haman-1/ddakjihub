@@ -1,14 +1,16 @@
 {{- /*
   사이트맵 — 택소노미 뿌리 페이지(/tags/·/categories/·/series/)와
-  태그 항목 페이지를 제외한다. 얇은 자동생성 페이지가 크롤 예산을 낭비하지 않도록.
-  카테고리·시리즈 항목 페이지는 색인에 남긴다(주제 허브·허브-스포크 연결).
+  태그·시리즈 항목 페이지를 제외한다. 얇은 자동생성 페이지가 크롤 예산을 낭비하지 않도록.
+  시리즈 항목(/series/<견종>/)은 /breeds/<견종>/ 허브와 검색어를 나눠 갖고 내용이 목록뿐이라
+  head.html에서 noindex로 빼면서 사이트맵에서도 함께 뺀다(2026-10-06).
+  카테고리 항목 페이지는 색인에 남긴다(주제 허브).
 */ -}}
 {{ printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   {{ range .Data.Pages }}
-    {{- /* 제외: 택소노미 뿌리 페이지 + 태그 항목 페이지 + 프런트매터에서 sitemap 비활성화한 페이지(/search/ 등) */ -}}
-    {{- $exclude := or (eq .Kind "taxonomy") (and (eq .Kind "term") (eq .Data.Singular "tag")) .Sitemap.Disable }}
+    {{- /* 제외: 택소노미 뿌리 페이지 + 태그·시리즈 항목 페이지 + 프런트매터에서 sitemap 비활성화한 페이지(/search/ 등) */ -}}
+    {{- $exclude := or (eq .Kind "taxonomy") (and (eq .Kind "term") (in (slice "tag" "series") .Data.Singular)) .Sitemap.Disable }}
     {{- if and (not $exclude) .Permalink -}}
   <url>
     <loc>{{ .Permalink }}</loc>{{ if not .Lastmod.IsZero }}
