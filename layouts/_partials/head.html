@@ -1,19 +1,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-{{- /* 홈 페이지네이션 페이지(/page/N/)의 .Permalink는 루트를 가리키므로 페이지 URL을 직접 만든다 */ -}}
+{{- /* 페이지네이션 페이지(/page/N/)의 .Permalink는 목록 루트를 가리키므로 페이지 URL을 직접 만든다.
+       홈은 home-pager, 섹션·택소노미 항목은 list-pager가 head 시점에 먼저 만들어 Scratch로 본문과 공유 */ -}}
 {{- $pageURL := .Permalink }}
 {{- $pageNo := 0 }}
 {{- if .IsHome }}
 {{- $pageNo = (partial "home-pager.html" .).PageNumber }}
+{{- else if in (slice "section" "term") .Kind }}
+{{- .Scratch.Set "listPaginator" (partial "list-pager.html" .) }}
+{{- $pageNo = (.Scratch.Get "listPaginator").PageNumber }}
+{{- end }}
 {{- if gt $pageNo 1 }}
 {{- $pageURL = printf "%spage/%d/" $pageURL $pageNo }}
-{{- end }}
 {{- end }}
 {{- $title := .Title }}
 {{- if .IsHome }}
 <title>{{ site.Title }} · {{ site.Params.tagline }}{{ if gt $pageNo 1 }} · {{ $pageNo }}페이지{{ end }}</title>
 {{- else if $title }}
-<title>{{ $title }} | {{ site.Title }}</title>
+<title>{{ $title }} | {{ site.Title }}{{ if gt $pageNo 1 }} · {{ $pageNo }}페이지{{ end }}</title>
 {{- else }}
 <title>{{ site.Title }}</title>
 {{- end }}
@@ -28,7 +32,7 @@
 <meta name="robots" content="noindex, follow">
 {{- end }}
 <link rel="canonical" href="{{ $pageURL }}">
-<meta property="og:title" content="{{ if .IsHome }}{{ site.Title }}{{ if gt $pageNo 1 }} · {{ $pageNo }}페이지{{ end }}{{ else }}{{ $title }}{{ end }}">
+<meta property="og:title" content="{{ if .IsHome }}{{ site.Title }}{{ if gt $pageNo 1 }} · {{ $pageNo }}페이지{{ end }}{{ else }}{{ $title }}{{ if gt $pageNo 1 }} · {{ $pageNo }}페이지{{ end }}{{ end }}">
 <meta property="og:description" content="{{ $desc }}">
 <meta property="og:url" content="{{ $pageURL }}">
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
