@@ -23,7 +23,8 @@
     {{- /* 섹션·택소노미 항목 페이지 — 글 카드 목록 (최신 순) */}}
     {{- $pages := .Pages }}
     {{- if eq .Kind "section" }}
-      {{- $pages = where site.RegularPages "Type" .Type }}
+      {{- /* Section으로 거른다 — 일상 섹션은 type이 다른 쇼츠 글도 섞여 나온다(2026-10-06) */ -}}
+      {{- $pages = where site.RegularPages "Section" .Section }}
     {{- end }}
     {{- $paginator := .Paginate ($pages.ByDate.Reverse) }}
     {{- if $paginator.Pages }}

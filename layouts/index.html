@@ -2,7 +2,7 @@
 {{- /* 대표 카드 — featured: true를 단 최신 글이 우선, 없으면 최신 글 폴백.
        교체는 원하는 글 프런트매터에 플래그를 옮기면 된다.
        플래그는 항상 한 글에만 — 교체할 때 이전 글의 featured: true를 지운다. */ -}}
-{{- $sections := slice "breeds" "guides" "daily" -}}
+{{- $sections := slice "breeds" "guides" "daily" "shorts" -}}
 {{- $recent := (where site.RegularPages "Type" "in" $sections).ByDate.Reverse -}}
 {{- $feat := where $recent "Params.featured" true -}}
 {{- $featured := index $feat 0 -}}

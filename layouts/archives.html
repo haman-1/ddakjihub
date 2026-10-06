@@ -3,7 +3,7 @@
 <header class="page-head">
   <h1>{{ .Title }}</h1>
 </header>
-{{- $sections := slice "breeds" "guides" "daily" }}
+{{- $sections := slice "breeds" "guides" "daily" "shorts" }}
 {{- $pages := (where site.RegularPages "Type" "in" $sections).ByDate.Reverse }}
 {{- with $pages }}
 {{- range .GroupByDate "2006" }}

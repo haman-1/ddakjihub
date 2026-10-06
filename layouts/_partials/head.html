@@ -37,10 +37,14 @@
 {{- with .Resources.GetMatch "cover.*" }}
 <meta property="og:image" content="{{ .Permalink }}">
 {{- else }}
-{{- with findRE `\{\{<\s*youtube\s+"[^"]+"` .RawContent 1 }}
-{{- $yt := partial "youtube-id.html" (dict "src" (replaceRE `.*"([^"]+)"` `$1` (index . 0))) }}
+  {{- if eq .Type "shorts" }}
+<meta property="og:image" content="https://i.ytimg.com/vi/{{ .Params.youtube }}/oar2.jpg">
+  {{- else }}
+  {{- with findRE `\{\{<\s*youtube\s+"[^"]+"` .RawContent 1 }}
+  {{- $yt := partial "youtube-id.html" (dict "src" (replaceRE `.*"([^"]+)"` `$1` (index . 0))) }}
 <meta property="og:image" content="https://i.ytimg.com/vi/{{ $yt }}/oar2.jpg">
-{{- end }}
+  {{- end }}
+  {{- end }}
 {{- end }}
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
