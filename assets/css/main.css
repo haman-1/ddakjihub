@@ -855,18 +855,44 @@ textarea {
 
 /* ── 쇼츠 영상 카드·상세 (2026-10-06) ─────────────────────────── */
 
-/* 목록 카드 — 일반 카드와 같은 크기·구조(16:9 표지 + 본문)로 그려 그리드
-   행 높이가 어긋나지 않게 한다. 세로 썸네일(oar2)은 16:9 프레임에 잘리지
-   않게 통째로 담는다(좌우 여백은 네이비 배경).
+/* 목록 카드 — 일반 카드와 같은 크기의 영상 전면 카드(1:1). 세로
+   썸네일(oar2)의 가운데 띠가 카드 전체를 채우고(object-fit: cover),
+   제목은 하단 오버레이·재생 배지 중앙. 일반 카드와 행 높이가 어긋나지
+   않게 하면서 쇼츠 카드의 영상 전면 느낌을 유지한다.
    썸네일 규칙은 기존 카드와 같다(oar2 세로 원본 → hqdefault 폴백). */
 .card-shorts-cover {
-  position: relative; /* 재생 배지 기준 */
+  position: relative; /* 배지·제목 오버레이 기준 */
+  display: block;
+  aspect-ratio: 1 / 1;
   background: var(--navy);
+  overflow: hidden;
 }
 .card-shorts-cover img {
-  /* 일반 카드의 cover(16:9 크롭) 대신 원본 비율 그대로 */
-  object-fit: contain;
-  object-position: center;
+  /* 그리드가 카드를 살짝 늘여도(행 높이 보정) 영상이 항상 카드 전체를
+     채우도록 absolute로 덮는다 */
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+.card-shorts-title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 44px 16px 14px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.72));
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 /* 재생 배지 — 카드·상세 공용 */
 .play-badge {
