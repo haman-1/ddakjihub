@@ -861,7 +861,8 @@ textarea {
    채운다 — 하단 빈 공간이 생기지 않는다. 카드(article) 자체에
    aspect-ratio를 주면 그리드가 행 높이로 늘여주지 않으므로(비율 박스는
    stretch 제외) 표지 쪽에 둔다. 9:10은 일반 카드 실측(417~446px,
-   4단 1280px 기준)보다 낮아 일반 카드가 역으로 늘어나지 않는 안전 한도.
+   3단 1280px 기준)보다 낮아 일반 카드가 역으로 늘어나지 않는 안전 한도.
+   예외는 아래 태블릿 2단 미디어쿼리(880~951px, 1:1).
    썸네일 규칙은 기존 카드와 같다(oar2 세로 원본 → hqdefault 폴백). */
 .card-shorts-cover {
   position: relative; /* 배지·제목 오버레이 기준 */
@@ -870,6 +871,15 @@ textarea {
   aspect-ratio: 9 / 10;
   background: var(--navy);
   overflow: hidden;
+}
+/* 태블릿 2단 폭(880~951px) — 카드 폭이 넓어져 9:10(440~479px)이 일반
+   카드(412~456px)를 넘어서는 구간. 1:1로 낮춰 쇼츠끼리 행이 일반 카드
+   행과 나란히 맞는다. 880px 미만 2단·952px 이상 3단은 9:10이 일반
+   카드 하한 아래라 그대로 둔다. */
+@media (min-width: 880px) and (max-width: 951px) {
+  .card-shorts-cover {
+    aspect-ratio: 1 / 1;
+  }
 }
 .card-shorts-cover img {
   position: absolute;
