@@ -855,50 +855,19 @@ textarea {
 
 /* ── 쇼츠 영상 카드·상세 (2026-10-06) ─────────────────────────── */
 
-/* 목록 카드 — 본문 없는 영상 전용 세로 카드. 썸네일이 카드 전체를 채운다.
+/* 목록 카드 — 일반 카드와 같은 크기·구조(16:9 표지 + 본문)로 그려 그리드
+   행 높이가 어긋나지 않게 한다. 세로 썸네일(oar2)은 16:9 프레임에 잘리지
+   않게 통째로 담는다(좌우 여백은 네이비 배경).
    썸네일 규칙은 기존 카드와 같다(oar2 세로 원본 → hqdefault 폴백). */
-.card-shorts .card-shorts-cover {
-  position: relative;
-  display: block;
-  aspect-ratio: 9 / 16;
+.card-shorts-cover {
+  position: relative; /* 재생 배지 기준 */
   background: var(--navy);
-  overflow: hidden;
 }
-.card-shorts .card-shorts-cover img {
-  /* 전역 img(height: auto) 대신 카드(컨테이너) 크기에 맞춘다 — 썸네일이
-     카드에 맞게 축소·채워지고, 클릭하면 상세에서 풀사이즈로 재생한다 */
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 50% 35%;
+.card-shorts-cover img {
+  /* 일반 카드의 cover(16:9 크롭) 대신 원본 비율 그대로 */
+  object-fit: contain;
+  object-position: center;
 }
-.card-shorts .card-shorts-title {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 44px 16px 14px;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.72));
-  color: #fff;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.4;
-  letter-spacing: -0.01em;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-/* 히어로 대표 카드 안에서는 높이를 카드 크기(최대 520px)로 제한하고,
-   썸네일은 잘리지 않게 비율대로 축소해 가운데 놓는다 */
-.hero-card .card-shorts .card-shorts-cover { max-height: 520px; }
-.hero-card .card-shorts .card-shorts-cover img {
-  width: auto;
-  height: 100%;
-  margin-inline: auto;
-}
-
 /* 재생 배지 — 카드·상세 공용 */
 .play-badge {
   position: absolute;
