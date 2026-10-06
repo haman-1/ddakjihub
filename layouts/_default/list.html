@@ -23,11 +23,26 @@
     {{- /* 섹션·택소노미 항목 페이지 — 글 카드 목록 (최신 순) */}}
     {{- $pages := .Pages }}
     {{- if eq .Kind "section" }}
-      {{- /* Section으로 거른다 — 일상 섹션은 type이 다른 쇼츠 글도 섞여 나온다(2026-10-06) */ -}}
+      {{- /* Section으로 거른다 — 일상 섹션은 type이 다른 쇼츠 글도 함께 모인다(2026-10-06) */ -}}
       {{- $pages = where site.RegularPages "Section" .Section }}
     {{- end }}
-    {{- $paginator := .Paginate ($pages.ByDate.Reverse) }}
+    {{- $shorts := where $pages "Type" "shorts" }}
+    {{- $texts := where $pages "Type" "ne" "shorts" }}
+    {{- if $shorts }}
+      {{- /* 쇼츠는 세로 카드라 일반 카드와 한 그리드에 섞이면 행 높이가 어긋난다 —
+             따로 모아 먼저 보여준다(2026-10-06) */ -}}
+    <h2 class="grid-subhead">쇼츠</h2>
+    <div class="card-grid shorts-grid">
+      {{- range $shorts.ByDate.Reverse }}
+      {{ partial "card.html" . }}
+      {{- end }}
+    </div>
+    {{- end }}
+    {{- $paginator := .Paginate ($texts.ByDate.Reverse) }}
     {{- if $paginator.Pages }}
+      {{- if $shorts }}
+    <h2 class="grid-subhead">글</h2>
+      {{- end }}
     <div class="card-grid">
       {{- range $paginator.Pages }}
       {{ partial "card.html" . }}
@@ -47,7 +62,7 @@
       {{- end }}
     </nav>
       {{- end }}
-    {{- else }}
+    {{- else if not $shorts }}
     <p class="empty-note">아직 올라온 글이 없습니다.</p>
     {{- end }}
   {{- end }}
