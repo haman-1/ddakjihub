@@ -871,13 +871,16 @@ textarea {
 .card-shorts .card-shorts-cover {
   position: relative;
   display: block;
+  aspect-ratio: 9 / 16;
   background: var(--navy);
   overflow: hidden;
 }
 .card-shorts .card-shorts-cover img {
+  /* 전역 img(height: auto) 대신 카드(컨테이너) 크기에 맞춘다 — 썸네일이
+     카드에 맞게 축소·채워지고, 클릭하면 상세에서 풀사이즈로 재생한다 */
   display: block;
   width: 100%;
-  aspect-ratio: 9 / 16;
+  height: 100%;
   object-fit: cover;
   object-position: 50% 35%;
 }
@@ -898,8 +901,14 @@ textarea {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-/* 히어로 대표 카드 안에서는 세로로 지나치게 길지 않게 자른다 */
+/* 히어로 대표 카드 안에서는 높이를 카드 크기(최대 520px)로 제한하고,
+   썸네일은 잘리지 않게 비율대로 축소해 가운데 놓는다 */
 .hero-card .card-shorts .card-shorts-cover { max-height: 520px; }
+.hero-card .card-shorts .card-shorts-cover img {
+  width: auto;
+  height: 100%;
+  margin-inline: auto;
+}
 
 /* 재생 배지 — 카드·상세 공용 */
 .play-badge {
