@@ -3,7 +3,8 @@
   태그·시리즈 항목 페이지를 제외한다. 얇은 자동생성 페이지가 크롤 예산을 낭비하지 않도록.
   시리즈 항목(/series/<견종>/)은 /breeds/<견종>/ 허브와 검색어를 나눠 갖고 내용이 목록뿐이라
   head.html에서 noindex로 빼면서 사이트맵에서도 함께 뺀다(2026-10-06).
-  카테고리 항목 페이지는 색인에 남긴다(주제 허브).
+  카테고리 항목 페이지는 기본 색인에 남긴다(주제 허브). 얇은 카테고리·섹션은 _index.md의
+  sitemap.disable로 사이트맵에서도 함께 빠진다(2026-10-08).
 */ -}}
 {{ printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"

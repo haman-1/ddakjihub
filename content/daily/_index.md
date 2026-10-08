@@ -1,4 +1,7 @@
 ---
 title: 일상·경험
 description: 반려견과 함께하는 일상과 직접 키우며 배운 경험을 기록합니다.
+noindex: true
+sitemap:
+  disable: true
 ---
