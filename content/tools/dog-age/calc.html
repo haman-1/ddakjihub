@@ -1,0 +1,22 @@
+<h2>강아지 나이 계산기</h2>
+<p class="calc-desc">나이와 체중을 넣으면 사람 나이 환산과 생애 단계를 계산합니다.</p>
+<div class="calc-field">
+  <label for="calc-years">강아지 나이</label>
+  <input type="number" id="calc-years" min="0" max="25" step="1" inputmode="numeric" placeholder="예: 5">
+  <span>년</span>
+  <input type="number" id="calc-months" min="0" max="11" step="1" inputmode="numeric" aria-label="개월" placeholder="0">
+  <span>개월</span>
+</div>
+<div class="calc-field">
+  <label for="calc-weight">체중</label>
+  <input type="number" id="calc-weight" min="0.5" max="120" step="0.1" inputmode="decimal" placeholder="예: 5.2">
+  <span>kg</span>
+</div>
+<button type="button" id="calc-run" class="calc-btn">계산하기</button>
+<p class="calc-msg" id="calc-msg" hidden></p>
+<div class="calc-result" id="calc-result" hidden>
+  <p class="calc-line">사람 나이로 <strong><span id="calc-human">0</span>세</strong> <span class="calc-sub">(<span id="calc-band">9~23kg</span> 구간 환산)</span></p>
+  <p class="calc-line">생애 단계 <strong><span id="calc-stage">성견</span></strong></p>
+  <p class="calc-line"><span class="calc-sub">7배 공식으로는 <span id="calc-seven">0</span>세 — 옛 방식과 비교해 보세요.</span></p>
+  <p class="calc-note">체중 구간표(Zoetis 자료) 기준 추정치입니다. 견종과 건강 상태에 따라 실제 노화 속도는 다릅니다.</p>
+</div>
