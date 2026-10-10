@@ -11,6 +11,11 @@ buildDrafts = false
 buildFuture = false
 buildExpired = false
 
+# 계산기 번들의 calc.html 위젯 마크업을 리소스로 읽도록 허용한다.
+# Hugo 0.162부터 text/html 콘텐츠 읽기가 기본 차단이라 계산기 글 빌드가 실패한다 (2026-10-10)
+[security]
+  allowContent = ['! ^text/org$']
+
 # 검색 — 홈에서 글 색인 JSON(/search-index.json)을 함께 뽑아 클라이언트 검색에 쓴다
 [outputs]
   home = ['HTML', 'RSS', 'SearchIndex']

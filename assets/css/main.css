@@ -1053,6 +1053,24 @@ textarea {
   font-weight: 700;
   color: var(--navy);
 }
+.calc-desc { margin: 0 0 18px; font-size: 15px; color: var(--text-sub); }
+.calc-btn {
+  padding: 10px 24px;
+  border: 0;
+  border-radius: 4px;
+  background: var(--navy);
+  color: #fff;
+  font: inherit;
+  font-size: 15.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.calc-btn:hover { filter: brightness(1.15); }
+.calc-line { margin: 0 0 6px; }
+.calc-line:last-of-type { margin-bottom: 0; }
+.calc-sub { font-weight: 400; color: var(--text-sub); }
+.calc-note { margin: 12px 0 0; font-weight: 400; font-size: 14px; color: var(--text-sub); }
+.calc-msg { margin: 12px 0 0; font-weight: 700; color: #b23b2e; }
 
 /* ── 모션 최소화 설정 존중 ─────────────── */
 @media (prefers-reduced-motion: reduce) {
