@@ -2,7 +2,7 @@
 {{- /* 대표 카드 — featured: true를 단 최신 글이 우선, 없으면 최신 글 폴백.
        교체는 원하는 글 프런트매터에 플래그를 옮기면 된다.
        플래그는 항상 한 글에만 — 교체할 때 이전 글의 featured: true를 지운다. */ -}}
-{{- $sections := slice "breeds" "guides" "daily" "shorts" -}}
+{{- $sections := slice "breeds" "guides" "daily" "shorts" "tools" -}}
 {{- $recent := (where site.RegularPages "Type" "in" $sections).ByDate.Reverse -}}
 {{- $feat := where $recent "Params.featured" true -}}
 {{- $featured := index $feat 0 -}}
@@ -73,6 +73,16 @@
       <a class="section-nav-card" href="/daily/">
         <span class="section-nav-name">일상·경험</span>
         <p class="section-nav-desc">보더콜리 딱지와 함께한 기록입니다. 수영, 눈, 생일 같은 평범하고 특별한 하루들.</p>
+        <span class="section-nav-go">보러 가기 →</span>
+      </a>
+      <a class="section-nav-card" href="/places/">
+        <span class="section-nav-name">애견동반 시설</span>
+        <p class="section-nav-desc">전국의 애견동반 카페·식당·호텔·펜션·수영장을 지역별로 찾아봅니다.</p>
+        <span class="section-nav-go">보러 가기 →</span>
+      </a>
+      <a class="section-nav-card" href="/tools/">
+        <span class="section-nav-name">반려견 계산기</span>
+        <p class="section-nav-desc">강아지 나이, 사료량, 칼로리 계산기와 계산법을 풀어서 설명합니다.</p>
         <span class="section-nav-go">보러 가기 →</span>
       </a>
     </div>

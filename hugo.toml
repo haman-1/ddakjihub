@@ -50,6 +50,16 @@ buildExpired = false
   weight = 20
 
 [[menus.main]]
+  name = '시설'
+  url = '/places/'
+  weight = 25
+
+[[menus.main]]
+  name = '계산기'
+  url = '/tools/'
+  weight = 27
+
+[[menus.main]]
   name = '일상'
   url = '/daily/'
   weight = 30

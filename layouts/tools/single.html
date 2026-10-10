@@ -3,11 +3,7 @@
 <article class="post">
   <header class="post-head">
     <div class="post-meta">
-      {{- /* 카드 라벨과 같은 기준 — 섹션(품종/가이드/일상)으로 통일, 섹션 목록으로 링크 */ -}}
-      {{- $sectionLabels := dict "breeds" "품종" "guides" "가이드" "daily" "일상" "places" "시설" "tools" "계산기" -}}
-      {{- with index $sectionLabels .Section }}
-      <a class="post-category" href="/{{ $.Section }}/">{{ . }}</a>
-      {{- end }}
+      <a class="post-category" href="/tools/">계산기</a>
       {{- if not .Date.IsZero }}
       <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format (site.Params.dateFormat | default "2006. 1. 2.") }}</time>
       {{- end }}
@@ -23,15 +19,12 @@
   {{- $coverInBody := false }}
   {{- with $cover }}
     {{- $coverSig := (resources.Fingerprint "sha256" .).Data.Integrity }}
-    {{- /* 렌더 훅이 이미지 URL을 리사이즈본으로 바꾸므로 렌더링 결과가 아닌
-           원문 마크다운에 파일명이 있는지로 판단한다 */ -}}
     {{- range $.Resources.ByType "image" }}
       {{- if and (in $.RawContent .Name) (or (eq .RelPermalink $cover.RelPermalink) (eq ((resources.Fingerprint "sha256" .).Data.Integrity) $coverSig)) }}
         {{- $coverInBody = true }}
       {{- end }}
     {{- end }}
   {{- end }}
-
   {{- if and $cover (not $coverInBody) }}
   <figure class="post-cover">
     <img src="{{ ($cover.Resize "1200x jpg q78").RelPermalink }}" alt="{{ $.Title }} 표지 이미지" decoding="async">
@@ -43,6 +36,14 @@
     <h2>목차</h2>
     {{ .TableOfContents }}
   </nav>
+  {{- end }}
+
+  {{- /* 계산기 위젯 — 번들 안 calc.html(마크업)·calc.js(로직)를 본문 앞에 자동 배치한다.
+         계산기가 목적인 방문자는 즉시 쓰고, 해설이 목적인 방문자는 본문으로 이어진다. */ -}}
+  {{- with .Resources.Get "calc.html" }}
+  <div class="calc">
+    {{ .Content | safeHTML }}
+  </div>
   {{- end }}
 
   <div class="post-content">
@@ -57,21 +58,21 @@
   </div>
   {{- end }}
 
-  {{- /* series가 같은 글(허브·스포크)을 자동으로 나열한다 */ -}}
-  {{- with .GetTerms "series" }}
-    {{- $series := index . 0 }}
-    {{- $others := where $series.Pages "RelPermalink" "ne" $.RelPermalink }}
-    {{- if $others }}
+  {{- /* 다른 계산기 — 내부 링크 겸 발견 경로 */ -}}
+  {{- $others := where (where site.RegularPages "Section" "tools") "RelPermalink" "ne" .RelPermalink }}
+  {{- with $others }}
   <aside class="series-box">
-    <h2>{{ $.Params.breed | default $series.LinkTitle }} 관련 글</h2>
+    <h2>다른 계산기</h2>
     <ul>
-      {{- range $others.ByDate.Reverse }}
+      {{- range . }}
       <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
       {{- end }}
     </ul>
   </aside>
-    {{- end }}
   {{- end }}
 </article>
 </div>
+{{- with .Resources.Get "calc.js" }}
+<script>{{ .Content | safeJS }}</script>
+{{- end }}
 {{ end }}

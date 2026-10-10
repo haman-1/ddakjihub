@@ -46,7 +46,7 @@
   <div class="card-body">
     <div class="card-meta">
       {{- /* 라벨은 주제 카테고리가 아니라 섹션 기준으로 통일 — 메뉴(품종/가이드/일상)와 같은 축 */ -}}
-      {{- $sectionLabels := dict "breeds" "품종" "guides" "가이드" "daily" "일상" -}}
+      {{- $sectionLabels := dict "breeds" "품종" "guides" "가이드" "daily" "일상" "places" "시설" "tools" "계산기" -}}
       {{- with index $sectionLabels $ctx.Section }}
       <span class="card-category">{{ . }}</span>
       {{- end }}

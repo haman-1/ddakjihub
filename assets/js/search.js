@@ -9,7 +9,7 @@
   var suggestEl = document.getElementById('search-suggest');
   if (!input || !resultsEl) return;
 
-  var SECTION_LABELS = { breeds: '품종', guides: '가이드', daily: '일상' };
+  var SECTION_LABELS = { breeds: '품종', guides: '가이드', daily: '일상', tools: '계산기' };
   var fuse = null;
   var loading = false;
   var pending = [];

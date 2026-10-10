@@ -1,0 +1,102 @@
+{{ define "main" }}
+{{- /* 시설 DB — 날짜순 글 카드 대신 시설 카드를 유형·지역 필터 칩과 함께 보여준다.
+       시설은 홈·아카이브·검색 색인 스트림에는 넣지 않고 이 목록이 진입점이다(수백 개로
+       늘어나도 정보 글 스트림을 오염시키지 않도록). 유형 라벨은 single.html과 동일하게 유지. */ -}}
+{{- $places := where site.RegularPages "Section" "places" -}}
+{{- $typeLabels := dict "cafe" "애견동반 카페" "restaurant" "반려견 동반 식당" "hotel" "애견 호텔" "pension" "애견동반 펜션" "pool" "강아지 수영장" -}}
+{{- /* 필터 칩은 실제 등록된 값만 나열한다(빈 그룹 방지) */ -}}
+{{- $types := slice -}}
+{{- $regions := slice -}}
+{{- range $places -}}
+  {{- with .Params.place_type }}{{ $types = $types | append . }}{{ end -}}
+  {{- with .Params.region }}{{ $regions = $regions | append . }}{{ end -}}
+{{- end -}}
+{{- $types = uniq $types -}}
+{{- $regions = uniq $regions -}}
+
+<header class="page-head">
+  <div class="container">
+    <h1>{{ .Title }}</h1>
+    {{- with .Description }}
+    <p>{{ . }}</p>
+    {{- end }}
+  </div>
+</header>
+
+<section class="band">
+  <div class="container">
+    {{- if or $types $regions }}
+    <div class="breed-filters">
+      <div class="breed-filter" role="group" aria-label="유형으로 걸러 보기">
+        <span class="filter-label">유형</span>
+        <button class="filter-chip" type="button" data-key="type" data-value="" aria-pressed="true">전체</button>
+        {{- range $types }}
+        <button class="filter-chip" type="button" data-key="type" data-value="{{ . }}" aria-pressed="false">{{ index $typeLabels . | default . }}</button>
+        {{- end }}
+      </div>
+      {{- if $regions }}
+      <div class="breed-filter" role="group" aria-label="지역으로 걸러 보기">
+        <span class="filter-label">지역</span>
+        <button class="filter-chip" type="button" data-key="region" data-value="" aria-pressed="true">전체</button>
+        {{- range $regions }}
+        <button class="filter-chip" type="button" data-key="region" data-value="{{ . }}" aria-pressed="false">{{ . }}</button>
+        {{- end }}
+      </div>
+      {{- end }}
+    </div>
+    {{- end }}
+
+    {{- if $places }}
+    <div class="card-grid">
+      {{- range sort $places "Params.region" "Params.title" }}
+      <article class="place-card" data-type="{{ .Params.place_type | default "" }}" data-region="{{ .Params.region | default "" }}">
+        <div class="place-badges">
+          {{- with .Params.place_type }}<span class="badge">{{ index $typeLabels . | default . }}</span>{{ end }}
+          {{- with .Params.region }}<span class="badge badge-region">{{ . }}</span>{{ end }}
+        </div>
+        <h3 class="place-name"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+        {{- with .Description }}
+        <p class="card-desc">{{ . }}</p>
+        {{- end }}
+        {{- with .Params.address }}
+        <p class="place-address">{{ . }}</p>
+        {{- end }}
+      </article>
+      {{- end }}
+    </div>
+    <p class="empty-note" id="place-empty" hidden>선택한 조건에 맞는 시설이 아직 없습니다. 다른 조건으로 찾아보세요.</p>
+    {{- else }}
+    <p class="empty-note">아직 등록된 시설이 없습니다.</p>
+    {{- end }}
+  </div>
+</section>
+
+{{- if $places }}
+<script>
+(function () {
+  var chips = document.querySelectorAll('.filter-chip');
+  var cards = document.querySelectorAll('.place-card');
+  var empty = document.getElementById('place-empty');
+  if (!chips.length || !cards.length) return;
+  var state = { type: '', region: '' };
+  chips.forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      var key = chip.dataset.key;
+      state[key] = chip.dataset.value;
+      chips.forEach(function (c) {
+        if (c.dataset.key === key) c.setAttribute('aria-pressed', String(c === chip));
+      });
+      var shown = 0;
+      cards.forEach(function (card) {
+        var ok = (!state.type || card.dataset.type === state.type)
+          && (!state.region || card.dataset.region === state.region);
+        card.hidden = !ok;
+        if (ok) shown++;
+      });
+      if (empty) empty.hidden = shown > 0;
+    });
+  });
+})();
+</script>
+{{- end }}
+{{ end }}
