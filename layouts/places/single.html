@@ -25,6 +25,22 @@
     {{- with .Params.dog_rule }}<div class="place-fact"><span class="fact-label">반려견</span><span>{{ . }}</span></div>{{ end }}
   </div>
 
+  {{- /* 지도 — 주소로 자동 생성: 구글맵 키리스 임베드 + 네이버 지도 링크 (주소 없는 항목은 생략) */ -}}
+  {{- with .Params.address }}
+  <div class="place-map">
+    <iframe
+      src="https://maps.google.com/maps?q={{ . | urlquery }}&output=embed"
+      title="{{ $.Title }} 위치 지도"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      allowfullscreen></iframe>
+    <div class="place-map-links">
+      <a class="button button-outline" href="https://map.naver.com/p/search/{{ . | urlquery }}" target="_blank" rel="noopener">네이버 지도에서 보기</a>
+      <a class="button button-outline" href="https://www.google.com/maps/search/{{ . | urlquery }}" target="_blank" rel="noopener">구글 지도에서 보기</a>
+    </div>
+  </div>
+  {{- end }}
+
   <div class="post-content">
     {{ .Content }}
   </div>
