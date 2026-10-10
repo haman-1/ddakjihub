@@ -1,0 +1,25 @@
+<h2>강아지 간식 열량 비율 계산기</h2>
+<p class="calc-desc">하루 필요 열량과 간식 열량으로 간식 비율을 계산합니다. 하루 필요 열량은 <a href="/tools/dog-daily-calories/">하루 필요 열량 계산기</a>에서 먼저 구하세요.</p>
+<div class="calc-field">
+  <label for="calc-daily">하루 필요 열량</label>
+  <input type="number" id="calc-daily" min="1" step="1" inputmode="numeric" placeholder="예: 374">
+  <span>kcal</span>
+</div>
+<div class="calc-field">
+  <label for="calc-treat-kcal">간식 1개 열량</label>
+  <input type="number" id="calc-treat-kcal" min="1" step="1" inputmode="numeric" placeholder="예: 35">
+  <span>kcal</span>
+</div>
+<div class="calc-field">
+  <label for="calc-count">하루 간식 개수</label>
+  <input type="number" id="calc-count" min="1" step="1" inputmode="numeric" placeholder="예: 3">
+  <span>개</span>
+</div>
+<button type="button" id="calc-run" class="calc-btn">계산하기</button>
+<p class="calc-msg" id="calc-msg" hidden></p>
+<div class="calc-result" id="calc-result" hidden>
+  <p class="calc-line">간식 열량 합계 <strong><span id="calc-sum">0</span> kcal</strong> <span class="calc-sub">(하루 필요 열량의 <span id="calc-pct">0</span>%)</span></p>
+  <p class="calc-line">간식 상한(10%) <strong><span id="calc-cap">0</span> kcal</strong></p>
+  <p class="calc-line" id="calc-verdict"></p>
+  <p class="calc-note">간식도 하루 필요 열량에 포함됩니다. 준 만큼 사료를 덜어 주세요. 사료 g 환산은 <a href="/tools/dog-food-amount/">사료량 계산기</a>에서.</p>
+</div>

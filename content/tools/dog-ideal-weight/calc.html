@@ -1,0 +1,26 @@
+<h2>강아지 적정 체중 계산기</h2>
+<p class="calc-desc">현재 체중과 체형 점수(BCS)를 고르면 적정 체중을 추정합니다.</p>
+<div class="calc-field">
+  <label for="calc-weight">현재 체중</label>
+  <input type="number" id="calc-weight" min="0.1" max="120" step="0.1" inputmode="decimal" placeholder="예: 8.5">
+  <span>kg</span>
+</div>
+<div class="calc-field">
+  <label for="calc-bcs">체형 점수 (BCS)</label>
+  <select id="calc-bcs">
+    <option value="3">3/9 · 많이 마름 — 갈비뼈·등뼈가 보임</option>
+    <option value="4">4/9 · 마른 편 — 갈비뼈가 쉽게 만져짐</option>
+    <option value="5" selected>5/9 · 적정 — 갈비뼈가 얇은 지방 아래 만져짐</option>
+    <option value="6">6/9 · 약간 과체중 — 갈비뼈가 지방에 덮임</option>
+    <option value="7">7/9 · 과체중 — 눌러야 갈비뼈가 만져짐</option>
+    <option value="8">8/9 · 비만 — 세게 눌러야 만져짐</option>
+    <option value="9">9/9 · 심한 비만 — 눌러도 만져지지 않음</option>
+  </select>
+</div>
+<button type="button" id="calc-run" class="calc-btn">계산하기</button>
+<p class="calc-msg" id="calc-msg" hidden></p>
+<div class="calc-result" id="calc-result" hidden>
+  <p class="calc-line" id="calc-ideal-line" hidden>적정 체중 <strong><span id="calc-ideal">0</span> kg</strong> <span class="calc-sub">(감량 필요 약 <span id="calc-excess">0</span> kg)</span></p>
+  <p class="calc-line" id="calc-status-line"></p>
+  <p class="calc-note">BCS 5점 초과 1점당 10% 과체중으로 보는 추정치입니다. 견종·개체차가 크니 감량 계획은 수의사와 상담하세요. 목표 체중 기준 하루 열량은 <a href="/tools/dog-daily-calories/">하루 필요 열량 계산기</a>에서 확인할 수 있습니다.</p>
+</div>
