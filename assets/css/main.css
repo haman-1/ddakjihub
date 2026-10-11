@@ -543,6 +543,12 @@ textarea {
 .post-content li { margin: 8px 0; }
 .post-content li::marker { color: var(--navy); }
 
+/* 정의 목록(표 대체) — 라벨:값 구조가 모바일에서도 줄바꿈 없이 읽힌다 */
+.post-content dl { margin: 24px 0; }
+.post-content dt { color: var(--navy); font-weight: 700; margin-top: 10px; }
+.post-content dt:first-child { margin-top: 0; }
+.post-content dd { margin: 2px 0 0; }
+
 /* 본문 링크는 스캔 편의를 위해 밑줄 유지(나머지 영역은 시안대로 밑줄 없음) */
 .post-content a {
   text-decoration: underline;
