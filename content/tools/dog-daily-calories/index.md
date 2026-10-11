@@ -1,8 +1,8 @@
 ---
 title: "강아지 하루 필요 열량 계산기 — RER·MER 공식과 계수 선택법"
 date: 2026-10-11T00:00:00+09:00
-description: "몸무게와 나이·상태로 강아지 하루 필요 열량(kcal)을 계산합니다. RER·MER 공식, 생애 단계별 계수표, 개체차 조정법과 간식 몫(10%)까지 정리했습니다."
-summary: "몸무게·상태로 하루 필요 열량을 계산하는 방법 — RER·MER 공식과 계수표, 조정법"
+description: "몸무게와 나이·상태로 강아지 하루 필요 열량(kcal)을 계산합니다. RER·MER 공식, 생애 단계별 계수, 개체차 조정법과 간식 몫(10%)까지 정리했습니다."
+summary: "몸무게·상태로 하루 필요 열량을 계산하는 방법 — RER·MER 공식과 계수, 조정법"
 kind: tool
 categories: ["관리"]
 tags: ["칼로리", "필요 열량", "체중 관리"]
@@ -28,17 +28,15 @@ draft: false
 
 ## 계수는 이렇게 고른다
 
-| 아이의 상태 | 계수 | 5kg | 10kg | 20kg |
-|---|---|---|---|---|
-| 새끼 · 생후 4개월(16주) 미만 | 3.0 | 702kcal | 1,181kcal | 1,986kcal |
-| 성장기 · 4개월~성견 전 | 2.0 | 468kcal | 787kcal | 1,324kcal |
-| 성견 · 중성화 안 함 | 1.8 | 421kcal | 709kcal | 1,192kcal |
-| 성견 · 중성화함 | 1.6 | 374kcal | 630kcal | 1,059kcal |
-| 비만 경향 · 실내 생활 위주 | 1.4 | 328kcal | 551kcal | 927kcal |
+- **새끼 · 생후 4개월(16주) 미만** — 계수 3.0 · 5kg: 702kcal · 10kg: 1,181kcal · 20kg: 1,986kcal
+- **성장기 · 4개월~성견 전** — 계수 2.0 · 5kg: 468kcal · 10kg: 787kcal · 20kg: 1,324kcal
+- **성견 · 중성화 안 함** — 계수 1.8 · 5kg: 421kcal · 10kg: 709kcal · 20kg: 1,192kcal
+- **성견 · 중성화함** — 계수 1.6 · 5kg: 374kcal · 10kg: 630kcal · 20kg: 1,059kcal
+- **비만 경향 · 실내 생활 위주** — 계수 1.4 · 5kg: 328kcal · 10kg: 551kcal · 20kg: 927kcal
 
-표의 계수는 메르크 수의학 매뉴얼 기준이고, 열량은 그 계수로 계산한 값입니다. 새끼 계수는 4개월을 기준으로 3.0에서 2.0으로 내려갑니다. 4개월과 16주가 같은 시점이라 자료에 따라 표현만 다릅니다. 중성화를 하면 필요 열량이 줄어서 계수가 1.6으로 낮아집니다.
+위 계수는 메르크 수의학 매뉴얼 기준이고, 열량은 그 계수로 계산한 값입니다. 새끼 계수는 4개월을 기준으로 3.0에서 2.0으로 내려갑니다. 4개월과 16주가 같은 시점이라 자료에 따라 표현만 다릅니다. 중성화를 하면 필요 열량이 줄어서 계수가 1.6으로 낮아집니다.
 
-활동량은 표에 따로 없지만 계수 선택에 영향을 줍니다. 운동을 많이 하는 아이는 표의 값으로는 모자랄 수 있어서, 높은 쪽에서 시작해 체중과 체형을 보며 조정합니다.
+활동량은 위 목록에 따로 없지만 계수 선택에 영향을 줍니다. 운동을 많이 하는 아이는 위 값으로는 모자랄 수 있어서, 높은 쪽에서 시작해 체중과 체형을 보며 조정합니다.
 
 ## 계산값은 출발점이다
 
@@ -73,7 +71,7 @@ draft: false
 
 ## 출처
 
-- [Merck Veterinary Manual — Daily Maintenance Energy Requirements for Dogs and Cats](https://www.merckvetmanual.com/multimedia/table/daily-maintenance-energy-requirements-for-dogs-and-cats) (생애 단계별 MER 계수표 — 새끼 3.0·2.0, 미중성화 1.8, 중성화 1.6, 비만 경향 1.4)
+- [Merck Veterinary Manual — Daily Maintenance Energy Requirements for Dogs and Cats](https://www.merckvetmanual.com/multimedia/table/daily-maintenance-energy-requirements-for-dogs-and-cats) (생애 단계별 MER 계수 — 새끼 3.0·2.0, 미중성화 1.8, 중성화 1.6, 비만 경향 1.4)
 - [dvm360 — Easy nutritional math?](https://www.dvm360.com/view/easy-nutritional-math-it-was-my-understanding-that-there-would-be-no-math) (RER 공식 70 × 체중^0.75, 근사식의 한계, 감량 계수 1.0과 현재 체중 기준·재계산 원칙)
 - [Pet Nutrition Alliance — Creating a Nutritional Plan](https://petnutritionalliance.org/resources/nutritional-assessment-procedure/creating-a-nutritional-plan/) (급여 변경 후 2~4주 재평가, 간식 10% 이내)
 - 표지 이미지는 AI로 생성했습니다.
