@@ -559,13 +559,16 @@ textarea {
 
 .post-content strong { color: var(--navy); font-weight: 700; }
 
-.post-content table {
-  display: block;
-  width: 100%;
+/* 표는 .table-scroll 래퍼가 가로 스크롤을 맡는다 — 열이 찌그러지지 않고 자연 폭 유지 (render-table 훅, 2026-10-11) */
+.post-content .table-scroll {
   max-width: 100%;
   overflow-x: auto;
-  border-collapse: collapse;
+  -webkit-overflow-scrolling: touch;
   margin: 24px 0;
+}
+.post-content table {
+  border-collapse: collapse;
+  width: 100%;
   font-size: 16px;
   line-height: 1.6;
 }
@@ -579,6 +582,7 @@ textarea {
   background: var(--surface-card);
   color: var(--navy);
   font-weight: 700;
+  white-space: nowrap;
 }
 
 .post-content blockquote {
