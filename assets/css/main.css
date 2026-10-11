@@ -401,7 +401,7 @@ textarea {
 
 /* ── 목록 페이지 ───────────────────────── */
 /* 페이지 제목은 에그셸 위에, 글 목록은 흰색 밴드에 둔다(섹션 온오프) */
-.page-head { padding-block: clamp(40px, 6vw, 64px) 0; }
+.page-head { padding-block: clamp(40px, 6vw, 64px); } /* 상하 대칭 — 텍스트가 헤더 영역 바닥에 붙지 않게(2026-10-11) */
 
 /* 아카이브처럼 page-body 안에 들어가는 제목은 상단 여백 중복 방지 */
 .page-body .page-head { padding-top: 0; }
