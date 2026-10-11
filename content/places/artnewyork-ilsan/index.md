@@ -5,6 +5,8 @@ description: "고양 일산 밤리단길의 빈티지숍 겸 카페 — 견종·
 kind: place
 place_type: cafe
 region: 경기
+city: 고양
+status: open
 address: "경기 고양시 일산동구 무궁화로75번길 32"
 hours: "12:00~23:00 (화·수 정기휴무)"
 parking: "전용 주차장 없음 — 근처 갓길 주차"

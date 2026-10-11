@@ -1,15 +1,25 @@
 {{ define "main" }}
-{{- /* 시설 DB — 날짜순 글 카드 대신 시설 카드를 유형·지역 필터 칩과 함께 보여준다.
+{{- /* 시설 DB — 날짜순 글 카드 대신 시설 카드를 유형·지역(시·군·구) 필터 칩과 함께 보여준다.
        시설은 홈·아카이브·검색 색인 스트림에는 넣지 않고 이 목록이 진입점이다(수백 개로
-       늘어나도 정보 글 스트림을 오염시키지 않도록). 유형 라벨은 single.html과 동일하게 유지. */ -}}
+       늘어나도 정보 글 스트림을 오염시키지 않도록). 유형 라벨은 single.html과 동일하게 유지.
+       status가 closed인 시설은 흐리게 표시하고 맨 뒤로 보낸다(페이지 자체는 유지). */ -}}
 {{- $places := where site.RegularPages "Section" "places" -}}
 {{- $typeLabels := dict "cafe" "애견동반 카페" "restaurant" "반려견 동반 식당" "hotel" "애견 호텔" "pension" "애견동반 펜션" "pool" "강아지 수영장" -}}
+{{- $active := where $places "Params.status" "ne" "closed" -}}
+{{- $closedPlaces := where $places "Params.status" "eq" "closed" -}}
 {{- /* 필터 칩은 실제 등록된 값만 나열한다(빈 그룹 방지) */ -}}
 {{- $types := slice -}}
 {{- $regions := slice -}}
+{{- $citiesByRegion := dict -}}
 {{- range $places -}}
   {{- with .Params.place_type }}{{ $types = $types | append . }}{{ end -}}
   {{- with .Params.region }}{{ $regions = $regions | append . }}{{ end -}}
+  {{- $r := .Params.region | default "" -}}
+  {{- $c := .Params.city | default "" -}}
+  {{- if and $r $c -}}
+    {{- $list := index $citiesByRegion $r | default (slice) -}}
+    {{- $citiesByRegion = merge $citiesByRegion (dict $r ($list | append $c | uniq)) -}}
+  {{- end -}}
 {{- end -}}
 {{- $types = uniq $types -}}
 {{- $regions = uniq $regions -}}
@@ -42,26 +52,27 @@
         <button class="filter-chip" type="button" data-key="region" data-value="{{ . }}" aria-pressed="false">{{ . }}</button>
         {{- end }}
       </div>
+      {{- /* 시·군·구 칩 — 지역 선택 시에만 해당 그룹이 나타난다 */ -}}
+      {{- range $r, $cities := $citiesByRegion }}
+      <div class="breed-filter city-group" role="group" aria-label="{{ $r }} 시·군·구로 걸러 보기" data-region="{{ $r }}" hidden>
+        <span class="filter-label">시·군·구</span>
+        <button class="filter-chip" type="button" data-key="city" data-value="" aria-pressed="true">전체</button>
+        {{- range $cities }}
+        <button class="filter-chip" type="button" data-key="city" data-value="{{ . }}" aria-pressed="false">{{ . }}</button>
+        {{- end }}
+      </div>
+      {{- end }}
       {{- end }}
     </div>
     {{- end }}
 
     {{- if $places }}
     <div class="card-grid">
-      {{- range sort $places "Params.region" "Params.title" }}
-      <article class="place-card" data-type="{{ .Params.place_type | default "" }}" data-region="{{ .Params.region | default "" }}">
-        <div class="place-badges">
-          {{- with .Params.place_type }}<span class="badge">{{ index $typeLabels . | default . }}</span>{{ end }}
-          {{- with .Params.region }}<span class="badge badge-region">{{ . }}</span>{{ end }}
-        </div>
-        <h3 class="place-name"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-        {{- with .Description }}
-        <p class="card-desc">{{ . }}</p>
-        {{- end }}
-        {{- with .Params.address }}
-        <p class="place-address">{{ . }}</p>
-        {{- end }}
-      </article>
+      {{- range sort $active "Params.region" "Params.city" "Params.title" }}
+      {{ partial "place-card.html" (dict "p" . "labels" $typeLabels) }}
+      {{- end }}
+      {{- range sort $closedPlaces "Params.region" "Params.city" "Params.title" }}
+      {{ partial "place-card.html" (dict "p" . "labels" $typeLabels) }}
       {{- end }}
     </div>
     <p class="empty-note" id="place-empty" hidden>선택한 조건에 맞는 시설이 아직 없습니다. 다른 조건으로 찾아보세요.</p>
@@ -78,22 +89,34 @@
   var cards = document.querySelectorAll('.place-card');
   var empty = document.getElementById('place-empty');
   if (!chips.length || !cards.length) return;
-  var state = { type: '', region: '' };
+  var state = { type: '', region: '', city: '' };
+  var cityGroups = document.querySelectorAll('.city-group');
+  function apply() {
+    cityGroups.forEach(function (g) { g.hidden = g.dataset.region !== state.region; });
+    var shown = 0;
+    cards.forEach(function (card) {
+      var ok = (!state.type || card.dataset.type === state.type)
+        && (!state.region || card.dataset.region === state.region)
+        && (!state.city || card.dataset.city === state.city);
+      card.hidden = !ok;
+      if (ok) shown++;
+    });
+    if (empty) empty.hidden = shown > 0;
+  }
   chips.forEach(function (chip) {
     chip.addEventListener('click', function () {
       var key = chip.dataset.key;
+      if (key === 'region') {
+        state.city = '';
+        chips.forEach(function (c) {
+          if (c.dataset.key === 'city') c.setAttribute('aria-pressed', String(c.dataset.value === ''));
+        });
+      }
       state[key] = chip.dataset.value;
       chips.forEach(function (c) {
         if (c.dataset.key === key) c.setAttribute('aria-pressed', String(c === chip));
       });
-      var shown = 0;
-      cards.forEach(function (card) {
-        var ok = (!state.type || card.dataset.type === state.type)
-          && (!state.region || card.dataset.region === state.region);
-        card.hidden = !ok;
-        if (ok) shown++;
-      });
-      if (empty) empty.hidden = shown > 0;
+      apply();
     });
   });
 })();

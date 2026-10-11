@@ -5,6 +5,8 @@ description: "경기 광주 포은대로의 애견카페 — 300평 실내외 �
 kind: place
 place_type: cafe
 region: 경기
+city: 광주
+status: open
 address: "경기 광주시 포은대로 788-9"
 hours: "10:00~21:00 · 금·토 10:00~24:00 · 휴무일 미확인"
 parking: "가능 — 전용 주차장"

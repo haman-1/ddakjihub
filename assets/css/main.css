@@ -986,6 +986,9 @@ textarea {
 .place-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
 .place-badges { display: flex; flex-wrap: wrap; gap: 6px; }
 .badge-region { border: 0; padding: 3px 4px; background: transparent; }
+.badge-open { background: rgba(34, 197, 94, 0.15); color: #157a3d; }
+.badge-closed { background: rgba(0, 0, 0, 0.07); color: var(--text-sub); }
+.place-card.is-closed { opacity: 0.62; }
 .place-name { margin: 0; font-size: 20px; font-weight: 700; letter-spacing: -0.01em; }
 .place-name a { color: var(--navy); text-decoration: none; }
 .place-name a:hover { text-decoration: underline; text-underline-offset: 6px; }

@@ -5,6 +5,8 @@ description: "경기 광주 남한산성 근처의 반려견 동반 카페 — 4
 kind: place
 place_type: cafe
 region: 경기
+city: 광주
+status: open
 address: "경기 광주시 남한산성로 259"
 hours: "주중 11:00~20:30 (라스트오더 20:00) · 주말 11:00~21:00 (라스트오더 20:30) · 월요일 휴무"
 phone: "031-749-1209"

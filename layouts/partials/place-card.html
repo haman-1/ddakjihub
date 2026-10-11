@@ -1,0 +1,16 @@
+{{- /* 시설 카드 — places 목록에서만 쓰는 카드 마크업. 컨텍스트: dict "p"(시설 페이지) "labels"(유형 라벨) */ -}}
+{{- $p := .p }}{{ $labels := .labels -}}
+<article class="place-card{{ if eq $p.Params.status "closed" }} is-closed{{ end }}" data-type="{{ $p.Params.place_type | default "" }}" data-region="{{ $p.Params.region | default "" }}" data-city="{{ $p.Params.city | default "" }}">
+  <div class="place-badges">
+    {{- with $p.Params.place_type }}<span class="badge">{{ index $labels . | default . }}</span>{{ end }}
+    {{- with $p.Params.region }}<span class="badge badge-region">{{ . }}{{ with $p.Params.city }} {{ . }}{{ end }}</span>{{ end }}
+    {{- if eq $p.Params.status "closed" }}<span class="badge badge-closed">폐업</span>{{ else if eq $p.Params.status "open" }}<span class="badge badge-open">운영중</span>{{ end }}
+  </div>
+  <h3 class="place-name"><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></h3>
+  {{- with $p.Description }}
+  <p class="card-desc">{{ . }}</p>
+  {{- end }}
+  {{- with $p.Params.address }}
+  <p class="place-address">{{ . }}</p>
+  {{- end }}
+</article>

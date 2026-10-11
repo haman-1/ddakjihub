@@ -5,6 +5,8 @@ description: "경기 용인 원삼면의 1,400평 반려견 운동장 — 소형
 kind: place
 place_type: pool
 region: 경기
+city: 용인
+status: open
 address: "경기 용인시 처인구 원양로291번길 103-6"
 hours: "11:00~20:00 (원양식당 라스트오더 18:00) · 화요일 휴무"
 phone: "0507-1305-3622"

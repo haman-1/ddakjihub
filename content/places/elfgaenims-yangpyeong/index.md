@@ -5,6 +5,8 @@ description: "양평 단월면의 독채 애견펜션 — 견종·사이즈 제�
 kind: place
 place_type: pension
 region: 경기
+city: 양평
+status: open
 address: "경기 양평군 단월면 통골길 87"
 dog_rule: "견종·사이즈 제한 없음 — 기준 2인 1견, 최대 6인 4견"
 checked: "2026-10-10"

@@ -5,6 +5,8 @@ description: "고양 덕양구의 바베큐 식당 — 크기·견종 제한 없
 kind: place
 place_type: restaurant
 region: 경기
+city: 고양
+status: open
 address: "경기 고양시 덕양구 동헌로 100 1층"
 hours: "12:00~21:00 (월요일 휴무, 20:00 라스트오더)"
 dog_rule: "크기·견종 제한 없이 실내 동반 가능"

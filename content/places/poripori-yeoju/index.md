@@ -5,6 +5,8 @@ description: "여주 산북면의 독채 애견펜션 — 180평 잔디 마당�
 kind: place
 place_type: pension
 region: 경기
+city: 여주
+status: open
 address: "경기 여주시 산북면 광여로 975"
 parking: "가능 — 부지 안 주차(철문 안쪽)"
 dog_rule: "견종·무게 제한 없음 — 기본 견수·추가 요금 기준은 기사마다 달라 예약 시 확인 필요"

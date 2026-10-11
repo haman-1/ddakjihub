@@ -5,6 +5,8 @@ description: "합정 잔다리로에 있는 브런치 카페 — 크기 제한 �
 kind: place
 place_type: cafe
 region: 서울
+city: 마포
+status: open
 address: "서울 마포구 잔다리로3길 34 1·2층"
 hours: "매일 09:00~21:00 (연중무휴)"
 phone: ""

@@ -5,6 +5,8 @@ description: "이천 향교로의 쌀 베이커리 카페 — 임금님표 이�
 kind: place
 place_type: cafe
 region: 경기
+city: 이천
+status: open
 address: "경기 이천시 향교로 3"
 hours: "평일 11:00~19:00 · 주말·공휴일 11:00~20:00 · 연중무휴"
 phone: "0507-1335-7596"

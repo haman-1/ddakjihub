@@ -6,6 +6,8 @@
     <div class="post-meta">
       <a class="post-category" href="/places/">시설</a>
       {{- with .Params.place_type }}<span class="badge">{{ index $typeLabels . | default . }}</span>{{ end }}
+      {{- with .Params.region }}<span class="badge badge-region">{{ . }}{{ with $.Params.city }} {{ . }}{{ end }}</span>{{ end }}
+      {{- if eq .Params.status "closed" }}<span class="badge badge-closed">폐업</span>{{ else if eq .Params.status "open" }}<span class="badge badge-open">운영중</span>{{ end }}
       {{- if not .Date.IsZero }}
       <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format (site.Params.dateFormat | default "2006. 1. 2.") }}</time>
       {{- end }}
@@ -57,9 +59,9 @@
   </div>
   {{- end }}
 
-  {{- /* 같은 지역의 다른 시설 — 내부 링크 겸 발견 경로 */ -}}
+  {{- /* 같은 지역의 다른 시설 — 내부 링크 겸 발견 경로 (폐업 시설은 제외) */ -}}
   {{- with .Params.region }}
-  {{- $others := where (where (where site.RegularPages "Section" "places") "Params.region" .) "RelPermalink" "ne" $.RelPermalink }}
+  {{- $others := where (where (where (where site.RegularPages "Section" "places") "Params.region" .) "Params.status" "ne" "closed") "RelPermalink" "ne" $.RelPermalink }}
   {{- with $others }}
   <aside class="series-box">
     <h2>같은 지역의 다른 시설</h2>
