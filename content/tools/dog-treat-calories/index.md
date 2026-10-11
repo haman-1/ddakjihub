@@ -24,15 +24,13 @@ Pet Nutrition Alliance는 간식을 하루 섭취 열량의 10% 이내로 제한
 
 ## 간식 상한, 열량으로 보면
 
-| 하루 필요 열량 | 간식 상한(10%) | 이런 아이 |
-|---|---|---|
-| 328kcal | 약 33kcal | 5kg · 실내 생활 위주 |
-| 374kcal | 약 37kcal | 5kg · 중성화 성견 |
-| 630kcal | 약 63kcal | 10kg · 중성화 성견 |
-| 1,059kcal | 약 106kcal | 20kg · 중성화 성견 |
-| 1,436kcal | 약 144kcal | 30kg · 중성화 성견 |
+- **하루 필요 328kcal** — 간식 상한 약 33kcal (5kg · 실내 생활 위주)
+- **하루 필요 374kcal** — 간식 상한 약 37kcal (5kg · 중성화 성견)
+- **하루 필요 630kcal** — 간식 상한 약 63kcal (10kg · 중성화 성견)
+- **하루 필요 1,059kcal** — 간식 상한 약 106kcal (20kg · 중성화 성견)
+- **하루 필요 1,436kcal** — 간식 상한 약 144kcal (30kg · 중성화 성견)
 
-표의 하루 필요 열량은 중성화 성견 계수(1.6)로 계산한 값입니다. 내 아이의 하루 필요 열량은 [하루 필요 열량 계산기](/tools/dog-daily-calories/)에서 구할 수 있습니다.
+위 하루 필요 열량은 중성화 성견 계수(1.6)로 계산한 값입니다. 내 아이의 하루 필요 열량은 [하루 필요 열량 계산기](/tools/dog-daily-calories/)에서 구할 수 있습니다.
 
 ## 간식 한 개의 열량은 어디서 확인하나
 
@@ -70,6 +68,6 @@ Pet Nutrition Alliance는 간식을 하루 섭취 열량의 10% 이내로 제한
 ## 출처
 
 - [Pet Nutrition Alliance — Creating a Nutritional Plan](https://petnutritionalliance.org/resources/nutritional-assessment-procedure/creating-a-nutritional-plan/) (간식은 하루 섭취 열량의 10% 이내 — 이 글의 상한 계산 기준)
-- [Merck Veterinary Manual — Daily Maintenance Energy Requirements for Dogs and Cats](https://www.merckvetmanual.com/multimedia/table/daily-maintenance-energy-requirements-for-dogs-and-cats) (표의 하루 필요 열량에 쓴 중성화 성견 계수 1.6)
-- [dvm360 — Easy nutritional math?](https://www.dvm360.com/view/easy-nutritional-math-it-was-my-understanding-that-there-would-be-no-math) (RER 공식 70 × 체중^0.75 — 표의 열량 계산 근거)
+- [Merck Veterinary Manual — Daily Maintenance Energy Requirements for Dogs and Cats](https://www.merckvetmanual.com/multimedia/table/daily-maintenance-energy-requirements-for-dogs-and-cats) (위 하루 필요 열량에 쓴 중성화 성견 계수 1.6)
+- [dvm360 — Easy nutritional math?](https://www.dvm360.com/view/easy-nutritional-math-it-was-my-understanding-that-there-would-be-no-math) (RER 공식 70 × 체중^0.75 — 위 열량 계산 근거)
 - 표지 이미지는 AI로 생성했습니다.
