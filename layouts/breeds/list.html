@@ -48,9 +48,10 @@
       <article class="card breed-card" data-size="{{ .Params.size | default "" }}" data-group="{{ .Params.group | default "" }}">
         {{- $cover := .Resources.GetMatch "cover.*" }}
         {{- $link := .RelPermalink }}
+        {{- $alt := .Params.breed | default .Title }}
         {{- with $cover }}
         <a class="card-cover" href="{{ $link }}" tabindex="-1" aria-hidden="true">
-          <img src="{{ (.Resize "560x jpg q75").RelPermalink }}" alt="" loading="lazy" decoding="async">
+          <img src="{{ (.Resize "560x jpg q75").RelPermalink }}" alt="{{ $alt }}" loading="lazy" decoding="async">
         </a>
         {{- end }}
         <div class="card-body">

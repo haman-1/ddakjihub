@@ -20,7 +20,7 @@
          썸네일 규칙은 목록 카드와 같다(oar2 세로 원본 → hqdefault 폴백). */ -}}
   <div class="shorts-player" data-id="{{ .Params.youtube }}">
     <button type="button" class="shorts-play" aria-label="영상 재생">
-      <img src="https://i.ytimg.com/vi/{{ .Params.youtube }}/oar2.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/{{ .Params.youtube }}/hqdefault.jpg'" alt="" decoding="async">
+      <img src="https://i.ytimg.com/vi/{{ .Params.youtube }}/oar2.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/{{ .Params.youtube }}/hqdefault.jpg'" alt="{{ .Title }}" decoding="async">
       <span class="play-badge" aria-hidden="true"></span>
     </button>
   </div>

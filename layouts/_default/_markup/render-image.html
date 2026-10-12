@@ -2,7 +2,7 @@
        원본은 그대로 보존되고 빌드 결과물만 가벼워진다. 외부 URL은 그대로 둔다. */ -}}
 {{- with .Page.Resources.GetMatch .Destination }}
   {{- $img := .Resize "1000x jpg q78" }}
-<img src="{{ $img.RelPermalink }}" alt="{{ $.PlainText }}" loading="lazy" decoding="async"{{ with $.Title }} title="{{ . }}"{{ end }}>
+<img src="{{ $img.RelPermalink }}" alt="{{ with $.PlainText }}{{ . }}{{ else }}{{ $.Page.Title }}{{ end }}" loading="lazy" decoding="async"{{ with $.Title }} title="{{ . }}"{{ end }}>
 {{- else }}
-<img src="{{ .Destination }}" alt="{{ .PlainText }}" loading="lazy" decoding="async"{{ with .Title }} title="{{ . }}"{{ end }}>
+<img src="{{ .Destination }}" alt="{{ with .PlainText }}{{ . }}{{ else }}{{ .Page.Title }}{{ end }}" loading="lazy" decoding="async"{{ with .Title }} title="{{ . }}"{{ end }}>
 {{- end }}

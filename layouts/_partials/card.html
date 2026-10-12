@@ -18,7 +18,7 @@
          제목은 하단 오버레이로 얹는다. 썸네일 규칙은 아래 일반 카드와
          같다(oar2 세로 원본 → hqdefault 폴백). */ -}}
   <a class="card-shorts-cover" href="{{ $ctx.RelPermalink }}">
-    <img src="https://i.ytimg.com/vi/{{ $ctx.Params.youtube }}/oar2.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/{{ $ctx.Params.youtube }}/hqdefault.jpg'" alt="" loading="{{ $load }}" decoding="async">
+    <img src="https://i.ytimg.com/vi/{{ $ctx.Params.youtube }}/oar2.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/{{ $ctx.Params.youtube }}/hqdefault.jpg'" alt="{{ $ctx.Title }}" loading="{{ $load }}" decoding="async">
     <span class="play-badge" aria-hidden="true"></span>
     <span class="card-shorts-title">{{ $ctx.Title }}</span>
   </a>
@@ -36,11 +36,11 @@
   {{- if $cover }}
   <a class="card-cover" href="{{ $ctx.RelPermalink }}" tabindex="-1" aria-hidden="true">
     {{- /* 카드는 작게 보이므로 리사이즈·압축본을 쓴다(원본은 보존) */ -}}
-    <img src="{{ ($cover.Resize "560x jpg q75").RelPermalink }}" alt="" loading="{{ $load }}" decoding="async">
+    <img src="{{ ($cover.Resize "560x jpg q75").RelPermalink }}" alt="{{ $ctx.Title }}" loading="{{ $load }}" decoding="async">
   </a>
   {{- else if $yt }}
   <a class="card-cover" href="{{ $ctx.RelPermalink }}" tabindex="-1" aria-hidden="true">
-    <img src="https://i.ytimg.com/vi/{{ $yt }}/oar2.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/{{ $yt }}/hqdefault.jpg'" alt="" loading="{{ $load }}" decoding="async">
+    <img src="https://i.ytimg.com/vi/{{ $yt }}/oar2.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/{{ $yt }}/hqdefault.jpg'" alt="{{ $ctx.Title }}" loading="{{ $load }}" decoding="async">
   </a>
   {{- end }}
   <div class="card-body">

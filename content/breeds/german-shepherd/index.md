@@ -63,7 +63,7 @@ draft: false
 
 ## 털무늬·색상 변형
 
-![](sable.jpg)
+![세퍼트 사색(sable) 모색](sable.jpg)
 
 세퍼트의 모색은 크게 네 갈래로 본다.
 
