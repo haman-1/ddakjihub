@@ -21,6 +21,9 @@ scripts/
 /*.md
 !/README.md
 
+# Claude 작업 폴더(허브 정션) — .git/info/exclude는 로컬 전용이라 재클론 시 사라진다
+.claude/
+
 # 로컬 캡처·스크린샷
 live-*.png
 live-index.html
