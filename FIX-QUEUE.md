@@ -14,7 +14,7 @@
 - [x] `/guides/dog-bath-schedule/` — 목욕 주기 (61)
 - [x] `/breeds/border-collie/` — 보더콜리 허브 (41)
 - [x] `/guides/dog-nail-trimming/` — 발톱 관리 (39)
-- [ ] `/breeds/maltese-exercise/` — 말티즈 운동량 (32)
+- [x] `/breeds/maltese-exercise/` — 말티즈 운동량 (32)
 - [ ] `/breeds/shiba-inu-colors/` — 시바 색상 (28)
 - [ ] `/guides/choosing-animal-hospital/` — 동물병원 고르기 (20)
 - [ ] `/breeds/maltese-tear-stains/` — 말티즈 눈물자국 (19)
