@@ -15,6 +15,12 @@ claude-glm.bat
 DESIGN-aspca.org.md
 scripts/
 
+# 루트의 .md는 전부 로컬 운영 문서 — 이름을 일일이 적지 않아도 새 문서가 자동 제외된다
+# (2026-10-13 FIX-QUEUE.md가 명단에서 빠져 공개 리포에 커밋된 사고 후속)
+# 공개할 루트 문서가 생기면 아래 예외 줄에 추가한다
+/*.md
+!/README.md
+
 # 로컬 캡처·스크린샷
 live-*.png
 live-index.html
