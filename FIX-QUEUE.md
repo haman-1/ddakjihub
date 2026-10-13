@@ -11,7 +11,7 @@
 - [x] `/breeds/belgian-malinois/` — 말리노이즈 허브 (노출 169)
 - [x] `/guides/retriever-types/` — 리트리버 6종 도감 (161)
 - [x] `/guides/dog-muzzle/` — 입마개 (112)
-- [ ] `/guides/dog-bath-schedule/` — 목욕 주기 (61)
+- [x] `/guides/dog-bath-schedule/` — 목욕 주기 (61)
 - [ ] `/breeds/border-collie/` — 보더콜리 허브 (41)
 - [ ] `/guides/dog-nail-trimming/` — 발톱 관리 (39)
 - [ ] `/breeds/maltese-exercise/` — 말티즈 운동량 (32)
