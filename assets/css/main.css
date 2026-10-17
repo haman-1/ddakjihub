@@ -330,8 +330,11 @@ textarea {
   color: var(--text-sub);
 }
 
-/* ── 홈 섹션 바로가기 ──────────────────── */
-.home-sections { padding-block: clamp(56px, 8vw, 96px); }
+/* ── 홈 섹션 바로가기(둘러보기) — 히어로·밴드와 같은 흰 배경 ── */
+.home-sections {
+  background: var(--surface);
+  padding-block: clamp(56px, 8vw, 96px);
+}
 
 .section-nav-grid {
   display: grid;
