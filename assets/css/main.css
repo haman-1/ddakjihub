@@ -192,22 +192,43 @@ textarea {
 }
 .site-nav a:hover { text-decoration: underline; text-underline-offset: 6px; }
 
-/* 모바일 — 메뉴 줄바꿈으로 헤더가 3줄이 되지 않게 한 줄 가로 스크롤.
-   타이틀·검색 아이콘이 1행, 메뉴는 전체 폭 2행(스크롤)으로 2줄 고정. */
+/* 모바일 — 헤더는 1줄 고정, 메뉴는 햄버거 토글 팝업(체크박스 CSS만, JS 없음).
+   토글 체크박스는 nav·버튼보다 앞에 있어야 ~ 선택자가 작동한다. */
+.menu-toggle,
+.menu-button { display: none; }
+
 @media (max-width: 640px) {
-  .header-inner {
-    padding-block: 10px;
-    row-gap: 4px;
+  .header-inner { padding-block: 10px; }
+  .header-search { margin-left: auto; } /* 타이틀 왼쪽, 검색·버튼 오른쪽 */
+
+  .menu-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px;
+    border-radius: 4px;
+    color: var(--navy);
   }
+  .menu-button .icon-close { display: none; }
+  .menu-toggle:checked ~ .menu-button .icon-open { display: none; }
+  .menu-toggle:checked ~ .menu-button .icon-close { display: block; }
+
   .site-nav {
-    flex-basis: 100%;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    scrollbar-width: none; /* Firefox */
-    -webkit-overflow-scrolling: touch;
+    display: none;
+    position: absolute; /* sticky 헤더 기준 전체 폭 드롭다운 */
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+    box-shadow: var(--shadow-hover);
+    padding-block: 8px;
   }
-  .site-nav::-webkit-scrollbar { display: none; } /* Chrome·Safari */
-  .site-nav a { white-space: nowrap; }
+  .menu-toggle:checked ~ .site-nav { display: flex; }
+  .site-nav a {
+    padding: 12px 20px; /* 컨테이너 좌우 패딩과 정렬 */
+    font-size: 16px;
+  }
 }
 
 /* ── 홈 히어로 ─────────────────────────── */
