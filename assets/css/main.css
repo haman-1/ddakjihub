@@ -192,6 +192,24 @@ textarea {
 }
 .site-nav a:hover { text-decoration: underline; text-underline-offset: 6px; }
 
+/* 모바일 — 메뉴 줄바꿈으로 헤더가 3줄이 되지 않게 한 줄 가로 스크롤.
+   타이틀·검색 아이콘이 1행, 메뉴는 전체 폭 2행(스크롤)으로 2줄 고정. */
+@media (max-width: 640px) {
+  .header-inner {
+    padding-block: 10px;
+    row-gap: 4px;
+  }
+  .site-nav {
+    flex-basis: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none; /* Firefox */
+    -webkit-overflow-scrolling: touch;
+  }
+  .site-nav::-webkit-scrollbar { display: none; } /* Chrome·Safari */
+  .site-nav a { white-space: nowrap; }
+}
+
 /* ── 홈 히어로 ─────────────────────────── */
 .hero {
   background: var(--surface);
