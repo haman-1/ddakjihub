@@ -260,9 +260,9 @@ textarea {
 /* ── 섹션 제목·카드 그리드 ─────────────── */
 .section-title {
   margin: 0 0 28px;
-  font-size: clamp(30px, 4vw, 48px);
+  font-size: clamp(22px, 3vw, 28px); /* 홈 섹션 제목 — 딱지 일상 스트립 제목과 같은 크기로 통일(2026-10-17) */
   line-height: 1.2;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   font-weight: 700;
   color: var(--navy);
 }
@@ -330,14 +330,11 @@ textarea {
   color: var(--text-sub);
 }
 
-/* ── 홈 섹션 바로가기(둘러보기) — 네이비 포인트 밴드 ── */
+/* ── 홈 섹션 바로가기(둘러보기) — 배경 없음(에그셸), 상단 hr 구분선 ── */
 .home-sections {
-  background: var(--navy);
+  border-top: 1px solid var(--line);
   padding-block: clamp(56px, 8vw, 96px);
 }
-
-/* 남색 밴드 위 제목만 흰색 — 카드는 크림 그대로 */
-.home-sections .section-title { color: var(--surface); }
 
 .section-nav-grid {
   display: grid;
@@ -395,7 +392,7 @@ textarea {
 
 .about-strip-body { flex: 1 1 340px; }
 
-.about-strip-body .section-title { margin-bottom: 16px; font-size: clamp(26px, 3vw, 36px); }
+.about-strip-body .section-title { margin-bottom: 16px; }
 
 .about-strip-body p {
   margin: 0 0 28px;
