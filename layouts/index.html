@@ -50,6 +50,22 @@
       {{- end }}
     </nav>
       {{- end }}
+      {{- /* 일상 스트립 — 1페이지만. 최신글 그리드에 이미 나온 글은 빼서 같은 화면 중복을 피한다 */}}
+      {{- if eq $paginator.PageNumber 1 }}
+        {{- $dailyPool := (where site.RegularPages "Type" "in" (slice "daily" "shorts")).ByDate.Reverse }}
+        {{- $shown := slice }}{{- range $paginator.Pages }}{{- $shown = $shown | append .RelPermalink }}{{- end }}
+        {{- $dailyStrip := first 3 (where $dailyPool "RelPermalink" "not in" $shown) }}
+        {{- if $dailyStrip }}
+    <div class="daily-strip">
+      <h3 class="daily-strip-title">딱지 일상</h3>
+      <div class="card-grid">
+          {{- range $dailyStrip }}
+        {{ partial "card.html" . }}
+          {{- end }}
+      </div>
+    </div>
+        {{- end }}
+      {{- end }}
     {{- else }}
     <p class="empty-note">곧 첫 글이 올라옵니다.</p>
     {{- end }}
