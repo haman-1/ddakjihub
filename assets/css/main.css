@@ -336,26 +336,52 @@ textarea {
   padding-block: clamp(56px, 8vw, 96px);
 }
 
+.home-sections .section-title { margin-bottom: 8px; }
+.home-sections-sub {
+  margin: 0 0 28px;
+  font-size: 15px;
+  color: var(--text-sub);
+}
+
 .section-nav-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20px;
+}
+@media (max-width: 640px) {
+  .section-nav-grid { grid-template-columns: 1fr; }
 }
 
 .section-nav-card {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 24px 26px;
+  padding: 20px 22px;
   border: 1px solid var(--line);
   border-radius: 4px;
-  background: var(--surface-card);
+  background: var(--surface);
   transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 .section-nav-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
 
+/* 파스텔 아이콘 칩 — 섹션마다 틴트·아이콘 색 */
+.section-nav-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+}
+.section-nav-icon svg { width: 20px; height: 20px; }
+.section-nav-icon--breeds { background: #EAEFE7; color: #48634D; }
+.section-nav-icon--guides { background: #F6EBDD; color: #9B6237; }
+.section-nav-icon--daily  { background: #F5E8E7; color: #A65A55; }
+.section-nav-icon--places { background: #E5EEF2; color: #426C80; }
+.section-nav-icon--tools  { background: #F0EAF5; color: #78608E; }
+
 .section-nav-name {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   letter-spacing: -0.01em;
   color: var(--navy);
