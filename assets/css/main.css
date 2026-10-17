@@ -330,11 +330,14 @@ textarea {
   color: var(--text-sub);
 }
 
-/* ── 홈 섹션 바로가기(둘러보기) — 히어로·밴드와 같은 흰 배경 ── */
+/* ── 홈 섹션 바로가기(둘러보기) — 네이비 포인트 밴드 ── */
 .home-sections {
-  background: var(--surface);
+  background: var(--navy);
   padding-block: clamp(56px, 8vw, 96px);
 }
+
+/* 남색 밴드 위 제목만 흰색 — 카드는 크림 그대로 */
+.home-sections .section-title { color: var(--surface); }
 
 .section-nav-grid {
   display: grid;
