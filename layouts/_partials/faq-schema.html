@@ -1,0 +1,55 @@
+{{- /* FAQPage JSON-LD — '## 빠른 답' 섹션의 Q&A를 본문 렌더 결과에서 뽑아 출력한다 (2026-10-22).
+      지원 형식: 리스트(- **Q** — A / - **Q**: A / - **Q** A), 질문 단락+다음 단락 답(도베르만식),
+      같은 줄 문단(**Q** — A). 답이 여러 블록(리스트·판단 박스 포함)이면 새 질문(물음표로 끝나는 <strong>)이
+      나올 때까지 덧붙인다. 빠른 답 섹션이 없는 페이지는 아무것도 출력하지 않는다. */ -}}
+{{- $faqItems := slice }}
+{{- with findRE "(?s)<h2[^>]*>빠른 답</h2>.*" .Content 1 }}
+  {{- /* FAQ 헤딩과 다음 h2 이후의 섹션은 버리고, li·p 블록 단위로 나눈다 */ -}}
+  {{- $sec := replaceRE "(?s)^.*?</h2>" "" (index . 0) }}
+  {{- $sec = replaceRE "(?s)<h2\\b.*$" "" $sec }}
+  {{- $blocks := findRE "(?s)<li>.*?</li>|<p[^>]*>.*?</p>" $sec }}
+  {{- $q := "" }}
+  {{- $a := "" }}
+  {{- range $blocks }}
+    {{- /* 느슨한 리스트(<li>\n<p>…)도 처리되도록 블록 래퍼를 공백 허용으로 벗긴다 */ -}}
+    {{- $inner := replaceRE "</li>\\s*$" "" (replaceRE "^\\s*<li>" "" .) }}
+    {{- $inner = trim $inner " \n\r\t" }}
+    {{- $inner = replaceRE "</p>\\s*$" "" (replaceRE "^\\s*<p[^>]*>" "" $inner) }}
+    {{- $inner = trim $inner " \n\r\t" }}
+    {{- if hasPrefix $inner "<strong>" }}
+      {{- $parts := split $inner "</strong>" }}
+      {{- $qNew := htmlUnescape (plainify (replaceRE "^<strong>" "" (index $parts 0))) }}
+      {{- $rest := trim (delimit (after 1 $parts) "</strong>") " \n\r\t" }}
+      {{- $rest = replaceRE "^(?:—|:)\\s*" "" $rest }}
+      {{- if $q }}
+        {{- /* 대기 중인 질문 있음 — 새 질문이면 앞 Q&A를 확정하고 교체, 아니면 답에 덧붙인다 */ -}}
+        {{- if hasSuffix (trim $qNew " \n\r\t") "?" }}
+          {{- if $a }}
+            {{- $faqItems = $faqItems | append (dict "@type" "Question" "name" $q "acceptedAnswer" (dict "@type" "Answer" "text" $a)) }}
+          {{- end }}
+          {{- $q = $qNew }}
+          {{- $a = trim (htmlUnescape (plainify (replaceRE "</(?:p|li)>" " " $rest))) " \n\r\t" }}
+        {{- else }}
+          {{- $a = printf "%s %s" $a (htmlUnescape (plainify (replaceRE "</(?:p|li)>" " " $inner))) }}
+        {{- end }}
+      {{- else }}
+        {{- if $rest }}
+          {{- $faqItems = $faqItems | append (dict "@type" "Question" "name" $qNew "acceptedAnswer" (dict "@type" "Answer" "text" (trim (htmlUnescape (plainify (replaceRE "</(?:p|li)>" " " $rest))) " \n\r\t"))) }}
+        {{- else }}
+          {{- $q = $qNew }}
+          {{- $a = "" }}
+        {{- end }}
+      {{- end }}
+    {{- else }}
+      {{- if $q }}
+        {{- $a = printf "%s %s" $a (htmlUnescape (plainify $inner)) }}
+      {{- end }}
+    {{- end }}
+  {{- end }}
+  {{- if and $q (trim $a " \n\r\t") }}
+    {{- $faqItems = $faqItems | append (dict "@type" "Question" "name" $q "acceptedAnswer" (dict "@type" "Answer" "text" (trim $a " \n\r\t"))) }}
+  {{- end }}
+{{- end }}
+{{- with $faqItems }}
+<script type="application/ld+json">{{ dict "@context" "https://schema.org" "@type" "FAQPage" "mainEntity" . | jsonify | safeJS }}</script>
+{{- end }}
