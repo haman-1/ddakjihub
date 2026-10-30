@@ -19,7 +19,7 @@ draft: false
 
 ## 하루 필요 열량부터 구한다
 
-계산은 두 단계입니다. 먼저 안정시 에너지 요구량(RER, Resting Energy Requirement)을 구합니다.
+계산은 두 단계입니다. 먼저 안정시 에너지 요구량(RER, Resting Energy Requirement)을 구합니다. 열량 계산만 필요하다면 [하루 필요 열량 계산기](/tools/dog-daily-calories/)에서 바로 구할 수 있습니다.
 
 **RER(kcal) = 70 × 체중(kg)의 0.75제곱**
 
