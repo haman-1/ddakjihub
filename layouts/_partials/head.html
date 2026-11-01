@@ -68,6 +68,8 @@
   gtag('config', '{{ . }}');
 </script>
 {{- end }}
+{{- /* Google AdSense — 승인·활성화 전까지 광고는 표시되지 않음 */ -}}
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4127540205710085" crossorigin="anonymous"></script>
 {{- $css := resources.Get "css/main.css" | minify | fingerprint }}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}">
 {{- /* Pretendard 한글 웹폰트 (CDN) */ -}}
