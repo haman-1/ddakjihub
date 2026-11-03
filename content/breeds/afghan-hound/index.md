@@ -30,7 +30,7 @@ draft: false
 
 <dl>
   <dt>체고</dt>
-  <dd>61~73cm입니다(위키백과). 영국 YuMOVE는 63~74cm로 조금 더 크게 제시합니다.</dd>
+  <dd>61~73cm입니다(위키백과). 영국 펫케어 브랜드 Lintbells의 품종 정보 페이지(YuMOVE)는 63~74cm로 조금 더 크게 제시합니다.</dd>
   <dt>체중</dt>
   <dd>20~27kg입니다(위키백과). YuMOVE는 27~32kg으로 봅니다.</dd>
   <dt>수명</dt>
@@ -113,7 +113,7 @@ draft: false
 
 - [Afghan Hound — PetMD](https://www.petmd.com/dog/breeds/afghan-hound) (성격·크기·운동·털 관리·질환·해외 가격)
 - [Afghan Hound — AKC](https://www.akc.org/dog-breeds/afghan-hound/) (역사·품종 표준·모색)
-- [Afghan Hound — YuMOVE](https://yumove.co.uk/pages/dog-breeds/afghan-hound) (수명·유전질환·마취 주의·운동·미용)
+- [Afghan Hound — YuMOVE](https://yumove.co.uk/pages/dog-breeds/afghan-hound) (영국 Lintbells 펫케어 브랜드의 품종 정보 페이지 — 수명·유전질환·마취 주의·운동·미용)
 - [Afghan Hound — Wikipedia](https://en.wikipedia.org/wiki/Afghan_Hound) (역사·모색·체격·수명 조사)
 - [아프간 하운드 분양 가이드 — Animalnea](http://dog.tomonews.kr/entry/%EC%95%84%ED%94%84%EA%B0%84-%ED%95%98%EC%9A%B4%EB%93%9C-%EB%B6%84%EC%96%91-%EA%B0%80%EC%9D%B4%EB%93%9C-%ED%8A%B9%EC%A7%95-%EC%97%AD%EC%82%AC-%EC%88%98%EB%AA%85-%EB%B0%8F-%EA%B0%80%EA%B2%A9-%EC%A0%95%EB%B3%B4) (국내 분양가 참고치·수명)
 
