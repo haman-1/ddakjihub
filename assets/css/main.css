@@ -613,7 +613,7 @@ textarea {
 
 /* 출처 인용 — 본문보다 작고 흐리게 (2026-11-04) */
 .post-content .src {
-  font-size: 0.8em;
+  font-size: 0.7em;
   color: var(--text-sub);
 }
 
