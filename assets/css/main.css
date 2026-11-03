@@ -611,6 +611,12 @@ textarea {
   line-height: 1.7;
 }
 
+/* 출처 인용 — 본문보다 작고 흐리게 (2026-11-04) */
+.post-content .src {
+  font-size: 0.8em;
+  color: var(--text-sub);
+}
+
 .post-content h2, .post-content h3, .post-content h4 {
   color: var(--navy);
   font-weight: 700;
