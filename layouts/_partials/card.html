@@ -24,6 +24,8 @@
   </a>
   {{- else }}
   {{- $cover := $ctx.Resources.GetMatch "cover.*" -}}
+  {{- /* card 파라미터가 있으면 카드 썸네일을 그 파일로 대체(표지는 본문용으로 유지) */ -}}
+  {{- with $ctx.Params.card }}{{ with $ctx.Resources.GetMatch . }}{{ $cover = . }}{{ end }}{{ end -}}
   {{- /* 표지가 없어도 본문에 유튜브 영상이 있으면 그 썸네일을 카드에 띄운다.
          oar2는 원본 비율(세로) 썸네일 — 16:9 카드 크롭에 맞게 잘리며, 없는 영상은
          hqdefault로 되돌린다. */ -}}

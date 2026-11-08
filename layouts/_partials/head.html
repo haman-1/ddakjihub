@@ -38,8 +38,10 @@
 <meta property="og:url" content="{{ $pageURL }}">
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
 <meta property="og:site_name" content="{{ site.Title }}">
-{{- /* 공유 미리보기 이미지 — 표지가 있으면 표지, 없으면 본문 유튜브 영상의 썸네일 */ -}}
-{{- with .Resources.GetMatch "cover.*" }}
+{{- /* 공유 미리보기 이미지 — card 파라미터가 있으면 그 파일, 아니면 표지, 없으면 본문 유튜브 영상의 썸네일 */ -}}
+{{- $ogImg := .Resources.GetMatch "cover.*" }}
+{{- with .Params.card }}{{ with $.Resources.GetMatch . }}{{ $ogImg = . }}{{ end }}{{ end }}
+{{- with $ogImg }}
 <meta property="og:image" content="{{ .Permalink }}">
 {{- else }}
   {{- if eq .Type "shorts" }}

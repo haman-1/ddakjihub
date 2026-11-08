@@ -7,6 +7,7 @@ kind: guide
 categories: ["품종"]
 tags: ["시바견", "진돗개", "견종 비교"]
 toc: true
+card: "card.jpg"
 draft: false
 ---
 
@@ -90,4 +91,4 @@ draft: false
 - [Shiba Inu — American Kennel Club](https://www.akc.org/dog-breeds/shiba-inu/) (기원과 일본 내 인기)
 - [천연기념물 진도의 진도개 — 국가유산청 국가유산포털](https://www.heritage.go.kr/heri/cul/culSelectDetail.do?VdkVgwKey=16,0000530000000,36&pageNo=1_1_1_0) (지정 번호·지정일·등록 개체)
 
-표지 이미지는 AI로 생성했습니다.
+표지·카드 이미지는 AI로 생성했습니다.
