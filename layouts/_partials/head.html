@@ -77,7 +77,9 @@
 {{- /* 출처 인용 스타일 — 본문 텍스트 노드의 괄호 인용을 .src로 감싸는 스크립트 */ -}}
 {{- $citeJs := resources.Get "js/cite-style.js" | minify | fingerprint }}
 <script defer src="{{ $citeJs.RelPermalink }}"></script>
-{{- /* 홈 '최신 글' 더보기·무한스크롤 — 홈 목록에서만 (2026-11-09) */ -}}
+{{- /* 홈 '최신 글' 더보기·무한스크롤 — 홈 목록에서만 (2026-11-09).
+     목록용 list-infinite.js는 _default/list.html 본문에서 로드 — 해당 템플릿을 쓰는
+     섹션·항목 페이지에만 붙고 필터형(품종)·시설 등 자체 템플릿에는 붙지 않는다 */ -}}
 {{- if .IsHome }}
 {{- $homeJs := resources.Get "js/home-infinite.js" | minify | fingerprint }}
 <script defer src="{{ $homeJs.RelPermalink }}"></script>

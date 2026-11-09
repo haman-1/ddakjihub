@@ -527,8 +527,8 @@ textarea {
 }
 .pagination a:hover { background: var(--navy); color: #fff; }
 
-/* ── 홈 '최신 글' 더보기 버튼 (2026-11-09) ── */
-.home-load-wrap { margin-top: 40px; text-align: center; }
+/* ── 홈·목록 더보기 버튼 (2026-11-09 홈, 2026-11-10 목록) ── */
+.home-load-wrap, .list-load-wrap { margin-top: 40px; text-align: center; }
 
 .empty-note { color: var(--text-sub); }
 

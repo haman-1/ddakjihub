@@ -26,12 +26,23 @@
     {{- $paginator := .Scratch.Get "listPaginator" }}
     {{- if not $paginator }}{{- $paginator = partial "list-pager.html" . }}{{- end }}
     {{- if $paginator.Pages }}
-    <div class="card-grid">
+    <div class="card-grid" id="list-grid">
       {{- range $paginator.Pages }}
       {{ partial "card.html" . }}
       {{- end }}
     </div>
       {{- if gt $paginator.TotalPages 1 }}
+      {{- /* 목록 더보기·무한스크롤 (2026-11-10) — 1페이지는 '더보기' 버튼만(JS가 클릭을 가로채
+             /page/N/의 카드를 append, 첫 클릭 후 스크롤 자동 로드). 버튼의 href는 실제
+             /page/N/ 링크라 JS 없어도 크롤러·사용자는 기존처럼 페이지 이동 → 크롤 경로 유지.
+             2페이지부터는 이전·다음 내비를 그대로 둔다. data-next는 JS 상태 전달용.
+             JS(list-infinite.js)는 grid·버튼이 있는 페이지만 동작 — 필터형 목록(품종) 등은 자체 템플릿. */ -}}
+    <div class="list-pager" data-next="{{ with $paginator.Next }}{{ .URL }}{{ end }}" hidden></div>
+      {{- if eq $paginator.PageNumber 1 }}
+    <div class="list-load-wrap">
+      <a class="button list-load-more" id="list-load-more" href="{{ $paginator.Next.URL }}">더보기</a>
+    </div>
+      {{- else }}
     <nav class="pagination" aria-label="페이지 이동">
       {{- if $paginator.HasPrev }}
       <a href="{{ $paginator.Prev.URL }}">이전</a>
@@ -45,10 +56,16 @@
       {{- end }}
     </nav>
       {{- end }}
+      {{- end }}
     {{- else }}
     <p class="empty-note">아직 올라온 글이 없습니다.</p>
     {{- end }}
   {{- end }}
   </div>
 </section>
+{{- /* 목록 더보기·무한스크롤 JS — 이 템플릿(카드 목록)을 쓰는 페이지만 로드 (2026-11-10) */ -}}
+{{- if not (eq .Kind "taxonomy") }}
+{{- $listJs := resources.Get "js/list-infinite.js" | minify | fingerprint }}
+<script src="{{ $listJs.RelPermalink }}"></script>
+{{- end }}
 {{ end }}
