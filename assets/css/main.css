@@ -527,6 +527,9 @@ textarea {
 }
 .pagination a:hover { background: var(--navy); color: #fff; }
 
+/* ── 홈 '최신 글' 더보기 버튼 (2026-11-09) ── */
+.home-load-wrap { margin-top: 40px; text-align: center; }
+
 .empty-note { color: var(--text-sub); }
 
 /* ── 홈 일상 스트립 — 최신글 band 안, 페이징 아래(1페이지 전용) ── */

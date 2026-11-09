@@ -31,12 +31,22 @@
     <h2 class="section-title">최신 글</h2>
     {{- $paginator := partial "home-pager.html" . }}
     {{- if $paginator.Pages }}
-    <div class="card-grid">
+    <div class="card-grid" id="latest-grid">
       {{- range $paginator.Pages }}
       {{ partial "card.html" . }}
       {{- end }}
     </div>
       {{- if gt $paginator.TotalPages 1 }}
+      {{- /* 홈 '최신 글' 로드 (2026-11-09) — 1페이지는 '더보기' 버튼만(JS가 클릭을 가로채
+             /page/N/의 카드를 append, 첫 클릭 후 스크롤 자동 로드). 버튼의 href는 실제
+             /page/N/ 링크라 JS 없어도 크롤러·사용자는 기존처럼 페이지 이동 → 크롤 경로 유지.
+             2페이지부터는 이전·다음 내비를 그대로 둔다. data-next는 JS 상태 전달용 */ -}}
+    <div class="home-pager" data-next="{{ with $paginator.Next }}{{ .URL }}{{ end }}" hidden></div>
+      {{- if eq $paginator.PageNumber 1 }}
+    <div class="home-load-wrap">
+      <a class="button home-load-more" id="home-load-more" href="{{ $paginator.Next.URL }}">최신 글 더보기</a>
+    </div>
+      {{- else }}
     <nav class="pagination" aria-label="페이지 이동">
       {{- if $paginator.HasPrev }}
       <a href="{{ $paginator.Prev.URL }}">이전</a>
@@ -49,6 +59,7 @@
       <span></span>
       {{- end }}
     </nav>
+      {{- end }}
       {{- end }}
       {{- /* 일상 스트립 — 1페이지만. 일상+쇼츠 풀에서 최신 3편, 최신글 그리드와 중복 허용 */}}
       {{- if eq $paginator.PageNumber 1 }}
