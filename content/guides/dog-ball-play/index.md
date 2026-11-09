@@ -8,6 +8,7 @@ kind: guide
 categories: ["훈련"]
 tags: ["강아지 공놀이", "물어오기 훈련", "강아지 훈련"]
 toc: true
+card: close-toss.jpg
 draft: false
 ---
 
