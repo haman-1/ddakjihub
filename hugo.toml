@@ -29,9 +29,9 @@ buildExpired = false
   pagerSize = 12
 
 # series — 같은 견종의 허브·스포크 글을 자동으로 묶는다 (본문 하단 '관련 글')
+# category·tag 택소노미는 제거함(2026-11-10) — 카테고리 페이지가 사이트 어디에서도 링크되지 않는
+# 유령 페이지(sitemap에만 존재, 미색인)라 크롤 예산 낭비. series는 '관련 글'에 필수라 유지.
 [taxonomies]
-  category = 'categories'
-  tag = 'tags'
   series = 'series'
 
 [params]
