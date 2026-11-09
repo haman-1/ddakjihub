@@ -30,7 +30,8 @@
 
   function appendCards(html) {
     var doc = new DOMParser().parseFromString(html, 'text/html');
-    var remoteGrid = doc.getElementById('latest-grid');
+    /* 구버전 템플릿(캐시) 페이지면 id가 없을 수 있어 class로 폴백 */
+    var remoteGrid = doc.getElementById('latest-grid') || doc.querySelector('.card-grid');
     var remotePager = doc.querySelector('.home-pager');
     if (!remoteGrid) throw new Error('latest-grid 없음');
     var cards = remoteGrid.children;
@@ -52,10 +53,12 @@
     observer.observe(btn);
   }
 
-  function loadNext() {
+  function loadNext(isRestore) {
     if (!nextURL || inFlight) return Promise.resolve(false);
     inFlight = true;
-    return fetch(nextURL)
+    /* no-store — GitHub Pages가 max-age=600으로 주는 HTML의 브라우저 캐시를
+       무시한다. 캐시된 구버전 페이지를 받으면 append가 조용히 실패하기 때문 */
+    return fetch(nextURL, { cache: 'no-store' })
       .then(function (r) {
         if (!r.ok) throw new Error('HTTP ' + r.status);
         return r.text();
@@ -70,6 +73,9 @@
       })
       .catch(function (err) {
         console.warn('홈 더보기 로드 실패:', err);
+        /* append가 안 되면 조용히 멈추지 말고 실제 /page/N/ 링크로 이동해
+           폴백(no-JS와 같은 동작). 뒤로가기 복원 중에는 이동하지 않는다 */
+        if (!isRestore && nextURL) window.location.href = nextURL;
         return false;
       })
       .finally(function () { inFlight = false; });
@@ -100,7 +106,7 @@
         requestAnimationFrame(function () { window.scrollTo(0, y); });
         return;
       }
-      loadNext().then(function (ok) {
+      loadNext(true).then(function (ok) {
         if (ok) step();
         else requestAnimationFrame(function () { window.scrollTo(0, y); });
       });
