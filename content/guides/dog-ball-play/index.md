@@ -25,12 +25,6 @@ draft: false
 
 특히 [보더콜리](/breeds/border-collie/)처럼 활동량이 많은 견종이나 움직이는 물체에 관심이 많은 강아지는 공놀이에 강한 흥미를 보일 수 있습니다.
 
-딱지도 생후 3개월 무렵부터 공놀이를 좋아했습니다. 그때의 영상입니다.
-
-{{< youtube "https://www.youtube.com/shorts/KctS2eKImCk" >}}
-
-[유튜브에서 보기](https://www.youtube.com/shorts/KctS2eKImCk)
-
 다만 모든 강아지가 공놀이를 좋아하는 것은 아닙니다. 공에 관심이 없거나 쫓아가는 활동보다 냄새를 맡고 주변을 탐색하는 것을 더 좋아하는 강아지도 있습니다.
 
 공놀이를 좋아하더라도 흥분한 상태에서 무리하게 뛰지 않도록 조절하는 것이 중요합니다.
@@ -245,5 +239,3 @@ draft: false
 
 - [How to Teach Your Dog to Fetch — American Kennel Club](https://www.akc.org/expert-advice/training/teach-your-dog-to-fetch/) (물어오기 훈련 단계·공을 놓는 행동의 보상 원칙)
 - [Are Tennis Balls Safe for Dogs? — American Kennel Club](https://www.akc.org/expert-advice/advice/are-tennis-balls-safe-for-dogs/) (테니스공의 치아 마모 위험)
-
-본문 영상은 딱지허브 유튜브 채널에 올린 딱지의 영상입니다.
