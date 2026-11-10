@@ -25,6 +25,10 @@
     </button>
   </div>
 
+  {{- with .Description }}
+  <p class="shorts-desc">{{ . }}</p>
+  {{- end }}
+
   <div class="shorts-actions">
     <a class="button" href="https://www.youtube.com/shorts/{{ .Params.youtube }}" rel="noopener">유튜브에서 보기</a>
     <a class="button button-outline" href="/daily/">일상 더 보기</a>

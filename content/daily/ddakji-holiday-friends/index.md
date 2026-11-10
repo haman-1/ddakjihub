@@ -1,7 +1,7 @@
 ---
 title: "연휴에 딱지는 친구들 만났어요 #강아지 #강아지훈련 #반려견 #보더콜리 #puppy"
 date: 2026-10-06T00:00:00+09:00
-description: ""
+description: "연휴에 오랜만에 친구들을 만나 함께 뛰어논 딱지. 즐겁게 어울려 노는 모습을 담은 짧은 영상."
 summary: ""
 kind: shorts
 type: shorts

@@ -1073,6 +1073,13 @@ textarea {
   gap: 12px;
   margin-top: 8px;
 }
+/* 상세 — 영상 아래 소개 캡션(description, 2026-11-11 애드센스 대응) */
+.shorts-desc {
+  max-width: 420px;
+  margin: 14px auto 0;
+  font-size: 0.95rem;
+  text-align: center;
+}
 
 /* ── 시설 DB 카드·상세 (2026-10-10) ──────── */
 /* 시설은 표지 없이 텍스트 카드 — 배지·이름·소개·주소 전체가 하나의 링크(2026-10-11) */
