@@ -4,6 +4,9 @@ date: 2026-10-10
 lastmod: 2026-10-14T00:00:00+09:00
 description: "양평 단월면의 독채 애견펜션 — 견종·사이즈 제한 없이 최대 6인 4견까지 묵을 수 있고, 4월부터 수영장을 추가요금 없이 씁니다."
 kind: place
+noindex: true
+sitemap:
+  disable: true
 place_type: pension
 region: 경기
 city: 양평

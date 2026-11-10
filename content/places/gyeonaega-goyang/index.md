@@ -4,6 +4,9 @@ date: 2026-10-10
 lastmod: 2026-10-14T00:00:00+09:00
 description: "고양 덕양구의 바베큐 식당 — 크기·견종 제한 없이 실내 단독 테이블에서 식사하고, 야외 인조잔디 운동장에서 뛰어놀 수 있습니다."
 kind: place
+noindex: true
+sitemap:
+  disable: true
 place_type: restaurant
 region: 경기
 city: 고양

@@ -4,6 +4,9 @@ date: 2026-10-10
 lastmod: 2026-10-14T00:00:00+09:00
 description: "서울 마포구 합정동 잔다리로에 있는 브런치 카페입니다. 반려견의 크기에 관계없이 실내 모든 좌석에서 함께 머물 수 있습니다."
 kind: place
+noindex: true
+sitemap:
+  disable: true
 place_type: cafe
 region: 서울
 city: 마포

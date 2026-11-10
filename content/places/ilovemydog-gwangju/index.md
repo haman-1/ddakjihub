@@ -4,6 +4,9 @@ date: 2026-10-11T00:00:00+09:00
 lastmod: 2026-10-14T00:00:00+09:00
 description: "경기 광주 곤지암읍에 있는 애견카페 겸 반려견 놀이터입니다. 늦은 밤까지 운영하며, 공격성이 없는 반려견이라면 카네코르소 등 대형견도 입장할 수 있습니다."
 kind: place
+noindex: true
+sitemap:
+  disable: true
 place_type: cafe
 region: 경기
 city: 광주

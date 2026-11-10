@@ -3,6 +3,9 @@ title: "카페더공생"
 date: 2026-10-17T13:40:15+09:00
 description: "경기 고양시 일산서구의 반려견 동반 카페 — 실내 카페와 야외 운동장, 넓은 무료 주차장을 갖췄습니다."
 kind: place
+noindex: true
+sitemap:
+  disable: true
 place_type: cafe
 region: 경기
 city: 고양

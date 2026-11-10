@@ -4,6 +4,9 @@ date: 2026-10-11T00:00:00+09:00
 lastmod: 2026-10-14T00:00:00+09:00
 description: "이천시 향교로에 있는 쌀 베이커리 카페입니다. 임금님표 이천쌀로 다양한 빵을 만들며, 반려견의 크기에 관계없이 야외 공간과 별채에 함께 입장할 수 있습니다."
 kind: place
+noindex: true
+sitemap:
+  disable: true
 place_type: cafe
 region: 경기
 city: 이천

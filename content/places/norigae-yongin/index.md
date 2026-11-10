@@ -4,6 +4,9 @@ date: 2026-10-10T00:00:00+09:00
 lastmod: 2026-10-14T00:00:00+09:00
 description: "경기 용인시 원삼면에 있는 1,400평 규모의 반려견 운동장입니다. 소형견과 중·대형견을 위한 공간 및 수영장이 구분되어 있으며, 맹견을 제외한 모든 견종이 동반할 수 있습니다."
 kind: place
+noindex: true
+sitemap:
+  disable: true
 place_type: pool
 region: 경기
 city: 용인

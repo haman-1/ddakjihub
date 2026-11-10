@@ -4,6 +4,9 @@ date: 2026-10-10
 lastmod: 2026-10-14T00:00:00+09:00
 description: "고양 일산 밤리단길의 빈티지숍 겸 카페 — 견종·크기 제한 없이 실내 동반이 가능하고 밤 11시까지 문을 엽니다."
 kind: place
+noindex: true
+sitemap:
+  disable: true
 place_type: cafe
 region: 경기
 city: 고양

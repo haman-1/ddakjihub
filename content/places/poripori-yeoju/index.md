@@ -4,6 +4,9 @@ date: 2026-10-11T00:00:00+09:00
 lastmod: 2026-10-14T00:00:00+09:00
 description: "여주 산북면에 있는 독채 애견펜션입니다. 180평 규모의 잔디 마당과 본채·별채를 갖추고 있으며, 반려견 전용 샤워실과 드라이룸도 이용할 수 있습니다. 견종이나 체중에 따른 제한은 없습니다."
 kind: place
+noindex: true
+sitemap:
+  disable: true
 place_type: pension
 region: 경기
 city: 여주

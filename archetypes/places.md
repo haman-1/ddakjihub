@@ -3,6 +3,9 @@ title: ""
 date: {{ .Date }}
 description: ""
 kind: place
+noindex: true      # (2026-11-11) AdSense thin-directory protection — never remove; /places/ list stays indexed
+sitemap:
+  disable: true
 place_type: ""     # cafe | restaurant | hotel | pension | pool
 region: ""         # 시·도 단위: 서울 | 경기 | 인천 | 부산 | 대구 | 강원 | 제주 ...
 city: ""           # 시·군·구: 경기는 필수(고양·용인·양평...), 서울은 구 — 주소에서 기재
@@ -26,7 +29,7 @@ draft: true
 - checked(확인일)·source(출처)는 반드시 채우고, 출처에서 확인한 정보만 쓴다.
 - 운영 여부(status)·시·군·구(city)도 출처에서 확인해 함께 기재한다(미확인은 비움).
 - 본문 구조: 한 줄 소개 → 이용 팁(주의점·준비물) → 주변 정보. 표지 이미지는 두지 않는다.
-- 발행 후 content/places/_index.md의 noindex·sitemap.disable 두 줄을 지운다(첫 글 한 번만).
+- 항목 페이지는 noindex·사이트맵 제외 기본값(2026-11-11, 애드센스 대응) — /places/ 목록은 색인 유지.
 -->
 
 <!-- 한 줄 소개 -->

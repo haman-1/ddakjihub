@@ -4,6 +4,9 @@ date: 2026-10-11T00:00:00+09:00
 lastmod: 2026-10-14T00:00:00+09:00
 description: "경기 광주 포은대로에 있는 애견카페로, 300평 규모의 실내외 운동장을 갖추고 있으며 대형견도 동반할 수 있습니다. 전용 주차장이 있습니다."
 kind: place
+noindex: true
+sitemap:
+  disable: true
 place_type: cafe
 region: 경기
 city: 광주

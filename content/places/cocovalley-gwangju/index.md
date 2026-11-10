@@ -4,6 +4,9 @@ date: 2026-10-10T00:00:00+09:00
 lastmod: 2026-10-14T00:00:00+09:00
 description: "경기 광주시 남한산성 인근에 있는 반려견 동반 카페입니다. 400평 규모의 야외 정원에 반려견 운동장과 수영장이 마련되어 있으며, 매주 월요일은 휴무입니다."
 kind: place
+noindex: true
+sitemap:
+  disable: true
 place_type: cafe
 region: 경기
 city: 광주
